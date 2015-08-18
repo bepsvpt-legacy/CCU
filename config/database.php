@@ -118,7 +118,7 @@ return [
         'default' => [
             'host'     => '127.0.0.1',
             'port'     => 6379,
-            'database' => 6,
+            'database' => env('DB_REDIS_NUMBER', 0),
         ],
 
     ],
