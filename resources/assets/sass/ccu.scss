@@ -1,0 +1,158 @@
+$navbar-height: 80px;
+$footer-height: 30px;
+
+html {
+    position: relative;
+    min-height: 100%;
+}
+
+body {
+    min-height: 100%;
+    overflow-y: scroll !important;
+    padding-right: 0 !important;
+}
+
+main {
+    padding-top: $navbar-height;
+    margin-bottom: $footer-height + 10px;
+    min-height: calc(100% - #{$footer-height});
+}
+
+footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: $footer-height;
+    background-color: #b1b1b1;
+}
+
+footer .container {
+    margin-top: 5px;
+}
+
+table {
+    th {
+        text-align: center !important;
+        vertical-align: middle !important;
+    }
+
+    td {
+        vertical-align: middle !important;;
+    }
+}
+
+.block {
+    display: block !important;
+}
+
+.inline {
+    display: inline !important;
+}
+
+.inline-block {
+    display: inline-block !important;
+}
+
+.full-height {
+    min-height: 100%;
+    height: 100%;
+}
+
+.vertical-align {
+    display: flex;
+    flex-direction: row;
+}
+
+.vertical-align > [class^="col-"], .vertical-align > [class*=" col-"], .vertical-align-children {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.sign-in-register-hint {
+    margin-top: 1em;
+}
+
+.has-error {
+    .input-group-addon, .form-control-feedback, .help-block {
+        color: #f44336 !important;
+    }
+}
+
+.has-success {
+    .input-group-addon, .form-control-feedback, .help-block {
+        color: #4CAF50 !important;
+    }
+}
+
+.modal-header-custom {
+    padding: 12px 24px 12px 24px !important;
+}
+
+.modal-header-custom .close {
+    position: relative;
+    top: 0 !important;
+    right: 0 !important;
+    padding-top: 0 !important;
+    margin-top: 0 !important;
+}
+
+.cursor-pointer {
+    cursor: pointer;
+}
+
+.profile-picture {
+    width: 64px;
+    height: 64px;
+}
+
+.profile-picture-medium {
+    width: 32px;
+    height: 32px;
+}
+
+.profile-picture-small {
+    width: 20px;
+    height: 20px;
+}
+
+.courses-comments {
+    padding-left: 8px;
+}
+
+.courses-comments-comments {
+    overflow: auto;
+    max-height: 360px;
+    border-left: 2px solid #d4d4d4;
+    margin-top: 16px;
+    margin-left: -8px;
+    padding-left: 6px;
+}
+
+.courses-comments-hr {
+    margin: 10px 0;
+    height:1px;
+    background-color:#d4d4d4;
+    color:#d4d4d4;
+}
+
+// angular-loading-bar https://github.com/chieffancypants/angular-loading-bar
+
+#loading-bar-spinner {
+    top: 15px;
+    left: initial;
+    right: 14px;
+}
+
+#loading-bar-spinner .spinner-icon {
+    width: 20px;
+    height: 20px;
+}
+
+@media only screen and (max-width:768px) {
+    #loading-bar-spinner {
+        top: 14px;
+        left: initial;
+        right: 64px;
+    }
+}
