@@ -24,9 +24,13 @@ class RouteServiceProvider extends ServiceProvider
      */
     public function boot(Router $router)
     {
-        $router->pattern('sub1', '[\w\-]+');
-        $router->pattern('sub2', '[\w\-]+');
-        $router->pattern('sub3', '[\w\-]+');
+        $assetsPattern = '[\w\-]+';
+
+        $router->patterns([
+            'sub1' => $assetsPattern,
+            'sub2' => $assetsPattern,
+            'sub3' => $assetsPattern,
+        ]);
 
         parent::boot($router);
     }

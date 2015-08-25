@@ -1,4 +1,4 @@
-Options All -Indexes
+Options -Indexes +FollowSymLinks
 
 <IfModule mod_rewrite.c>
     <IfModule mod_negotiation.c>

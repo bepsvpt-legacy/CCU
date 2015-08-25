@@ -2,9 +2,9 @@
 
 namespace App\Ccu\Core;
 
-use Illuminate\Database\Eloquent\Model;
+use Eloquent;
 
-class Entity extends Model
+class Entity extends Eloquent
 {
     const CACHE_A_DAY = 1440;
 
