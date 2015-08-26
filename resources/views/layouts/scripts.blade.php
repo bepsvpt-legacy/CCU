@@ -1,5 +1,9 @@
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.2/angular.min.js" defer></script>
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.2/angular-route.min.js" defer></script>
+<!--[if lt IE 9]>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.2/html5shiv.min.js" defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js" defer></script>
+<![endif]-->
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular.min.js" defer></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular-route.min.js" defer></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/angulartics/0.19.2/angulartics.min.js" defer></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-loading-bar/0.8.0/loading-bar.min.js" defer></script>
 <script src="{{ routeAssets('js.vendor.angulartics-google-analytics') }}" defer></script>
@@ -18,11 +22,13 @@
 @inject('filesystem', 'Illuminate\Filesystem\Filesystem')
 
 @foreach($jsDirectories as $directory)
-    @foreach($filesystem->allFiles(base_path('resources/views/js/' . $directory)) as $file)
+    @foreach($filesystem->allFiles(base_path("resources/views/js/{$directory}")) as $file)
         @if (ends_with($file->getRelativePathname(), '.js.php'))
-            <script src="{{ routeAssets('js.' . $directory . '.' . str_replace('/', '.', substr($file->getRelativePathname(), 0, -7))) }}" defer></script>
+            <script src="{{ routeAssets("js.{$directory}." . str_replace('/', '.', substr($file->getRelativePathname(), 0, -7))) }}" defer></script>
         @endif
     @endforeach
 @endforeach
 
-<script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o), m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','//www.google-analytics.com/analytics.js','ga');ga('create', 'UA-65962475-2', '{{ app()->environment('local') ? 'none' : 'auto' }}');</script>
+@if (app()->environment('production'))
+    <script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o), m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','//www.google-analytics.com/analytics.js','ga');ga('create', 'UA-65962475-2', 'auto');</script>
+@endif

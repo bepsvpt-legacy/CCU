@@ -24,6 +24,6 @@ class HomeController extends Controller
             throw new NotFoundHttpException;
         }
 
-        return response($info->content);
+        return response($info->getAttribute('content'));
     }
 }
