@@ -73,3 +73,8 @@ Route::group(['prefix' => 'assets'], function ()
         get('{sub1}/{sub2}/{sub3}.html', ['uses' => 'AssetsController@templates']);
     });
 });
+
+Route::group(['prefix' => 'errors', 'as' => 'errors.'], function ()
+{
+    get('browser-not-support', ['as' => 'browserNotSupport', 'uses' => 'ErrorsController@browserNotSupport']);
+});

@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use Agent;
 use Carbon\Carbon;
 use Closure;
 use Illuminate\Auth\Guard;
@@ -32,6 +33,15 @@ class PreprocessConnection
     protected $view;
 
     /**
+     * The URIs that should be excluded from browser detection.
+     *
+     * @var array
+     */
+    protected $browserDetectionExcept = [
+        'errors/*',
+    ];
+
+    /**
      * @param Guard $guard
      * @param ViewFactory $view
      */
@@ -55,6 +65,11 @@ class PreprocessConnection
 
         Carbon::setLocale('zh-TW');
 
+        if (( ! $this->shouldPassThrough($this->request, $this->browserDetectionExcept)) && $this->isBrowserNotSupport())
+        {
+            return redirect()->route('errors.browserNotSupport');
+        }
+
         $this->setGlobalViewVariables();
 
         $this->response = $next($request);
@@ -65,5 +80,40 @@ class PreprocessConnection
     protected function setGlobalViewVariables()
     {
         $this->view->share('guard', $this->guard);
+    }
+
+    /**
+     * Determine if the user browser is not support.
+     *
+     * @return bool
+     */
+    protected function isBrowserNotSupport()
+    {
+        if (('IE' === ($browser = Agent::browser())) && (Agent::version($browser) < 11))
+        {
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
+     * Determine if the request has a URI that should pass through browser detection.
+     *
+     * @param  \Illuminate\Http\Request $request
+     * @param  array $excepts
+     * @return bool
+     */
+    protected function shouldPassThrough($request, array $excepts = [])
+    {
+        foreach ($excepts as $except)
+        {
+            if ($request->is($except))
+            {
+                return true;
+            }
+        }
+
+        return false;
     }
 }
