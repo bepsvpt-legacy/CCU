@@ -1,6 +1,6 @@
-(function () {
-    'use strict';
+'use strict';
 
+(function () {
     angular.module('ccu').config(function ($routeProvider) {
         $routeProvider.when('/', {
             templateUrl: '{{ routeAssets("templates.home") }}'

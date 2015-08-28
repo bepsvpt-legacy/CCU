@@ -1,7 +1,7 @@
 @extends('errors.master')
 
 @section('title')
-    Be right back.
+    <title>Be right back.</title>
 @endsection
 
 @section('main')

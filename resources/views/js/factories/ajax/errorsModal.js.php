@@ -1,6 +1,6 @@
-(function ($) {
-    'use strict';
+'use strict';
 
+(function ($) {
     angular.module('ccu')
         .factory('errorsModal', ['$rootScope', function ($rootScope) {
             return {

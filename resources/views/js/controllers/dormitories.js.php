@@ -1,6 +1,6 @@
-(function ($) {
-    'use strict';
+'use strict';
 
+(function ($) {
     angular.module('ccu')
         .controller('RoommatesController', ['$scope', '$http', 'errorsModal', function ($scope, $http, errorsModal) {
 

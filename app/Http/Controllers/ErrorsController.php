@@ -12,4 +12,9 @@ class ErrorsController extends Controller
     {
         return view('errors.browserNotSupport');
     }
+
+    public function noscript()
+    {
+        return view('errors.noscript');
+    }
 }

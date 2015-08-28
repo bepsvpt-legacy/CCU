@@ -1,7 +1,3 @@
-<!--[if lt IE 9]>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.2/html5shiv.min.js" defer></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js" defer></script>
-<![endif]-->
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular.min.js" defer></script>
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular-route.min.js" defer></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/angulartics/0.19.2/angulartics.min.js" defer></script>
@@ -15,9 +11,9 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/1000hz-bootstrap-validator/0.9.0/validator.min.js" defer></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/autosize.js/3.0.8/autosize.min.js" defer></script>
 <script src="https://www.google.com/recaptcha/api.js" defer></script>
+<script src="{{ routeAssets('js.ccu') }}" defer></script>
 <script src="{{ routeAssets('js.angular') }}" defer></script>
 <script src="{{ routeAssets('js.routes') }}" defer></script>
-<script src="{{ routeAssets('js.ccu') }}" defer></script>
 
 @inject('filesystem', 'Illuminate\Filesystem\Filesystem')
 

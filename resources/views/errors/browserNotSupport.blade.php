@@ -1,7 +1,7 @@
 @extends('errors.master')
 
 @section('title')
-    不支援的瀏覽器
+    <title>不支援的瀏覽器</title>
 @endsection
 
 @section('main')

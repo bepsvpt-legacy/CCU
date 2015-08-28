@@ -1,6 +1,6 @@
-(function ($) {
-    'use strict';
+'use strict';
 
+(function ($) {
     angular.module('ccu')
         .controller('SignInController', ['$scope', '$http', '$window', 'errorsModal', function ($scope, $http, $window, errorsModal) {
             $scope.signIn = {rememberMe: true};
