@@ -3,6 +3,8 @@
 namespace App\Ccu\General;
 
 use App\Ccu\Core\Entity;
+use Carbon\Carbon;
+use Request;
 
 class Event extends Entity
 {
@@ -33,4 +35,19 @@ class Event extends Entity
      * @var array
      */
     protected $dates = ['occurred_at'];
+
+    /**
+     * Save a new model and return the instance.
+     *
+     * @param  array  $attributes
+     * @return static
+     */
+    public static function create(array $attributes = [])
+    {
+        $attributes['user_agent'] = Request::header('user-agent');
+        $attributes['ip_address'] = Request::ip();
+        $attributes['occurred_at'] = Carbon::now();
+
+        return parent::create($attributes);
+    }
 }

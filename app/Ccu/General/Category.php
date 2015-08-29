@@ -28,14 +28,14 @@ class Category extends Entity
      */
     protected $fillable = ['category', 'name'];
 
-
     /**
      * Get categories or specific one from database.
      *
      * @param string|null $category
-     * @return \Illuminate\Database\Eloquent\Collection|static[]
+     * @param bool $getId
+     * @return \Illuminate\Database\Eloquent\Collection|int|static[]
      */
-    public static function getCategories($category = null)
+    public static function getCategories($category = null, $getId = false)
     {
         $categories = Cache::remember('categories', self::CACHE_A_MONTH, function ()
         {
@@ -50,8 +50,8 @@ class Category extends Entity
         $categories = $categories->filter(function ($item) use ($category)
         {
             return $category === $item->category;
-        });
+        })->flatten();
 
-        return $categories->flatten();
+        return ($getId) ? $categories->first()->getAttribute('id') : $categories;
     }
 }

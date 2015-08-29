@@ -2,7 +2,13 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Ccu\General\Category;
+use App\Ccu\General\Event;
+use App\Ccu\General\Verify;
 use App\Ccu\Member\Account;
+use App\Ccu\Member\Role;
+use App\Events\Member\RegisterEvent;
+use App\Events\Member\SignInEvent;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Auth;
@@ -16,6 +22,8 @@ class AuthController extends Controller
         {
             return response()->json(['message' => ['Invalid email or password.']], 422);
         }
+
+        event(new SignInEvent(Auth::user()));
 
         return response()->json(['message' => ['Sign in success.']]);
     }
@@ -31,7 +39,27 @@ class AuthController extends Controller
 
         Auth::loginUsingId($account->getAttribute('id'), true);
 
+        event(new RegisterEvent($account));
+
         return response()->json(['message' => ['Register success.']]);
+    }
+
+    public function verifyEmail($token)
+    {
+        if ( ! (($account = Verify::verifyToken($token)) instanceof Account))
+        {
+            return view('errors.emailVerifyFailed', ['message' => $account]);
+        }
+
+        $account->attachRole(Role::where('name', '=', 'verified-user')->first());
+
+        Event::create([
+            'category_id' => Category::getCategories('events.account', true),
+            'account_id' => $account->getAttribute('id'),
+            'action' => 'account.verifyEmail',
+        ]);
+
+        return redirect()->route('home');
     }
 
     public function signOut()

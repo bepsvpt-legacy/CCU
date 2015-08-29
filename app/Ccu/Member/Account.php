@@ -72,8 +72,6 @@ class Account extends Entity implements AuthenticatableContract, CanResetPasswor
         else
         {
             DB::commit();
-
-            // register email
         }
 
         return $account;
