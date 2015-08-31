@@ -6,6 +6,18 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>CCU</title>
         <noscript><meta http-equiv="refresh" content="0; url=/errors/noscript"></noscript>
+        <script>
+            (function () {
+                'use strict';
+
+                const VERSION = 1.0;
+
+                if (VERSION > parseFloat(localStorage.getItem('VERSION') || 0)) {
+                    localStorage.setItem('VERSION', VERSION);
+                    window.location.reload(true);
+                }
+            })();
+        </script>
         <style>
             #ccu-initializing{position:fixed;top:50%;left:50%;margin-top:-164px;margin-left:-32px;z-index:99999}#ccu-initializing .background{position:fixed;top:0;left:0;min-width:100%;min-height:100%;background:#eee}.hide{display:none!important}body{overflow-y:scroll!important}
             /* http://tobiasahlin.com/spinkit/ */

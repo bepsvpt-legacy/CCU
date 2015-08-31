@@ -74,7 +74,7 @@ class SetCacheHeaders
                 'public' => true
             ]);
 
-            $response->setExpires(Carbon::now()->addDays(7));
+            $response->setExpires(Carbon::now()->addDays(30));
 
             if ((null !== ($etag = $request->headers->get('If-None-Match'))) || (null !== $request->headers->get('If-Modified-Since')))
             {
