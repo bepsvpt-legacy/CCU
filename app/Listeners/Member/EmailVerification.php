@@ -4,9 +4,8 @@ namespace App\Listeners\Member;
 
 use App\Events\Member\RegisterEvent;
 use App\Ccu\Mail\Register;
-use Illuminate\Contracts\Queue\ShouldQueue;
 
-class EmailVerification //implements ShouldQueue
+class EmailVerification
 {
     /**
      * Handle the event.

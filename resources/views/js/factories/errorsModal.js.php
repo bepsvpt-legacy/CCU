@@ -17,6 +17,14 @@
                     (422 === response.status) ? this.unprocessableEntity(response.data) : this.otherwise(response.status);
 
                     this.show();
+
+                    var g = $('textarea[name="g-recaptcha-response"]');
+
+                    if (g.length) {
+                        var num = g.attr('id').substr(g.attr('id').lastIndexOf('-')+1);
+
+                        grecaptcha.reset(isNaN(num) ? 0 : num);
+                    }
                 },
                 init: function () {
                     $rootScope.errors = [];

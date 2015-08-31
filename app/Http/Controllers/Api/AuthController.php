@@ -25,7 +25,7 @@ class AuthController extends Controller
 
         event(new SignInEvent(Auth::user()));
 
-        return response()->json(['message' => ['Sign in success.']]);
+        return response('', 200);
     }
 
     public function register(Requests\RegisterRequest $request)
@@ -41,7 +41,7 @@ class AuthController extends Controller
 
         event(new RegisterEvent($account));
 
-        return response()->json(['message' => ['Register success.']]);
+        return response('', 200);
     }
 
     public function verifyEmail($token)
@@ -66,6 +66,6 @@ class AuthController extends Controller
     {
         Auth::logout();
 
-        return response()->json(['message' => ['Sing out success.']]);
+        return response('', 200);
     }
 }

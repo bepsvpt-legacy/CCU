@@ -32,9 +32,9 @@ class RegisterRequest extends Request
      */
     public function messages()
     {
-        return [
-            'domain.exists' => '您的信箱不在白名單內，如對此有問題，請聯繫管理員',
-        ];
+        return parent::messages([
+            'domain.exists' => '您的信箱不在允許名單內，如對此有疑惑，請聯繫管理員',
+        ]);
     }
 
     /**

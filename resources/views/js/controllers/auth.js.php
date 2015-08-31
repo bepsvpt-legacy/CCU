@@ -1,8 +1,17 @@
 'use strict';
 
-(function ($) {
+(function () {
+    var _errorsModal, redirectToHomePage = function () {
+            window.location.href = '{{ route("home") }}';
+        }, handleErrorResponse = function (response) {
+            _errorsModal.make(response);
+        };
+
     angular.module('ccu')
-        .controller('SignInController', ['$scope', '$http', '$window', 'errorsModal', function ($scope, $http, $window, errorsModal) {
+        .run(['errorsModal', function(errorsModal) {
+            _errorsModal = errorsModal;
+        }])
+        .controller('SignInController', ['$scope', '$http', function ($scope, $http) {
             $scope.signIn = {rememberMe: true};
 
             $scope.submit = function () {
@@ -11,22 +20,14 @@
                     password: $scope.signIn.password,
                     rememberMe: $scope.signIn.rememberMe
                 })
-                    .then(function (response) {
-                        $window.location.href = '/';
-                    }, function (response) {
-                        errorsModal.make(response);
-                    });
+                    .then(redirectToHomePage, handleErrorResponse);
             };
         }])
-        .controller('SignOutController', ['$http', '$window', function ($http, $window) {
+        .controller('SignOutController', ['$http', function ($http) {
             $http.get('{{ route("api.auth.signOut") }}')
-                .then(function (response) {
-                    $window.location.href = '/';
-                }, function (response) {
-                    $window.location.href = '/';
-                });
+                .then(redirectToHomePage, redirectToHomePage);
         }])
-        .controller('RegisterController', ['$scope', '$http', '$window', 'errorsModal', function ($scope, $http, $window, errorsModal) {
+        .controller('RegisterController', ['$scope', '$http', function ($scope, $http) {
             $scope.register = {};
 
             $scope.submit = function () {
@@ -34,13 +35,9 @@
                     email: $scope.register.email,
                     password: $scope.register.password,
                     password_confirmation: $scope.register.password_confirmation,
-                    'g-recaptcha-response': $('#g-recaptcha-response').val()
+                    'g-recaptcha-response': angular.element('textarea[name="g-recaptcha-response"]').val() || ''
                 })
-                    .then(function (response) {
-                        $window.location.href = '/';
-                    }, function (response) {
-                        errorsModal.make(response);
-                    });
+                    .then(redirectToHomePage, handleErrorResponse);
             };
         }]);
-})(jQuery);
+})();
