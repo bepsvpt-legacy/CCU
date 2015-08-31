@@ -14,7 +14,7 @@
         .controller('SignInController', ['$scope', '$http', function ($scope, $http) {
             $scope.signIn = {rememberMe: true};
 
-            $scope.submit = function () {
+            $scope.signInFormSubmit = function () {
                 $http.post('{{ route("api.auth.signIn") }}', {
                     email: $scope.signIn.email,
                     password: $scope.signIn.password,
@@ -30,11 +30,12 @@
         .controller('RegisterController', ['$scope', '$http', function ($scope, $http) {
             $scope.register = {};
 
-            $scope.submit = function () {
+            $scope.registerFormSubmit = function () {
                 $http.post('{{ route("api.auth.register") }}', {
                     email: $scope.register.email,
                     password: $scope.register.password,
                     password_confirmation: $scope.register.password_confirmation,
+                    termsOfService: $scope.register.termsOfService,
                     'g-recaptcha-response': angular.element('textarea[name="g-recaptcha-response"]').val() || ''
                 })
                     .then(redirectToHomePage, handleErrorResponse);

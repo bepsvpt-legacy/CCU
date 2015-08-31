@@ -57,19 +57,18 @@ table {
     height: 100%;
 }
 
-.vertical-align {
-    display: flex;
-    flex-direction: row;
-}
-
-.vertical-align > [class^="col-"], .vertical-align > [class*=" col-"], .vertical-align-children {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
 .sign-in-register-hint {
     margin-top: 1em;
+}
+
+.sign-in-register-submit-checkbox {
+    label {
+        padding-left: 10px;
+    }
+
+    .checkbox-hint {
+        padding-left: 8px;
+    }
 }
 
 .has-error {

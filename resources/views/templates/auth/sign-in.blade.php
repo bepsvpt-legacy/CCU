@@ -1,7 +1,7 @@
 <div class="row">
     <div class="col-xs-10 col-xs-offset-1 col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3">
         <div>
-            <form ng-submit="signInForm.$valid && submit()" name="signInForm" method="POST" accept-charset="UTF-8" data-toggle="validator">
+            <form ng-submit="signInForm.$valid && signInFormSubmit()" name="signInForm" method="POST" accept-charset="UTF-8" data-toggle="validator">
                 <fieldset>
                     <div class="text-center">
                         <legend>登入</legend>
@@ -25,16 +25,16 @@
                         {!! Form::validationMessage() !!}
                     </div>
 
-                    <div class="text-right">
-                        <div class="checkbox inline">
+                    <div>
+                        <div class="checkbox pull-left sign-in-register-submit-checkbox">
                             <label>
                                 {!! Form::checkbox('rememberMe', true, true, ['ng-model' => 'signIn.rememberMe']) !!}
-                                <span> 記住我</span>
+                                <span class="checkbox-hint">記住我</span>
                             </label>
                         </div>
 
-                        <div class="inline">
-                            {!! Form::button('登入', ['type' => 'submit', 'class' => 'btn btn-success']) !!}
+                        <div class="text-right">
+                            {!! Form::button('登入', ['type' => 'submit', 'class' => 'btn btn-sm btn-success']) !!}
                         </div>
                     </div>
                 </fieldset>
