@@ -11,8 +11,8 @@
             </div>
             <div id="navbar-collapse" class="navbar-collapse collapse navbar-responsive-collapse">
                 <ul class="nav navbar-nav">
-                    <li><a href="#/courses" title="課程評論"><span class="fa fa-fw fa-book"></span><span> 課程評論</span></a></li>
-                    <li><a href="#/dormitories/roommates" title="宿舍找室友"><span class="fa fa-fw fa-home"></span><span> 宿舍找室友</span></a></li>
+                    <li><a href="#/courses" title="課程評論" data-toggle="tooltip" data-placement="bottom"><span class="fa fa-fw fa-book"></span><span> 課程評論</span></a></li>
+                    <li><a href="#/dormitories/roommates" title="宿舍找室友" data-toggle="tooltip" data-placement="bottom"><span class="fa fa-fw fa-home"></span><span> 宿舍找室友</span></a></li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     @if ($guard->guest())

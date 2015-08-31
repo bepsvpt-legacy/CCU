@@ -1,15 +1,25 @@
 'use strict';
 
-(function ($) {
+(function () {
+    var _errorsModal, handleErrorResponse = function (response) {
+        _errorsModal.make(response);
+    };
+
     angular.module('ccu')
-        .controller('RoommatesController', ['$scope', '$http', 'errorsModal', function ($scope, $http, errorsModal) {
+        .run(['errorsModal', function(errorsModal) {
+            _errorsModal = errorsModal;
+        }])
+        .controller('RoommatesController', ['$scope', '$http', function ($scope, $http) {
+            var ls = JSON.parse(localStorage.getItem('dormitories'));
+
+            $scope.showCreateForm = ((null !== ls) && (ls.hasOwnProperty('roommates')) && (ls.roommates.hasOwnProperty('showCreateForm'))) ? ls.roommates.showCreateForm : true;
+            $scope.search = {};
+            $scope.create = {};
 
             $http.get('{{ route("api.dormitories.roommates.status") }}', {cache: true})
                 .then(function (response) {
                     $scope.status = response.data;
-                }, function (response) {
-                    errorsModal.make(response);
-                });
+                }, handleErrorResponse);
 
             $scope.searchFormSubmit = function () {
                 $http.get('{{ route("api.dormitories.roommates.search") }}', {
@@ -20,9 +30,7 @@
                 })
                     .then(function (response) {
                         $scope.searchResults = response.data;
-                    }, function (response) {
-                        errorsModal.make(response);
-                    });
+                    }, handleErrorResponse);
             };
 
             $scope.createFormSubmit = function () {
@@ -31,14 +39,20 @@
                     bed: $scope.create.bed,
                     name: $scope.create.name,
                     fb: $scope.create.fb,
-                    'g-recaptcha-response': $('#g-recaptcha-response').val()
+                    'g-recaptcha-response': angular.element('textarea[name="g-recaptcha-response"]').val() || ''
                 })
-                    .then(function (response) {
-                        $scope.create = {};
-                        alert('新增成功');
-                    }, function (response) {
-                        errorsModal.make(response);
-                    });
+                    .then(function () {
+                        $scope.createFormHide();
+                        setTimeout(function() {alert('新增成功');}, 1);
+                    }, handleErrorResponse);
+            };
+
+            $scope.createFormShow = function () {
+                $scope.createFormHide(true);
+            };
+
+            $scope.createFormHide = function (reverse) {
+                localStorage.setItem('dormitories', JSON.stringify({roommates: {showCreateForm: $scope.showCreateForm = !!reverse}}));
             };
         }]);
-})(jQuery);
+})();

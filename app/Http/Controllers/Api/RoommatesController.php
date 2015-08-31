@@ -12,17 +12,25 @@ use Illuminate\Http\Request;
 
 class RoommatesController extends Controller
 {
+    /**
+     * Current academic.
+     *
+     * @var int
+     */
+    protected $academic;
+
+    public function __construct()
+    {
+        $this->academic = $this->getAcademic();
+    }
+
     public function search(Request $request)
     {
-        $academic = $this->getAcademic();
+        $roommates = [];
 
-        if ( ! Roommate::where('academic', '=', $academic)->where('name', '=', $request->input('name'))->where('room', '=', $request->input('room'))->exists())
+        if (Roommate::where('academic', '=', $this->academic)->where('name', '=', $request->input('name'))->where('room', '=', $request->input('room'))->exists())
         {
-            $roommates = [];
-        }
-        else
-        {
-            $roommates = Roommate::where('academic', '=', $academic)->where('room', '=', $request->input('room'))->get();
+            $roommates = Roommate::where('academic', '=', $this->academic)->where('room', '=', $request->input('room'))->get();
         }
 
         return response()->json($roommates);
@@ -30,15 +38,13 @@ class RoommatesController extends Controller
 
     public function status()
     {
-        $roommatesStatus = Cache::remember('roommatesStatus', 5, function()
+        $roommatesStatus = Cache::remember('roommatesStatus', 60, function()
         {
             $nums = [0, 0, 0, 0];
 
-            foreach (Roommate::where('academic', '=', 108)->groupBy('room')->get(['room']) as $room)
+            foreach (Roommate::select(['room'])->selectRaw('count(`room`) as num')->where('academic', '=', $this->academic)->groupBy('room')->get() as $room)
             {
-                $c = Roommate::where('academic', '=', 108)->where('room', '=', $room->room)->count();
-
-                ++$nums[$c-1];
+                ++$nums[$room->num - 1];
             }
 
             return $nums;
@@ -52,7 +58,7 @@ class RoommatesController extends Controller
         try
         {
             Roommate::create([
-                'academic' => $this->getAcademic(),
+                'academic' => $this->academic,
                 'room' => $request->input('room'),
                 'bed' => $request->input('bed'),
                 'name' => $request->input('name'),
@@ -67,19 +73,19 @@ class RoommatesController extends Controller
             }
             else
             {
-                return response()->json(['message' => ['新增失敗']], 422);
+                return response()->json(['message' => ['新增失敗，請聯繫管理員以協助處理此狀況']], 422);
             }
         }
 
-        return response()->json(['message' => ['Create success.']]);
+        return response('', 200);
     }
 
     public function getAcademic()
     {
-        $day = Carbon::now();
+        $now = Carbon::now();
 
-        $year = $day->year + 4;
+        $year = $now->year + 4;
 
-        return ($day->month >= 8) ? ($year - 1911) : ($year - 1912);
+        return ($now->month >= 8) ? ($year - 1911) : ($year - 1912);
     }
 }

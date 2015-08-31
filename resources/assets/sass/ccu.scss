@@ -57,20 +57,6 @@ table {
     height: 100%;
 }
 
-.sign-in-register-hint {
-    margin-top: 1em;
-}
-
-.sign-in-register-submit-checkbox {
-    label {
-        padding-left: 10px;
-    }
-
-    .checkbox-hint {
-        padding-left: 8px;
-    }
-}
-
 .has-error {
     .input-group-addon, .form-control-feedback, .help-block {
         color: #f44336 !important;
@@ -97,6 +83,24 @@ table {
 
 .cursor-pointer {
     cursor: pointer;
+}
+
+.sign-in-register-hint {
+    margin-top: 1em;
+}
+
+.sign-in-register-submit-checkbox {
+    label {
+        padding-left: 10px;
+    }
+
+    .checkbox-hint {
+        padding-left: 8px;
+    }
+}
+
+.dormitories-roommates-title {
+    font-size: 21px;
 }
 
 .profile-picture {
