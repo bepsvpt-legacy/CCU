@@ -3,8 +3,9 @@
 namespace App\Exceptions;
 
 use Exception;
-use Symfony\Component\HttpKernel\Exception\HttpException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Illuminate\Session\TokenMismatchException;
+use Symfony\Component\HttpKernel\Exception\HttpException;
 
 class Handler extends ExceptionHandler
 {
@@ -39,6 +40,11 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $e)
     {
+        if ($e instanceof TokenMismatchException)
+        {
+            return ($request->ajax()) ? response()->json(['message' => ['很抱歉，請嘗試重新整理網頁']], 422) : response()->view('errors.tokenMismatch', [], 500);
+        }
+
         return parent::render($request, $e);
     }
 }
