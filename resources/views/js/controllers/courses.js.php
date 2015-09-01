@@ -98,7 +98,7 @@
 
             $scope.vote.findIndex = function (id) {
                 for (var i in $scope.vote.votes) {
-                    if (id === $scope.vote.votes[i].courses_comment_id) {
+                    if ($scope.vote.votes.hasOwnProperty(i) && (id === $scope.vote.votes[i].courses_comment_id)) {
                         return i;
                     }
                 }
