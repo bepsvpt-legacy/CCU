@@ -68,4 +68,23 @@ class AuthController extends Controller
 
         return response('', 200);
     }
+
+    public function rolesPermissions()
+    {
+        $data = ['roles' => [], 'permissions' => [], 'signIn' => ( ! Auth::guest())];
+
+        if ($data['signIn'])
+        {
+            $account = Auth::user()->load('roles.perms');
+
+            $data['roles'] = $account->getRelation('roles')->pluck('name');
+
+            foreach ($account->getRelation('roles') as $role)
+            {
+                $data['permissions'] += $role->getRelation('perms')->pluck('name')->toArray();
+            }
+        }
+
+        return response()->json($data);
+    }
 }

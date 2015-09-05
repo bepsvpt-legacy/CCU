@@ -36,11 +36,11 @@
                     });
             };
         }])
-        .controller('CoursesShowController', ['$scope', '$rootScope', '$routeParams', '$http', '$filter', 'errorsModal', function ($scope, $rootScope, $routeParams, $http, $filter, errorsModal) {
+        .controller('CoursesShowController', ['$scope', '$rootScope', '$stateParams', '$http', '$filter', 'errorsModal', function ($scope, $rootScope, $stateParams, $http, $filter, errorsModal) {
             $scope.vote = {};
             $scope.postCommentsCommentForm = [];
 
-            $http.get('{{ route("api.courses.show") }}/' + $routeParams.courseId, {cache: true})
+            $http.get('{{ route("api.courses.show") }}/' + $stateParams.courseId, {cache: true})
                 .then(function (response) {
                     $scope.info = response.data;
                 }, function (response) {
@@ -52,7 +52,7 @@
                     page = 1;
                 }
 
-                $http.get('{{ route("api.courses.show") }}/' + $routeParams.courseId + '/comments?page=' + page)
+                $http.get('{{ route("api.courses.show") }}/' + $stateParams.courseId + '/comments?page=' + page)
                     .then(function (response) {
                         $scope.comments = response.data;
                     }, function (response) {
@@ -107,7 +107,7 @@
             };
 
             $scope.postComments = function (commentId) {
-                var url = '/api/courses/' + $routeParams.courseId + '/comments';
+                var url = '/api/courses/' + $stateParams.courseId + '/comments';
 
                 if (undefined !== commentId) {
                     url += '/' + commentId;

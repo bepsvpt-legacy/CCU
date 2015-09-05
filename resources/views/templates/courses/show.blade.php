@@ -20,7 +20,7 @@
     <h3><span class="fa fa-comments" aria-hidden="true"></span> 課程評論</h3><br>
 
     <div class="row">
-        <div ng-if=" ! $root.guest" class="col-xs-10 col-xs-offset-1 col-sm-7 col-sm-offset-1">
+        <div ng-if="$root.user.signIn" class="col-xs-10 col-xs-offset-1 col-sm-7 col-sm-offset-1">
             <div class="media">
                 <div class="media-left">
                     <img class="media-object profile-picture-medium" src="https://ccu.bepsvpt.net/favicon.png" alt="Profile Picture">
@@ -73,7 +73,7 @@
                         </div>
                     </div>
 
-                    <div ng-if=" ! $root.guest" class="media">
+                    <div ng-if="$root.user.signIn" class="media">
                         <div class="media-left">
                             <img class="media-object profile-picture-small" src="https://ccu.bepsvpt.net/favicon.png" alt="Profile Picture">
                         </div>

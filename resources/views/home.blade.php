@@ -7,10 +7,10 @@
         <title>CCU</title>
         <noscript><meta http-equiv="refresh" content="0; url=/errors/noscript"></noscript>
         <script>
+            const VERSION = 1.0;
+
             (function () {
                 'use strict';
-
-                const VERSION = 1.0;
 
                 if (VERSION > parseFloat(localStorage.getItem('VERSION') || 0)) {
                     localStorage.setItem('VERSION', VERSION);
@@ -27,10 +27,10 @@
     <body>
         <div id="ccu-initializing"><div class="background"></div><div class="ccu-initializing-spinner"></div></div>
 
-        <div class="full-height hide">
+        <div class="hide">
             @include('layouts.header')
 
-            <main class="container" ng-view></main>
+            <main class="container" ui-view></main>
 
             @include('layouts.footer')
         </div>

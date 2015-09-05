@@ -23,6 +23,7 @@ Route::group(['prefix' => 'api', 'namespace' => 'Api', 'as' => 'api.'], function
         get('sign-out', ['as' => 'signOut', 'uses' => 'AuthController@signOut']);
         post('register', ['as' => 'register', 'uses' => 'AuthController@register']);
         get('register/verify-email/{token}', ['as' => 'verifyEmail', 'uses' => 'AuthController@verifyEmail']);
+        get('roles-permissions', ['as' => 'rolesPermissions', 'uses' => 'AuthController@rolesPermissions']);
     });
 
     Route::group(['prefix' => 'courses', 'as' => 'courses.'], function ()

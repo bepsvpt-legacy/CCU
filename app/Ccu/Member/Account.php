@@ -53,10 +53,8 @@ class Account extends Entity implements AuthenticatableContract, CanResetPasswor
      */
     public function events()
     {
-        $event = Category::getCategories('events.account')->shift();
-
         return $this->hasMany('App\Ccu\General\Event')
-            ->where('category_id', '=', $event->getAttribute('id'));
+            ->where('category_id', '=', Category::getCategories('events.account', true));
     }
 
     public static function create(array $attributes = [])
