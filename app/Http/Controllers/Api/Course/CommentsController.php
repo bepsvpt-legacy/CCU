@@ -28,11 +28,11 @@ class CommentsController extends Controller
         return response()->json($comments);
     }
 
-    public function parsingComments($comments, $recursive = false)
+    public function parsingComments($comments, $isRecursive = false)
     {
         foreach ($comments as $comment)
         {
-            if (( ! $recursive) && count($subComments = $comment->getAttribute('comments')))
+            if (( ! $isRecursive) && count($subComments = $comment->getAttribute('comments')))
             {
                 $this->parsingComments($subComments, true);
             }
@@ -47,7 +47,7 @@ class CommentsController extends Controller
         }
     }
 
-    public function store(Requests\CoursesCommentsRequest $request, Guard $guard, $courseId, $commentId = null)
+    public function store(Requests\CoursesCommentsRequest $request, $courseId, $commentId = null)
     {
         if ( ! Course::where('id', '=', $courseId)->exists())
         {
@@ -59,7 +59,7 @@ class CommentsController extends Controller
         }
 
         $comment = Comment::create([
-            'user_id' => $guard->user()->user->account_id,
+            'user_id' => $request->user()->user->account_id,
             'course_id' => $courseId,
             'courses_comment_id' => $commentId,
             'content' => $request->input('content'),
@@ -79,13 +79,13 @@ class CommentsController extends Controller
         return response()->json($request->user()->user->votes);
     }
 
-    public function vote(Request $request, Guard $guard, $commentId, $withdraw = false)
+    public function vote(Request $request, $commentId, $withdraw = false)
     {
-        return CommentsVote::vote($commentId, $guard->user()->user->account_id, boolval($request->input('agree', false)), $withdraw);
+        return CommentsVote::vote($commentId, $request->user()->user->account_id, boolval($request->input('agree', false)), $withdraw);
     }
 
-    public function voteWithdraw(Request $request, Guard $guard, $commentId)
+    public function voteWithdraw(Request $request, $commentId)
     {
-        return $this->vote($request, $guard, $commentId, true);
+        return $this->vote($request, $commentId, true);
     }
 }
