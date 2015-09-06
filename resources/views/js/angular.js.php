@@ -1,6 +1,6 @@
 'use strict';
 
-(function ($) {
+(function () {
     var app = angular.module('ccu', [
         'ui.router',
         'angular-loading-bar',
@@ -40,4 +40,4 @@
                 };
             });
     }]);
-})(jQuery);
+})();

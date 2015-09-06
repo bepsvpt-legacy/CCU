@@ -14,15 +14,31 @@
             $scope.search = {keyword: ''};
             $scope.courses = CourseService.getCourses();
 
-            $http.get('{{ route("api.courses.departments") }}', {cache: true})
-                .then(function (response) {
-                    $scope.options.departments = response.data;
-                }, handleErrorResponse);
+            var courses = JSON.parse(localStorage.getItem('courses')),
+                pushLocalStorage = function (item, data) {
+                    if ( ! (courses = JSON.parse(localStorage.getItem('courses')))) {
+                        courses = {};
+                    }
+                    courses[item] = data;
+                    localStorage.setItem('courses', JSON.stringify(courses));
+                };
 
-            $http.get('{{ route("api.courses.dimensions") }}', {cache: true})
-                .then(function (response) {
-                    $scope.options.dimensions = response.data;
-                }, handleErrorResponse);
+            if (courses) {
+                $scope.options.departments = courses.departments;
+                $scope.options.dimensions = courses.dimensions;
+            } else {
+                $http.get('{{ route("api.courses.departments") }}', {cache: true})
+                    .then(function (response) {
+                        $scope.options.departments = response.data;
+                        pushLocalStorage('departments', response.data);
+                    }, handleErrorResponse);
+
+                $http.get('{{ route("api.courses.dimensions") }}', {cache: true})
+                    .then(function (response) {
+                        $scope.options.dimensions = response.data;
+                        pushLocalStorage('dimensions', response.data);
+                    }, handleErrorResponse);
+            }
 
             $scope.searchFormSubmit = function () {
                 CourseService.searchCourse($scope.search)
@@ -100,13 +116,13 @@
                     anonymous: (isSubComment) ? $scope.commentsComment[commentId].anonymous :  $scope.comment.anonymous
                 }).then(function () {
                     $scope.getComments($scope.comments.current_page);
-                }, handleErrorResponse);
 
-                if (isSubComment) {
-                    $scope.commentsComment[commentId] = {};
-                } else {
-                    $scope.comment = {};
-                }
+                    if (isSubComment) {
+                        $scope.commentsComment[commentId] = {};
+                    } else {
+                        $scope.comment = {};
+                    }
+                }, handleErrorResponse);
             };
 
             $scope.commentsPaginate = function (nextPage, url) {
