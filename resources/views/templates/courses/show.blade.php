@@ -124,6 +124,9 @@
                         </tr>
                     </thead>
                     <tbody>
+                        <tr ng-hide="exams.length">
+                            <td colspan="4">尚無檔案</td>
+                        </tr>
                         <tr ng-repeat="exam in exams">
                             <td>@{{ exam.semester.name }}</td>
                             <td><a ng-href="/api/courses/exams/@{{ exam.id }}" target="_blank">@{{ exam.file_name }}</a></td>
