@@ -7,7 +7,7 @@
         <title>CCU</title>
         <noscript><meta http-equiv="refresh" content="0; url=/errors/noscript"></noscript>
         <script>
-            const VERSION = 1.2;
+            const VERSION = 1.21;
 
             (function () {
                 'use strict';
