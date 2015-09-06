@@ -30,11 +30,15 @@ Route::group(['prefix' => 'api', 'namespace' => 'Api', 'as' => 'api.'], function
     {
         get('departments', ['as' => 'departments', 'uses' => 'CoursesController@departments']);
         get('dimensions', ['as' => 'dimensions', 'uses' => 'CoursesController@dimensions']);
+        get('semesters', ['as' => 'semesters', 'uses' => 'CoursesController@semesters']);
         get('search', ['as' => 'search', 'uses' => 'CoursesController@search']);
+        get('exams/{exam_id}', ['middleware' => 'auth', 'as' => 'exams.download', 'uses' => 'ExamsController@download']);
 
         Route::group(['prefix' => '{courseId}'], function ()
         {
             get('/', ['as' => 'show', 'uses' => 'CoursesController@show']);
+            get('exams', ['as' => 'exams.index', 'uses' => 'ExamsController@index']);
+            post('exams', ['middleware' => 'auth', 'as' => 'exams.store', 'uses' => 'ExamsController@store']);
             get('comments', ['as' => 'comments.list', 'uses' => 'CommentsController@index']);
             post('comments/{commentId?}', ['middleware' => 'auth', 'as' => 'comments.store', 'uses' => 'CommentsController@store']);
         });

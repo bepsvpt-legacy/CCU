@@ -47,11 +47,40 @@
                     });
             };
         }])
-        .controller('CoursesShowController', ['$http','$rootScope',  '$scope', '$stateParams', function ($http, $rootScope, $scope, $stateParams) {
+        .controller('CoursesShowController', ['$http',  '$scope', '$stateParams', function ($http, $scope, $stateParams) {
             $http.get('/api/courses/' + $stateParams.courseId, {cache: true})
                 .then(function (response) {
                     $scope.info = response.data;
                 }, handleErrorResponse);
+        }])
+        .controller('CoursesExamsController', ['$http',  '$scope', '$stateParams', 'Upload', function ($http, $scope, $stateParams, Upload) {
+            $scope.exam = {};
+
+            $scope.getExams = function () {
+                $http.get('/api/courses/' + $stateParams.courseId + '/exams')
+                    .then(function (response) {
+                        $scope.exams = response.data;
+                    }, handleErrorResponse);
+            };
+
+            $http.get('{{ route("api.courses.semesters") }}', {cache: true})
+                .then(function (response) {
+                    $scope.semesters = response.data;
+                }, handleErrorResponse);
+
+            $scope.examFormSubmit = function () {
+                Upload.upload({
+                    url: 'api/courses/' + $stateParams.courseId + '/exams',
+                    fields: {semester: $scope.exam.semester.id},
+                    file: $scope.exam.file
+                }).then(function () {
+                    $scope.exam = {};
+                    $scope.getExams();
+                    setTimeout(function() {alert('上傳成功');}, 1);
+                }, handleErrorResponse)
+            };
+
+            $scope.getExams();
         }])
         .controller('CoursesCommentsController', ['$http', '$rootScope', '$scope', '$stateParams', 'CourseService', function ($http, $rootScope, $scope, $stateParams, CourseService) {
             $scope.vote = {votes: CourseService.getVotes()};

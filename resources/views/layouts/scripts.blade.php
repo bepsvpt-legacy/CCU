@@ -3,6 +3,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.15/angular-ui-router.min.js" defer></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/angulartics/0.19.2/angulartics.min.js" defer></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-loading-bar/0.8.0/loading-bar.min.js" defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/danialfarid-angular-file-upload/7.0.17/ng-file-upload.min.js" defer></script>
 <script src="{{ routeAssets('js.vendor.angulartics-google-analytics') }}" defer></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js" defer></script>
 <script src="{{ routeAssets('js.vendor.arrive') }}" defer></script>

@@ -22,6 +22,11 @@ class CoursesController extends Controller
         return response()->json(Category::getCategories('courses.dimension'));
     }
 
+    public function semesters()
+    {
+        return response()->json(Category::getCategories('courses.semester'));
+    }
+
     public function search(Request $request)
     {
         $courses = (new CourseSearch($request->all()))->search();

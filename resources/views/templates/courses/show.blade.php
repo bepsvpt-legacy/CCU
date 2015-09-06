@@ -61,7 +61,7 @@
                         <small class="text-primary cursor-pointer">檢視回覆</small>
                     </div>
 
-                    <div ng-if="comment.sub" class="courses-comments-comments">
+                    <div ng-if="comment.sub" class="courses-comments-comments overflow-scroll">
                         <div ng-repeat="subComment in comment.comments" class="media">
                             <div class="media-left">
                                 <img class="media-object profile-picture-small" src="https://ccu.bepsvpt.net/favicon.png" alt="Profile Picture">
@@ -80,13 +80,13 @@
                         <div class="media-body">
                             <form ng-submit="commentsComment[comment.id].content.length >= 10 && commentFormSubmit(comment.id)" method="POST" accept-charset="UTF-8" data-toggle="validator">
                                 <fieldset>
-                                    <div class="form-group">
+                                    <div class="form-group form-group-no-margin">
                                         <label class="sr-only">回覆</label>
                                         <textarea ng-model="commentsComment[comment.id].content" class="form-control textarea-no-resize" rows="1" placeholder="回覆..." data-minlength="10" data-minlength-error="至少需10個字" maxlength="1000" required></textarea>
                                         <div class="help-block with-errors"></div>
                                     </div>
 
-                                    <div class="form-group text-right">
+                                    <div class="form-group form-group-no-margin text-right">
                                         <label>{!! Form::checkbox('anonymous', true, null, ['ng-model' => 'commentsComment[comment.id].anonymous']) !!} <span>匿名</span></label>
 
                                         {!! Form::submit('送出', ['class' => 'btn btn-xs btn-success']) !!}
@@ -103,6 +103,73 @@
                     <li ng-class="(comments.prev_page_url) ? '' : 'disabled'" class="previous cursor-pointer"><span ng-click="commentsPaginate(false, comments.prev_page_url)" class="text-primary">← Newer</span></li>
                     <li ng-class="(comments.next_page_url) ? '' : 'disabled'" class="next cursor-pointer"><span ng-click="commentsPaginate(true, comments.next_page_url)" class="text-primary">Older →</span></li>
                 </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div ng-controller="CoursesExamsController">
+    <h3><span class="fa fa-file-pdf-o" aria-hidden="true"></span> 考古題</h3><br>
+
+    <div class="row">
+        <div class="col-xs-10 col-xs-offset-1">
+            <div class="table-responsive text-center">
+                <table class="table table-striped table-bordered table-hover">
+                    <thead>
+                        <tr class="info">
+                            <th>學期</th>
+                            <th>檔名<span ng-if=" ! $root.user.signIn"> (需登入方可下載)</span></th>
+                            <th class="hidden-xs">大小</th>
+                            <th class="hidden-xs">上傳時間</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="exam in exams">
+                            <td>@{{ exam.semester.name }}</td>
+                            <td><a ng-href="/api/courses/exams/@{{ exam.id }}" target="_blank">@{{ exam.file_name }}</a></td>
+                            <td class="hidden-xs">@{{ exam.file_size | bytes }}</td>
+                            <td class="hidden-xs">@{{ exam.created_at }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="col-xs-10 col-xs-offset-1">
+            <div class="panel panel-default">
+                <div class="panel-heading">檔案上傳<span ng-if=" ! $root.user.signIn"> (需登入)</span></div>
+                <div class="panel-body">
+                    <div>
+                        <blockquote>
+                            <ul>
+                                <li>目前支援格式：pdf / jpeg / png / bmp</li>
+                                <li>檔案大小限制：8MB</li>
+                                <li>尊重智慧財產權，勿上傳非相關檔案或未授權檔案，謝謝</li>
+                            </ul>
+                        </blockquote>
+                    </div>
+                    <div ng-if="$root.user.signIn">
+                        <form ng-submit="examForm.$valid && examFormSubmit()" name="examForm" method="POST" accept-charset="UTF-8" enctype="multipart/form-data" class="form-inline">
+                            <fieldset>
+                                <div class="form-group">
+                                    {!! Form::label('semester', '學期', ['class' => 'sr-only']) !!}
+                                    <select ng-model="exam.semester" ng-options="semester.name for semester in semesters track by semester.id" class="form-control" required>
+                                        <option value="">學期</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="sr-only">檔案</label>
+                                    <input ng-model="exam.file" ngf-select ngf-max-size="8MB" type="file" accept="image/jpeg,image/bmp,image/png,application/pdf" required>
+                                </div>
+
+                                <div class="form-group">
+                                    {!! Form::button('上傳', ['ng-disabled' => '!examForm.$valid', 'type' => 'submit', 'class' => 'btn btn-sm btn-success']) !!}
+                                </div>
+                            </fieldset>
+                        </form>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

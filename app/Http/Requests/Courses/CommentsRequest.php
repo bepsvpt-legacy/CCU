@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\Courses;
 
 use App\Http\Requests\Request;
 
-class CoursesCommentsRequest extends Request
+class CommentsRequest extends Request
 {
     /**
      * Get the validation rules that apply to the request.

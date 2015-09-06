@@ -57,4 +57,14 @@ class Course extends Entity
     {
         return $this->belongsTo('App\Ccu\General\Category', 'dimension_id');
     }
+
+    /**
+     * Get the exams associated with the course.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function exams()
+    {
+        return $this->hasMany('App\Ccu\Course\Exam');
+    }
 }

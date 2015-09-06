@@ -8,7 +8,6 @@ use App\Ccu\Course\CommentsVote;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Carbon\Carbon;
-use Illuminate\Auth\Guard;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
@@ -47,7 +46,7 @@ class CommentsController extends Controller
         }
     }
 
-    public function store(Requests\CoursesCommentsRequest $request, $courseId, $commentId = null)
+    public function store(Requests\Courses\CommentsRequest $request, $courseId, $commentId = null)
     {
         if ( ! Course::where('id', '=', $courseId)->exists())
         {

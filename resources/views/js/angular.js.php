@@ -4,7 +4,8 @@
     var app = angular.module('ccu', [
         'ui.router',
         'angular-loading-bar',
-        'angulartics', 'angulartics.google.analytics'
+        'angulartics', 'angulartics.google.analytics',
+        'ngFileUpload'
     ]);
 
     app.config(['$httpProvider', function($httpProvider) {
@@ -40,4 +41,14 @@
                 };
             });
     }]);
+
+    app.filter('bytes', function() {
+        return function(bytes, precision) {
+            if (isNaN(parseFloat(bytes)) || !isFinite(bytes)) return '-';
+            if (typeof precision === 'undefined') precision = 1;
+            var units = ['bytes', 'KB', 'MB', 'GB', 'TB', 'PB'],
+                number = Math.floor(Math.log(bytes) / Math.log(1024));
+            return (bytes / Math.pow(1024, Math.floor(number))).toFixed(precision) +  ' ' + units[number];
+        }
+    });
 })();
