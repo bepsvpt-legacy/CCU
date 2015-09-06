@@ -1,74 +1,59 @@
 'use strict';
 
 (function () {
+    var _errorsModal, handleErrorResponse = function (response) {
+        _errorsModal.make(response);
+    };
+
     angular.module('ccu')
-        .controller('CoursesListController', ['$scope', '$http', 'errorsModal', function ($scope, $http, errorsModal) {
+        .run(['errorsModal', function(errorsModal) {
+            _errorsModal = errorsModal;
+        }])
+        .controller('CoursesController', ['$scope', '$http', 'CourseService', function ($scope, $http, CourseService) {
             $scope.options = {};
             $scope.search = {keyword: ''};
+            $scope.courses = CourseService.getCourses();
 
             $http.get('{{ route("api.courses.departments") }}', {cache: true})
                 .then(function (response) {
                     $scope.options.departments = response.data;
-                }, function (response) {
-                    errorsModal.make(response);
-                });
+                }, handleErrorResponse);
 
             $http.get('{{ route("api.courses.dimensions") }}', {cache: true})
                 .then(function (response) {
                     $scope.options.dimensions = response.data;
-                }, function (response) {
-                    errorsModal.make(response);
-                });
+                }, handleErrorResponse);
 
-            $scope.searching = function () {
-                $http.get('{{ route("api.courses.search") }}', {
-                    params: {
-                        department: ($scope.search.department) ? $scope.search.department.id : 0,
-                        dimension: ($scope.search.dimension) ? $scope.search.dimension.id : 0,
-                        keyword: $scope.search.keyword
-                    },
-                    cache: true
-                })
-                    .then(function (response) {
-                        $scope.courses = response.data;
-                    }, function (response) {
-                        errorsModal.make(response);
+            $scope.searchFormSubmit = function () {
+                CourseService.searchCourse($scope.search)
+                    .then(function (data) {
+                        $scope.courses = data;
                     });
             };
         }])
-        .controller('CoursesShowController', ['$scope', '$rootScope', '$stateParams', '$http', '$filter', 'errorsModal', function ($scope, $rootScope, $stateParams, $http, $filter, errorsModal) {
-            $scope.vote = {};
-            $scope.postCommentsCommentForm = [];
-
-            $http.get('{{ route("api.courses.show") }}/' + $stateParams.courseId, {cache: true})
+        .controller('CoursesShowController', ['$http','$rootScope',  '$scope', '$stateParams', function ($http, $rootScope, $scope, $stateParams) {
+            $http.get('/api/courses/' + $stateParams.courseId, {cache: true})
                 .then(function (response) {
                     $scope.info = response.data;
-                }, function (response) {
-                    errorsModal.make(response);
-                });
+                }, handleErrorResponse);
+        }])
+        .controller('CoursesCommentsController', ['$http', '$rootScope', '$scope', '$stateParams', 'CourseService', function ($http, $rootScope, $scope, $stateParams, CourseService) {
+            $scope.vote = {votes: CourseService.getVotes()};
+            $scope.comment = {};
+            $scope.commentsComment = [];
+
+            $scope.$on('userVotesLoaded', function() {
+                $scope.vote.votes = CourseService.getVotes();
+            });
 
             $scope.getComments = function (page) {
-                if (undefined === page) {
-                    page = 1;
-                }
+                page = page || 1;
 
-                $http.get('{{ route("api.courses.show") }}/' + $stateParams.courseId + '/comments?page=' + page)
+                $http.get('/api/courses/' + $stateParams.courseId + '/comments?page=' + page)
                     .then(function (response) {
                         $scope.comments = response.data;
-                    }, function (response) {
-                        errorsModal.make(response);
-                    });
+                    }, handleErrorResponse);
             };
-
-            if ( ! $rootScope.guest)
-            {
-                $http.get('{{ route("api.courses.comments.getVotes") }}')
-                    .then(function (response) {
-                        $scope.vote.votes = response.data;
-                    }, function (response) {
-                        errorsModal.make(response);
-                    });
-            }
 
             $scope.vote.voteComment = function (comment, agree) {
                 $scope.vote.voteRequest('POST', comment, agree);
@@ -81,19 +66,19 @@
             $scope.vote.voteRequest = function (method, comment, agree) {
                 agree = !!agree;
 
-                $http({method: method, url: '/api/courses/' + comment.id + '/vote', data: {agree: agree}, ignoreLoadingBar: true})
+                $http({method: method, url: '/api/courses/comments/' + comment.id + '/vote', data: {agree: agree}, ignoreLoadingBar: true})
                     .then(function (response) {
                         comment.agree = response.data.agree;
                         comment.disagree = response.data.disagree;
 
                         if ('POST' === method) {
-                            $scope.vote.votes.push({agree: agree, courses_comment_id: comment.id});
+                            CourseService.insertVote(comment.id, agree);
                         } else {
-                            delete $scope.vote.votes[$scope.vote.findIndex(comment.id)];
+                            CourseService.deleteVote($scope.vote.findIndex(comment.id));
                         }
-                    }, function (response) {
-                        errorsModal.make(response);
-                    });
+
+                        $scope.vote.votes = CourseService.getVotes();
+                    }, handleErrorResponse);
             };
 
             $scope.vote.findIndex = function (id) {
@@ -106,36 +91,22 @@
                 return -1;
             };
 
-            $scope.postComments = function (commentId) {
-                var url = '/api/courses/' + $stateParams.courseId + '/comments';
-
-                if (undefined !== commentId) {
-                    url += '/' + commentId;
-                    $scope.postCommentsCommentForm[commentId].submit = true;
-                } else {
-                    $scope.postCommentForm.submit = true;
-                }
+            $scope.commentFormSubmit = function (commentId) {
+                var isSubComment = undefined !== commentId,
+                    url = '/api/courses/' + $stateParams.courseId + '/comments' + ((isSubComment) ? ('/' + commentId) : '');
 
                 $http.post(url, {
-                    content: (undefined !== commentId) ? $scope.postCommentsCommentForm[commentId].content : $scope.postCommentForm.content,
-                    anonymous: (undefined !== commentId) ? $scope.postCommentsCommentForm[commentId].anonymous :  $scope.postCommentForm.anonymous
-                }).then(function (response) {
+                    content: (isSubComment) ? $scope.commentsComment[commentId].content : $scope.comment.content,
+                    anonymous: (isSubComment) ? $scope.commentsComment[commentId].anonymous :  $scope.comment.anonymous
+                }).then(function () {
                     $scope.getComments($scope.comments.current_page);
+                }, handleErrorResponse);
 
-                    if (undefined !== commentId) {
-                        $scope.postCommentsCommentForm[commentId] = {submit: false};
-                    } else {
-                        $scope.postCommentForm = {submit: false};
-                    }
-                }, function (response) {
-                    errorsModal.make(response);
-
-                    if (undefined !== commentId) {
-                        $scope.postCommentsCommentForm[commentId] = {submit: false};
-                    } else {
-                        $scope.postCommentForm = {submit: false};
-                    }
-                });
+                if (isSubComment) {
+                    $scope.commentsComment[commentId] = {};
+                } else {
+                    $scope.comment = {};
+                }
             };
 
             $scope.commentsPaginate = function (nextPage, url) {
@@ -143,9 +114,7 @@
                     $http.get(url, {cache: true})
                         .then(function (response) {
                             $scope.comments = response.data;
-                        }, function (response) {
-                            errorsModal.make(response);
-                        });
+                        }, handleErrorResponse);
                 }
             };
 

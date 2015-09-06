@@ -13,10 +13,10 @@
 
 get('/', ['as' => 'home', 'uses' => 'HomeController@home']);
 
-get('api/information/{name}', ['as' => 'api.information', 'uses' => 'HomeController@information']);
-
 Route::group(['prefix' => 'api', 'namespace' => 'Api', 'as' => 'api.'], function ()
 {
+    get('information/{name}', ['as' => 'information', 'uses' => 'WebsiteController@information']);
+
     Route::group(['prefix' => 'auth', 'as' => 'auth.'], function ()
     {
         post('sign-in', ['as' => 'signIn', 'uses' => 'AuthController@signIn']);
@@ -26,20 +26,24 @@ Route::group(['prefix' => 'api', 'namespace' => 'Api', 'as' => 'api.'], function
         get('roles-permissions', ['as' => 'rolesPermissions', 'uses' => 'AuthController@rolesPermissions']);
     });
 
-    Route::group(['prefix' => 'courses', 'as' => 'courses.'], function ()
+    Route::group(['prefix' => 'courses', 'namespace' => 'Course', 'as' => 'courses.'], function ()
     {
         get('departments', ['as' => 'departments', 'uses' => 'CoursesController@departments']);
         get('dimensions', ['as' => 'dimensions', 'uses' => 'CoursesController@dimensions']);
         get('search', ['as' => 'search', 'uses' => 'CoursesController@search']);
-        get('votes', ['middleware' => 'auth', 'as' => 'comments.getVotes', 'uses' => 'CoursesCommentsController@getVotes']);
-        get('{courseId?}', ['as' => 'show', 'uses' => 'CoursesController@show']);
-        get('{courseId}/comments', ['as' => 'comments.list', 'uses' => 'CoursesCommentsController@index']);
 
-        Route::group(['middleware' => 'auth'], function ()
+        Route::group(['prefix' => '{courseId}'], function ()
         {
-            post('{courseId}/comments/{commentId?}', ['as' => 'comments.store', 'uses' => 'CoursesCommentsController@store']);
-            post('{commentId}/vote', ['as' => 'comments.vote', 'uses' => 'CoursesCommentsController@vote']);
-            delete('{commentId}/vote', ['as' => 'comments.voteWithdraw', 'uses' => 'CoursesCommentsController@voteWithdraw']);
+            get('/', ['as' => 'show', 'uses' => 'CoursesController@show']);
+            get('comments', ['as' => 'comments.list', 'uses' => 'CommentsController@index']);
+            post('comments/{commentId?}', ['middleware' => 'auth', 'as' => 'comments.store', 'uses' => 'CommentsController@store']);
+        });
+
+        Route::group(['prefix' => 'comments', 'as' => 'comments.'], function ()
+        {
+            get('votes', ['as' => 'getVotes', 'uses' => 'CommentsController@getVotes']);
+            post('{commentId}/vote', ['middleware' => 'auth', 'as' => 'vote', 'uses' => 'CommentsController@vote']);
+            delete('{commentId}/vote', ['middleware' => 'auth', 'as' => 'voteWithdraw', 'uses' => 'CommentsController@voteWithdraw']);
         });
     });
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Api;
+namespace App\Http\Controllers\Api\Course;
 
 use App\Ccu\Course\Course;
 use App\Ccu\Course\CourseSearch;

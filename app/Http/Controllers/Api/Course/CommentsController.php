@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Api;
+namespace App\Http\Controllers\Api\Course;
 
 use App\Ccu\Course\Comment;
 use App\Ccu\Course\Course;
@@ -12,7 +12,7 @@ use Illuminate\Auth\Guard;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
-class CoursesCommentsController extends Controller
+class CommentsController extends Controller
 {
     public function index($courseId = null)
     {
@@ -69,9 +69,14 @@ class CoursesCommentsController extends Controller
         return response()->json($comment);
     }
 
-    public function getVotes(Guard $guard)
+    public function getVotes(Request $request)
     {
-        return response()->json($guard->user()->user->votes);
+        if (null === $request->user())
+        {
+            return response()->json([]);
+        }
+
+        return response()->json($request->user()->user->votes);
     }
 
     public function vote(Request $request, Guard $guard, $commentId, $withdraw = false)

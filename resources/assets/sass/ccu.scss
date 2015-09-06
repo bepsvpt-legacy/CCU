@@ -118,6 +118,10 @@ table {
     height: 20px;
 }
 
+.courses-comments-content {
+    white-space: pre-line;
+}
+
 .courses-comments {
     padding-left: 8px;
 }
@@ -136,6 +140,10 @@ table {
     height:1px;
     background-color:#d4d4d4;
     color:#d4d4d4;
+}
+
+.textarea-no-resize {
+    resize: none !important;
 }
 
 // angular-loading-bar https://github.com/chieffancypants/angular-loading-bar

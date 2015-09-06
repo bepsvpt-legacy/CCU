@@ -22,10 +22,10 @@
                 template: '',
                 controller: 'SignOutController'
             })
-            .state('courses-list', {
+            .state('courses', {
                 url: '/courses',
-                templateUrl: '{{ routeAssets("templates.courses.list") }}',
-                controller: 'CoursesListController'
+                templateUrl: '{{ routeAssets("templates.courses.index") }}',
+                controller: 'CoursesController'
             })
             .state('courses-show', {
                 url: '/courses/:courseId',
