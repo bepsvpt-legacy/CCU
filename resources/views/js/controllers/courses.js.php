@@ -127,7 +127,7 @@
 
             $scope.commentsPaginate = function (nextPage, url) {
                 if (null !== url) {
-                    $http.get(url, {cache: true})
+                    $http.get(url)
                         .then(function (response) {
                             $scope.comments = response.data;
                         }, handleErrorResponse);
