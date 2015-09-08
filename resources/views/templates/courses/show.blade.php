@@ -120,6 +120,7 @@
                             <th>學期</th>
                             <th>檔名<span ng-if=" ! $root.user.signIn"> (需登入方可下載)</span></th>
                             <th class="hidden-xs">大小</th>
+                            <th class="hidden-xs">下載次數</th>
                             <th class="hidden-xs">上傳時間</th>
                         </tr>
                     </thead>
@@ -131,6 +132,7 @@
                             <td>@{{ exam.semester.name }}</td>
                             <td><a ng-href="/api/courses/exams/@{{ exam.id }}" target="_blank">@{{ exam.file_name }}</a></td>
                             <td class="hidden-xs">@{{ exam.file_size | bytes }}</td>
+                            <td class="hidden-xs">@{{ exam.downloads }}</td>
                             <td class="hidden-xs">@{{ exam.created_at }}</td>
                         </tr>
                     </tbody>
@@ -144,7 +146,7 @@
                 <div class="panel-body">
                     <div>
                         <blockquote>
-                            <ul>
+                            <ul class="ul-noindent">
                                 <li>目前支援格式：pdf / jpeg / png / bmp</li>
                                 <li>檔案大小限制：8MB</li>
                                 <li>尊重智慧財產權，勿上傳非相關檔案或未授權檔案，謝謝</li>

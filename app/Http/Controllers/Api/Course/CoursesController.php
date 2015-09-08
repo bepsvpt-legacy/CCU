@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Api\Course;
 
 use App\Ccu\Course\Course;
-use App\Ccu\Course\CourseSearch;
+use App\Ccu\Course\Search;
 use App\Ccu\General\Category;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
@@ -29,7 +29,7 @@ class CoursesController extends Controller
 
     public function search(Request $request)
     {
-        $courses = (new CourseSearch($request->all()))->search();
+        $courses = (new Search($request->all()))->search();
 
         return response()->json($courses);
     }

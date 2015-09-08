@@ -2,7 +2,7 @@
 
 namespace App\Ccu\Course;
 
-class CourseSearch
+class Search
 {
     /**
      * @var \App\Ccu\Course\Course
