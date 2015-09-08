@@ -23,7 +23,8 @@
         "phpspec/phpspec": "~2.2",
         "barryvdh/laravel-debugbar": "~2.0",
         "barryvdh/laravel-ide-helper": "~2.1",
-        "rap2hpoutre/laravel-log-viewer": "~0.4"
+        "rap2hpoutre/laravel-log-viewer": "~0.4",
+        "yangqi/htmldom": "dev-master"
     },
     "autoload": {
         "classmap": [

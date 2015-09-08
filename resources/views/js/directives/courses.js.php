@@ -10,7 +10,7 @@
                     vote: '=',
                     action: '@'
                 },
-                templateUrl: '{{ routeAssets("templates.directives.courses.commentsBody") }}'
+                templateUrl: '{{ routeAssets("templates.directives.courses.commentsBody") }}?' + VERSION
             }
         })
         .directive('coursesInfo', function() {
@@ -21,7 +21,7 @@
                     type: '@',
                     value: '@'
                 },
-                templateUrl: '{{ routeAssets("templates.directives.courses.info") }}'
+                templateUrl: '{{ routeAssets("templates.directives.courses.info") }}?' + VERSION
             }
         })
         .directive('coursesExams', function() {
@@ -31,7 +31,7 @@
                     exams: '=',
                     heading: '@'
                 },
-                templateUrl: '{{ routeAssets("templates.directives.courses.exams") }}'
+                templateUrl: '{{ routeAssets("templates.directives.courses.exams") }}?' + VERSION
             }
         });
 })();
