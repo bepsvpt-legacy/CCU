@@ -7,7 +7,8 @@
                 restrict: 'E',
                 scope: {
                     comment: '=',
-                    vote: '='
+                    vote: '=',
+                    action: '@'
                 },
                 templateUrl: '{{ routeAssets("templates.directives.courses.commentsBody") }}'
             }
@@ -21,6 +22,16 @@
                     value: '@'
                 },
                 templateUrl: '{{ routeAssets("templates.directives.courses.info") }}'
+            }
+        })
+        .directive('coursesExams', function() {
+            return {
+                restrict: 'E',
+                scope: {
+                    exams: '=',
+                    heading: '@'
+                },
+                templateUrl: '{{ routeAssets("templates.directives.courses.exams") }}'
             }
         });
 })();

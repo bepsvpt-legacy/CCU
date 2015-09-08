@@ -21,7 +21,7 @@ class Comment extends Entity
      *
      * @var array
      */
-    protected $visible = ['id', 'agree', 'anonymous', 'comments', 'content', 'posted_at', 'disagree', 'user'];
+    protected $visible = ['id', 'agree', 'anonymous', 'comments', 'content', 'posted_at', 'disagree', 'course', 'user'];
 
     /**
      * The attributes that are mass assignable.
@@ -38,6 +38,16 @@ class Comment extends Entity
     public function comments()
     {
         return $this->hasMany('App\Ccu\Course\Comment', 'courses_comment_id');
+    }
+
+    /**
+     * Get the course of the comment.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function course()
+    {
+        return $this->belongsTo('App\Ccu\Course\Course');
     }
 
     /**

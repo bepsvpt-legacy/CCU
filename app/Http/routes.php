@@ -32,6 +32,7 @@ Route::group(['prefix' => 'api', 'namespace' => 'Api', 'as' => 'api.'], function
         get('dimensions', ['as' => 'dimensions', 'uses' => 'CoursesController@dimensions']);
         get('semesters', ['as' => 'semesters', 'uses' => 'CoursesController@semesters']);
         get('search', ['as' => 'search', 'uses' => 'CoursesController@search']);
+        get('exams/newest-hottest', ['as' => 'exams.newestHottest', 'uses' => 'ExamsController@newestHottest']);
         get('exams/{exam_id}', ['middleware' => 'auth', 'as' => 'exams.download', 'uses' => 'ExamsController@download']);
 
         Route::group(['prefix' => '{courseId}'], function ()
@@ -45,6 +46,7 @@ Route::group(['prefix' => 'api', 'namespace' => 'Api', 'as' => 'api.'], function
 
         Route::group(['prefix' => 'comments', 'as' => 'comments.'], function ()
         {
+            get('newest', ['as' => 'newest', 'uses' => 'CommentsController@newest']);
             get('votes', ['as' => 'getVotes', 'uses' => 'CommentsController@getVotes']);
             post('{commentId}/vote', ['middleware' => 'auth', 'as' => 'vote', 'uses' => 'CommentsController@vote']);
             delete('{commentId}/vote', ['middleware' => 'auth', 'as' => 'voteWithdraw', 'uses' => 'CommentsController@voteWithdraw']);

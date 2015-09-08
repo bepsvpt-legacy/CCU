@@ -5,5 +5,6 @@
 @endsection
 
 @section('main')
-    <div class="title">唉呦，這個頁面不見啦，{!! HTML::linkRoute('home', '只能回首頁了') !!}</div>
+    <div class="title">唉呦，這個頁面不見啦</div>
+    <div>{!! HTML::linkRoute('home', '只能回首頁了') !!}</div>
 @endsection

@@ -12,8 +12,6 @@
             </div>
         </div>
     </div>
-
-    <hr>
 </div>
 
 <div ng-controller="CoursesCommentsController">
@@ -44,7 +42,7 @@
                 </div>
             </div>
         </div>
-        <div ng-hide="comments.data.length" class="col-xs-10 col-xs-offset-1 text-center">
+        <div ng-hide="comments.data.length" class="col-xs-10 col-xs-offset-1 col-sm-7 col-sm-offset-1 text-center">
             <h3 ng-hide="undefined === comments" class="text-muted">尚無留言</h3>
         </div>
         <div ng-if="comments.data.length" class="col-xs-10 col-xs-offset-1 col-sm-7 col-sm-offset-1">
@@ -57,8 +55,8 @@
 
                     <hr ng-if="comment.comments.length" class="courses-comments-hr">
 
-                    <div ng-if="comment.comments.length && ( ! comment.sub)" ng-click="comment.sub = true">
-                        <small class="text-primary cursor-pointer">檢視回覆</small>
+                    <div ng-if="comment.comments.length && ( ! comment.sub)">
+                        <small ng-click="comment.sub = true" class="text-primary cursor-pointer">檢視回覆</small>
                     </div>
 
                     <div ng-if="comment.sub" class="courses-comments-comments overflow-scroll">
@@ -120,19 +118,19 @@
                             <th>學期</th>
                             <th>檔名<span ng-if=" ! $root.user.signIn"> (需登入方可下載)</span></th>
                             <th class="hidden-xs">大小</th>
-                            <th class="hidden-xs">下載次數</th>
+                            <th>下載次數</th>
                             <th class="hidden-xs">上傳時間</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr ng-hide="exams.length">
-                            <td colspan="4">尚無檔案</td>
+                            <td colspan="5">尚無檔案</td>
                         </tr>
                         <tr ng-repeat="exam in exams">
                             <td>@{{ exam.semester.name }}</td>
                             <td><a ng-href="/api/courses/exams/@{{ exam.id }}" target="_blank">@{{ exam.file_name }}</a></td>
                             <td class="hidden-xs">@{{ exam.file_size | bytes }}</td>
-                            <td class="hidden-xs">@{{ exam.downloads }}</td>
+                            <td>@{{ exam.downloads }}</td>
                             <td class="hidden-xs">@{{ exam.created_at }}</td>
                         </tr>
                     </tbody>

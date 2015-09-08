@@ -28,7 +28,7 @@ class Exam extends Entity
      *
      * @var array
      */
-    protected $visible = ['id', 'file_name', 'file_size', 'downloads', 'created_at', 'semester'];
+    protected $visible = ['id', 'file_name', 'file_size', 'downloads', 'created_at', 'course', 'semester'];
 
     /**
      * The attributes that are mass assignable.
@@ -50,6 +50,16 @@ class Exam extends Entity
      * @var array
      */
     protected $with = ['semester'];
+
+    /**
+     * Get the course of the exam.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function course()
+    {
+        return $this->belongsTo('App\Ccu\Course\Course');
+    }
 
     /**
      * Get the semester of the course.

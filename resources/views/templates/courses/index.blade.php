@@ -47,4 +47,28 @@
             </tr>
         </tbody>
     </table>
+
+    <hr>
+</div>
+
+<div class="row">
+    <div class="col-xs-12 col-sm-4 col-sm-offset-1">
+        <h3 class="text-center">最新留言</h3>
+
+        <div ng-repeat="comment in comments" class="media">
+            <div class="media-left media-top">
+                <img class="media-object profile-picture-small" src="https://ccu.bepsvpt.net/favicon.png" alt="Profile Picture">
+            </div>
+            <div class="media-body">
+                <a ng-href="#/courses/@{{ comment.course.id }}" data-toggle="tooltip" data-placement="bottom" title="@{{ comment.course.name_en }}" class="pull-right">@{{ comment.course.name }}</a>
+
+                <courses-comments-body comment="comment" action="true"></courses-comments-body>
+            </div>
+        </div>
+    </div>
+    <div class="col-xs-12 col-sm-5 col-sm-offset-1 text-center">
+        <courses-exams heading="最新考古題" exams="exams.newest"></courses-exams>
+
+        <courses-exams heading="熱門考古題" exams="exams.hottest"></courses-exams>
+    </div>
 </div>

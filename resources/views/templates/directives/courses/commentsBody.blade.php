@@ -4,7 +4,7 @@
 
 <div>
     <small>
-        <div ng-if="$root.user.signIn" class="inline">
+        <div ng-if="$root.user.signIn && undefined === action" class="inline">
             <div ng-if="-1 !== (index = vote.findIndex(comment.id))" class="inline">
                 <span ng-click="vote.voteWithdraw(comment, vote.votes[index].agree)" class="text-primary cursor-pointer">@{{ vote.votes[index].agree ? '收回讚' : '收回爛' }}</span>
                 <action-separation></action-separation>

@@ -40,6 +40,12 @@ table {
     }
 }
 
+hr {
+    height: 1px;
+    background-color:#d4d4d4;
+    color:#d4d4d4;
+}
+
 .block {
     display: block !important;
 }
@@ -143,9 +149,6 @@ table {
 
 .courses-comments-hr {
     margin: 10px 0;
-    height:1px;
-    background-color:#d4d4d4;
-    color:#d4d4d4;
 }
 
 .overflow-scroll {

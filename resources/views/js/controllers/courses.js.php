@@ -40,6 +40,16 @@
                     }, handleErrorResponse);
             }
 
+            $http.get('{{ route("api.courses.exams.newestHottest") }}', {cache: true})
+                .then(function (response) {
+                    $scope.exams = response.data;
+                }, handleErrorResponse);
+
+            $http.get('{{ route("api.courses.comments.newest") }}', {cache: true})
+                .then(function (response) {
+                    $scope.comments = response.data;
+                }, handleErrorResponse);
+
             $scope.searchFormSubmit = function () {
                 CourseService.searchCourse($scope.search)
                     .then(function (data) {
