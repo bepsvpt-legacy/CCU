@@ -14,6 +14,7 @@
         "jenssegers/agent": "~2.2",
         "pragmarx/google2fa": "~0.5",
         "predis/predis": "~1.0",
+        "yangqi/htmldom": "dev-master",
         "zizaco/entrust": "~1.4"
     },
     "require-dev": {
@@ -23,8 +24,7 @@
         "phpspec/phpspec": "~2.2",
         "barryvdh/laravel-debugbar": "~2.0",
         "barryvdh/laravel-ide-helper": "~2.1",
-        "rap2hpoutre/laravel-log-viewer": "~0.4",
-        "yangqi/htmldom": "dev-master"
+        "rap2hpoutre/laravel-log-viewer": "~0.4"
     },
     "autoload": {
         "classmap": [
