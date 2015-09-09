@@ -1,6 +1,6 @@
 <h4 ng-class="(comment.anonymous) ? 'text-muted' : 'text-info'" class="media-heading">@{{ (comment.anonymous) ? '匿名' : comment.user.nickname }}</h4>
 
-<p class="courses-comments-content">@{{ comment.content }}</p>
+<p class="pre-line">@{{ comment.content }}</p>
 
 <div>
     <small>
@@ -21,5 +21,9 @@
         <span class="text-danger"><span class="fa fa-thumbs-o-down"></span> <span>@{{ comment.disagree }}</span></span>
         <action-separation></action-separation>
         <span data-toggle="tooltip" data-placement="bottom" title="@{{ comment.posted_at.date }}">@{{ comment.posted_at.human }}</span>
+        <div ng-if="$root.user.signIn && undefined === action && undefined === subcomment && ! comment.reply" class="inline">
+            <action-separation></action-separation>
+            <span ng-click="comment.reply = true" class="text-primary cursor-pointer">回覆</span>
+        </div>
     </small>
 </div>

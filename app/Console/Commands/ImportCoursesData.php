@@ -112,6 +112,8 @@ class ImportCoursesData extends Command
 
         if ($this->option('delete-files'))
         {
+            $this->info('Deleting files...');
+
             foreach ($this->filesystem->files($path) as $file)
             {
                 $this->filesystem->delete($file);

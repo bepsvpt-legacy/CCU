@@ -8,6 +8,7 @@
                 scope: {
                     comment: '=',
                     vote: '=',
+                    subcomment: '@',
                     action: '@'
                 },
                 templateUrl: '{{ routeAssets("templates.directives.courses.commentsBody") }}?' + VERSION

@@ -52,10 +52,10 @@
 </div>
 
 <div class="row">
-    <div class="col-xs-12 col-sm-4 col-sm-offset-1">
+    <div class="col-xs-12 col-sm-5 col-sm-offset-1">
         <h3 class="text-center">最新留言</h3>
 
-        <div ng-repeat="comment in comments" class="media">
+        <div ng-repeat="comment in comments" class="media shadow-z-1 courses-comments">
             <div class="media-left media-top">
                 <img class="media-object profile-picture-small" src="https://ccu.bepsvpt.net/favicon.png" alt="Profile Picture">
             </div>
@@ -66,7 +66,7 @@
             </div>
         </div>
     </div>
-    <div class="col-xs-12 col-sm-5 col-sm-offset-1 text-center">
+    <div class="col-xs-12 col-sm-5 col-sm-offset-0 text-center">
         <courses-exams heading="最新考古題" exams="exams.newest"></courses-exams>
 
         <courses-exams heading="熱門考古題" exams="exams.hottest"></courses-exams>

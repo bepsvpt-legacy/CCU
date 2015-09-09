@@ -46,11 +46,12 @@
             <h3 ng-hide="undefined === comments" class="text-muted">尚無留言</h3>
         </div>
         <div ng-if="comments.data.length" class="col-xs-10 col-xs-offset-1 col-sm-7 col-sm-offset-1">
-            <div ng-repeat="comment in comments.data" class="media">
+            <div ng-repeat="comment in comments.data" class="media shadow-z-1 courses-comments">
                 <div class="media-left media-top">
                     <img class="media-object profile-picture-small" src="https://ccu.bepsvpt.net/favicon.png" alt="Profile Picture">
                 </div>
-                <div class="media-body courses-comments">
+
+                <div class="media-body">
                     <courses-comments-body comment="comment" vote="vote"></courses-comments-body>
 
                     <hr ng-if="comment.comments.length" class="courses-comments-hr">
@@ -66,12 +67,12 @@
                             </div>
 
                             <div class="media-body">
-                                <courses-comments-body comment="subComment" vote="vote"></courses-comments-body>
+                                <courses-comments-body comment="subComment" vote="vote" subcomment="true"></courses-comments-body>
                             </div>
                         </div>
                     </div>
 
-                    <div ng-if="$root.user.signIn" class="media">
+                    <div ng-if="$root.user.signIn && comment.reply" class="media">
                         <div class="media-left">
                             <img class="media-object profile-picture-small" src="https://ccu.bepsvpt.net/favicon.png" alt="Profile Picture">
                         </div>
@@ -111,8 +112,8 @@
 
     <div class="row">
         <div class="col-xs-10 col-xs-offset-1">
-            <div class="table-responsive text-center">
-                <table class="table table-striped table-bordered table-hover">
+            <div class="text-center">
+                <table class="table table-striped table-bordered table-hover shadow-z-1">
                     <thead>
                         <tr class="info">
                             <th>學期</th>

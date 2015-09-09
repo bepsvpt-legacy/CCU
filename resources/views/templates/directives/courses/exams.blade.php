@@ -1,7 +1,7 @@
 <div>
     <h3>@{{ heading }}</h3>
 
-    <table class="table table-striped table-bordered table-hover">
+    <table class="table table-striped table-bordered table-hover shadow-z-1">
         <thead>
             <tr class="success">
                 <th>課程名稱</th>

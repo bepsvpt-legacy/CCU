@@ -51,7 +51,7 @@
         <hr>
 
         <div class="text-center">
-            <table class="table table-striped table-bordered table-hover">
+            <table class="table table-striped table-bordered table-hover shadow-z-1">
                 <thead>
                     <tr class="info">
                         <th><span class="fa fa-magic" aria-hidden="true"></span></th>
