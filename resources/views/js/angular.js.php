@@ -1,22 +1,13 @@
 'use strict';
 
 (function () {
+    var needLoaded = ['ui.router', 'angular-loading-bar', 'angulartics', 'ngFileUpload'];
 
-    var app = angular.module('ccu', [
-        'ui.router',
-        'angular-loading-bar',
-        'ngFileUpload'
-    ]);
-
-    try {
-        angular.injector(['angulartics', 'angulartics.google.analytics'])
-            .invoke(function($rootScope, $compile, $document) {
-                $compile($document)($rootScope);
-                $rootScope.$digest();
-            }
-        );
-    } catch (e) {
+    if ('undefined' !== typeof GA_IS_AVAILABLE) {
+        needLoaded.push('angulartics.google.analytics');
     }
+
+    var app = angular.module('ccu', needLoaded);
 
     app.config(['$httpProvider', function($httpProvider) {
         $httpProvider.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
