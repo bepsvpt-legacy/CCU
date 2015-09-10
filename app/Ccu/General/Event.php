@@ -44,6 +44,7 @@ class Event extends Entity
      */
     public static function create(array $attributes = [])
     {
+        $attributes['detail'] = (isset($attributes['detail'])) ? serialize($attributes['detail']) : null;
         $attributes['user_agent'] = Request::header('user-agent');
         $attributes['ip_address'] = Request::ip();
         $attributes['occurred_at'] = Carbon::now();

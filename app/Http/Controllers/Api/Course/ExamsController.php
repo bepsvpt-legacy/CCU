@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Api\Course;
 
 use App\Ccu\Course\Course;
 use App\Ccu\Course\Exam;
+use App\Ccu\General\Category;
+use App\Ccu\General\Event;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Cache;
@@ -89,6 +91,13 @@ class ExamsController extends Controller
         }
 
         $exam->increment('downloads');
+
+        Event::create([
+            'category_id' => Category::getCategories('events.user', true),
+            'account_id' => $request->user()->user->account_id,
+            'action' => 'user.download',
+            'detail' => collect(['target' => 'courses.exams', 'identify' => $examId]),
+        ]);
 
         return response()->download(
             storage_path('uploads/courses/exams') . '/' . $exam->getAttribute('file_path'),
