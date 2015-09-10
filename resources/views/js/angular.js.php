@@ -1,12 +1,22 @@
 'use strict';
 
 (function () {
+
     var app = angular.module('ccu', [
         'ui.router',
         'angular-loading-bar',
-        'angulartics', 'angulartics.google.analytics',
         'ngFileUpload'
     ]);
+
+    try {
+        angular.injector(['angulartics', 'angulartics.google.analytics'])
+            .invoke(function($rootScope, $compile, $document) {
+                $compile($document)($rootScope);
+                $rootScope.$digest();
+            }
+        );
+    } catch (e) {
+    }
 
     app.config(['$httpProvider', function($httpProvider) {
         $httpProvider.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
