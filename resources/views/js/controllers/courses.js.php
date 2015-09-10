@@ -57,7 +57,7 @@
                     });
             };
         }])
-        .controller('CoursesShowController', ['$http',  '$scope', '$stateParams', function ($http, $scope, $stateParams) {
+        .controller('CoursesShowController', ['$http', '$scope', '$stateParams', function ($http, $scope, $stateParams) {
             $http.get('/api/courses/' + $stateParams.courseId, {cache: true})
                 .then(function (response) {
                     $scope.info = response.data;

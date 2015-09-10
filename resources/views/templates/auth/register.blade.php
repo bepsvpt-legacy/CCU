@@ -39,13 +39,6 @@
                     </div>
 
                     <div>
-                        <div class="checkbox pull-left sign-in-register-submit-checkbox">
-                            <label>
-                                {!! Form::checkbox('termsOfService', true, null, ['ng-model' => 'register.termsOfService', 'required']) !!}
-                                <span class="checkbox-hint">我同意<a data-toggle="modal" data-target="#register-terms-of-service">服務條款</a></span>
-                            </label>
-                        </div>
-
                         <div class="text-right">
                             {!! Form::button('註冊', ['type' => 'submit', 'class' => 'btn btn-sm btn-success']) !!}
                         </div>

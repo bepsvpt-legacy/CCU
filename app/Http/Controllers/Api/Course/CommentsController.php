@@ -32,7 +32,7 @@ class CommentsController extends Controller
     {
         $comments = Cache::remember('newestCoursesComments', 15, function ()
         {
-            $comments = Comment::with(['course', 'user'])->whereNull('courses_comment_id')->latest()->take(5)->get();
+            $comments = Comment::with(['course', 'course.department', 'user'])->whereNull('courses_comment_id')->latest()->take(5)->get();
 
             $this->parsingComments($comments, true);
 

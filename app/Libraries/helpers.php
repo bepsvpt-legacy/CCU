@@ -1,6 +1,7 @@
 <?php
 
-if ( ! function_exists('_asset')) {
+if ( ! function_exists('_asset'))
+{
     /**
      * Generate an asset path for the application.
      *
@@ -22,7 +23,8 @@ if ( ! function_exists('_asset')) {
     }
 }
 
-if ( ! function_exists('_route')) {
+if ( ! function_exists('_route'))
+{
     /**
      * Generate a URL to a named route.
      *
@@ -36,5 +38,19 @@ if ( ! function_exists('_route')) {
         $url = 'assets/' . str_replace('.', '/', $name) . $postfix;
 
         return _asset($url);
+    }
+}
+
+if ( ! function_exists('temp_path'))
+{
+    /**
+     * Get the path to the temporary folder.
+     *
+     * @param  string  $path
+     * @return string
+     */
+    function temp_path($path = '')
+    {
+        return base_path('../temp') . ($path ? DIRECTORY_SEPARATOR . $path : $path);
     }
 }

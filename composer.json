@@ -9,6 +9,7 @@
         "laravel/framework": "5.1.*",
         "doctrine/dbal": "~2.5",
         "greggilbert/recaptcha": "~2.0",
+        "guzzlehttp/guzzle": "~6.1",
         "illuminate/html": "~5.0",
         "intervention/image": "~2.3",
         "jenssegers/agent": "~2.2",

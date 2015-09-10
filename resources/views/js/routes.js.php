@@ -30,7 +30,12 @@
             .state('courses-show', {
                 url: '/courses/:courseId',
                 templateUrl: '{{ routeAssets("templates.courses.show") }}?' + VERSION,
-                controller: 'CoursesShowController'
+                controller: 'CoursesShowController',
+                onEnter: function ($state, $stateParams) {
+                    if(0 === $stateParams.courseId.length){
+                        $state.go('courses')
+                    }
+                }
             })
             .state('courses-comments-list', {
                 url: '/courses/:courseId/comments',

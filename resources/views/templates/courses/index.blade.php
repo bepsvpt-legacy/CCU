@@ -60,7 +60,7 @@
                 <img class="media-object profile-picture-small" src="https://ccu.bepsvpt.net/favicon.png" alt="Profile Picture">
             </div>
             <div class="media-body">
-                <a ng-href="#/courses/@{{ comment.course.id }}" data-toggle="tooltip" data-placement="bottom" title="@{{ comment.course.name_en }}" class="pull-right">@{{ comment.course.name }}</a>
+                <a ng-href="#/courses/@{{ comment.course.id }}" data-toggle="tooltip" data-placement="bottom" title="@{{ comment.course.department.name }} - @{{ comment.course.professor }}" class="pull-right">@{{ comment.course.name }}</a>
 
                 <courses-comments-body comment="comment" action="true"></courses-comments-body>
             </div>

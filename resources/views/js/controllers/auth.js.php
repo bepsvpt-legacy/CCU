@@ -35,7 +35,6 @@
                     email: $scope.register.email,
                     password: $scope.register.password,
                     password_confirmation: $scope.register.password_confirmation,
-                    termsOfService: $scope.register.termsOfService,
                     'g-recaptcha-response': angular.element('textarea[name="g-recaptcha-response"]').val() || ''
                 })
                     .then(redirectToHomePage, handleErrorResponse);

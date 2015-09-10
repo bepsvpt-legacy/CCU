@@ -4,6 +4,7 @@ namespace App\Console\Commands;
 
 use App\Ccu\Course\Course;
 use App\Ccu\General\Category;
+use Carbon\Carbon;
 use DB;
 use Exception;
 use Illuminate\Console\Command;
@@ -81,6 +82,15 @@ class ImportCoursesData extends Command
      */
     public function handle()
     {
+        // 初始化資料
+        $academic = $this->getAcademic();
+        $academic = "{$academic['year']}學年度第{$academic['academic']}學期";
+
+        if ( ! $this->confirm("即將匯入的課程為 {$academic} 之課程?", true))
+        {
+            $academic = $this->ask('學年') . '學年度第' . $this->ask('學期') . '學期';
+        }
+
         $path = base_path($this->ask('The directory of courses data'));
 
         if ( ! $this->filesystem->exists($path))
@@ -90,18 +100,23 @@ class ImportCoursesData extends Command
             return;
         }
 
-        $this->info("Destination directory: {$path}");
+        $this->info("Destination directory: {$path}" . PHP_EOL);
 
+        // 分析檔案
         $this->info('Parsing files...');
 
         $data = [];
 
         foreach ($this->filesystem->files($path) as $file)
         {
-            $data[] = $this->parsingFile($file);
+            if (count($temp = $this->parsingFile($file, $academic)))
+            {
+                $data[] = $temp;
+            }
         }
 
-        $this->info('Saving data...');
+        // 儲存資料至資料庫
+        $this->info(PHP_EOL . 'Saving data...' . PHP_EOL);
 
         if ( ! $this->savingData($data))
         {
@@ -112,7 +127,7 @@ class ImportCoursesData extends Command
 
         if ($this->option('delete-files'))
         {
-            $this->info('Deleting files...');
+            $this->info('Deleting files...' . PHP_EOL);
 
             foreach ($this->filesystem->files($path) as $file)
             {
@@ -124,14 +139,43 @@ class ImportCoursesData extends Command
     }
 
     /**
+     * Get the current year and academic.
+     *
+     * @return array
+     */
+    public function getAcademic()
+    {
+        $now = Carbon::now();
+
+        return [
+            'year' => ($now->month >= 8) ? ($now->year - 1911) : ($now->year - 1912),
+            'academic' => ($now->month >= 8) ? 1 : 2];
+    }
+
+    /**
      * Parsing the course html file.
      *
      * @param string $file
+     * @param string $academic
      * @return array
      */
-    protected function parsingFile($file)
+    protected function parsingFile($file, $academic)
     {
-        $html = $this->htmldom->str_get_html(str_ireplace('<font color=red>', '', file_get_contents($file)));
+        $content = file_get_contents($file);
+
+        // 確認是正確的學期，已防匯入舊資料
+        if ( ! mb_strpos($content, $academic))
+        {
+            return [];
+        }
+        else if (mb_strpos($content, '教師未定'))
+        {
+            $this->comment("{$file} 此檔案含有「教師未定」課程，該檔案之所有課程已略過");
+
+            return [];
+        }
+
+        $html = $this->htmldom->str_get_html(str_ireplace('<font color=red>', '', $content));
 
         // 取得系所
         $department = $html->find('h1', 0)->plaintext;

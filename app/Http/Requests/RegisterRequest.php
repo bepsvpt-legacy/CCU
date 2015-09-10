@@ -21,7 +21,6 @@ class RegisterRequest extends Request
             ],
             'domain' => 'exists:whitelist_mail_servers',
             'password' => 'required|min:6|confirmed',
-            'termsOfService' => 'required|accepted',
             'g-recaptcha-response' => 'required|recaptcha',
         ];
     }
