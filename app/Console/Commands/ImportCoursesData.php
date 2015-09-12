@@ -86,15 +86,13 @@ class ImportCoursesData extends Command
         $academic = $this->getAcademic();
         $academic = "{$academic['year']}學年度第{$academic['academic']}學期";
 
-        if ( ! $this->confirm("即將匯入的課程為 {$academic} 之課程?", true))
-        {
+        if ( ! $this->confirm("即將匯入的課程為 {$academic} 之課程?", true)) {
             $academic = $this->ask('學年') . '學年度第' . $this->ask('學期') . '學期';
         }
 
         $path = base_path($this->ask('The directory of courses data'));
 
-        if ( ! $this->filesystem->exists($path))
-        {
+        if ( ! $this->filesystem->exists($path)) {
             $this->error("The directory is not exists: {$path}");
 
             return;
@@ -107,10 +105,8 @@ class ImportCoursesData extends Command
 
         $data = [];
 
-        foreach ($this->filesystem->files($path) as $file)
-        {
-            if (count($temp = $this->parsingFile($file, $academic)))
-            {
+        foreach ($this->filesystem->files($path) as $file) {
+            if (count($temp = $this->parsingFile($file, $academic))) {
                 $data[] = $temp;
             }
         }
@@ -118,19 +114,16 @@ class ImportCoursesData extends Command
         // 儲存資料至資料庫
         $this->info(PHP_EOL . 'Saving data...' . PHP_EOL);
 
-        if ( ! $this->savingData($data))
-        {
+        if ( ! $this->savingData($data)) {
             $this->error('There is something wrong when saving the data.');
 
             return;
         }
 
-        if ($this->option('delete-files'))
-        {
+        if ($this->option('delete-files')) {
             $this->info('Deleting files...' . PHP_EOL);
 
-            foreach ($this->filesystem->files($path) as $file)
-            {
+            foreach ($this->filesystem->files($path) as $file) {
                 $this->filesystem->delete($file);
             }
         }
@@ -149,7 +142,8 @@ class ImportCoursesData extends Command
 
         return [
             'year' => ($now->month >= 8) ? ($now->year - 1911) : ($now->year - 1912),
-            'academic' => ($now->month >= 8) ? 1 : 2];
+            'academic' => ($now->month >= 8) ? 1 : 2
+        ];
     }
 
     /**
@@ -164,12 +158,9 @@ class ImportCoursesData extends Command
         $content = file_get_contents($file);
 
         // 確認是正確的學期，已防匯入舊資料
-        if ( ! mb_strpos($content, $academic))
-        {
+        if ( ! mb_strpos($content, $academic)) {
             return [];
-        }
-        else if (mb_strpos($content, '教師未定'))
-        {
+        } else if (mb_strpos($content, '教師未定')) {
             $this->comment("{$file} 此檔案含有「教師未定」課程，該檔案之所有課程已略過");
 
             return [];
@@ -191,8 +182,7 @@ class ImportCoursesData extends Command
         $lessons = $html->find('table tr');
         array_shift($lessons);
 
-        foreach ($lessons as $lesson)
-        {
+        foreach ($lessons as $lesson) {
             $t = explode(PHP_EOL, trim($lesson->children($pos+3)->plaintext));
 
             $courses[] = [
@@ -215,22 +205,16 @@ class ImportCoursesData extends Command
      */
     protected function savingData($data)
     {
-        foreach ($data as $datum)
-        {
+        foreach ($data as $datum) {
             $department_id = array_search($datum['department'], $this->correspondenceTable) + 22; // prefix 22
 
             DB::beginTransaction();
 
-            try
-            {
-                foreach ($datum['courses'] as $course)
-                {
-                    if (Course::where('code', '=', $course['code'])->where('professor', '=', $course['professor'])->exists())
-                    {
+            try {
+                foreach ($datum['courses'] as $course) {
+                    if (Course::where('code', '=', $course['code'])->where('professor', '=', $course['professor'])->exists()) {
                         continue;
-                    }
-                    else if (null !== $course['dimension'])
-                    {
+                    } else if (null !== $course['dimension']) {
                         $course['dimension'] = Category::where('category', '=', 'courses.dimension')->where('name', '=', $course['dimension'])->first()->getAttribute('id');
                     }
 
@@ -245,9 +229,7 @@ class ImportCoursesData extends Command
 
                     ++$this->count;
                 }
-            }
-            catch (Exception $e)
-            {
+            } catch (Exception $e) {
                 DB::rollBack();
 
                 $this->error($e->getMessage());

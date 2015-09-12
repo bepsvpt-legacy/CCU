@@ -13,8 +13,7 @@ class DormitoriesRoommatesRequest extends Request
      */
     public function rules()
     {
-        if (str_contains($fb = $this->input('fb'), 'm.facebook.com'));
-        {
+        if (str_contains($fb = $this->input('fb'), 'm.facebook.com'));{
             $this->merge(['fb' => str_replace('m.facebook.com', 'www.facebook.com', $fb)]);
         }
 

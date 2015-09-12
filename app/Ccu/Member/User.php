@@ -35,13 +35,6 @@ class User extends Entity
     protected $fillable = ['account_id', 'nickname', 'profile_picture_id'];
 
     /**
-     * The relations to eager load on every query.
-     *
-     * @var array
-     */
-    protected $with = ['profilePicture'];
-
-    /**
      * Get the account of the user.
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo

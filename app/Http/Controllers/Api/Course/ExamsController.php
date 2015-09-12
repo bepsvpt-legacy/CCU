@@ -27,8 +27,7 @@ class ExamsController extends Controller
             }
         ])->find($courseId, ['id']);
 
-        if (null === $course)
-        {
+        if (null === $course) {
             throw new NotFoundHttpException;
         }
 
@@ -37,8 +36,7 @@ class ExamsController extends Controller
 
     public function newestHottest()
     {
-        $exams = Cache::remember('newestCoursesExams', 60, function ()
-        {
+        $exams = Cache::remember('newestCoursesExams', 60, function () {
             $newest = Exam::with(['course', 'course.department'])->latest()->take(5)->get();
 
             $hottest = Exam::with(['course', 'course.department'])->orderBy('downloads', 'desc')->take(5)->get();
@@ -51,8 +49,7 @@ class ExamsController extends Controller
 
     public function store(Requests\Courses\ExamsRequest $request, $courseId)
     {
-        if ( ! Course::where('id', '=', $courseId)->exists())
-        {
+        if ( ! Course::where('id', '=', $courseId)->exists()) {
             throw new NotFoundHttpException;
         }
 
@@ -69,8 +66,7 @@ class ExamsController extends Controller
             'created_at' => Carbon::now()
         ]);
 
-        if ( ! $exam->exists)
-        {
+        if ( ! $exam->exists) {
             throw new InternalErrorException;
         }
 
@@ -81,12 +77,9 @@ class ExamsController extends Controller
 
     public function download(Request $request, $examId)
     {
-        if (null === $request->user())
-        {
+        if (null === $request->user()) {
             throw new AccessDeniedHttpException;
-        }
-        else if (null === ($exam = Exam::find($examId)))
-        {
+        } else if (null === ($exam = Exam::find($examId))) {
             throw new NotFoundHttpException;
         }
 

@@ -29,7 +29,7 @@ class Category extends Entity
     protected $fillable = ['category', 'name'];
 
     /**
-     * Get categories or specific one from database.
+     * Get the categories or specific one.
      *
      * @param string|null $category
      * @param bool $getId
@@ -37,20 +37,17 @@ class Category extends Entity
      */
     public static function getCategories($category = null, $getId = false)
     {
-        $categories = Cache::remember('categories', self::CACHE_A_MONTH, function ()
-        {
+        $categories = Cache::remember('categories', self::CACHE_A_MONTH, function () {
             return Category::all();
         });
 
-        if ((null === $category) || ! is_string($category))
-        {
+        if ((null === $category) || ( ! is_string($category))) {
             return $categories;
         }
 
-        $categories = $categories->filter(function ($item) use ($category)
-        {
+        $categories = $categories->filter(function ($item) use ($category) {
             return $category === $item->category;
-        })->flatten();
+        });
 
         return ($getId) ? $categories->first()->getAttribute('id') : $categories;
     }

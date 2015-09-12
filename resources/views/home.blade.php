@@ -14,7 +14,6 @@
 
                 if (VERSION > parseFloat(localStorage.getItem('VERSION') || 0)) {
                     localStorage.setItem('VERSION', VERSION);
-                    window.location.reload(true);
                 }
             })();
         </script>
@@ -28,7 +27,7 @@
         <link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/0.3.0/css/material-fullpalette.min.css">
         <link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/0.3.0/css/ripples.min.css">
         <link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/angular-loading-bar/0.8.0/loading-bar.min.css">
-        <link type="text/css" rel="stylesheet" href="{{ routeAssets("css.ccu") }}">
+        <link type="text/css" rel="stylesheet" href="{{ routeAssets("css.ccu") }}?{{ $version }}">
     </head>
     <body>
         <div id="ccu-initializing"><div class="background"></div><div class="ccu-initializing-spinner"></div></div>

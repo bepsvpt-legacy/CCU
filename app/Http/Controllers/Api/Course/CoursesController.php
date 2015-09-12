@@ -36,8 +36,7 @@ class CoursesController extends Controller
 
     public function show($courseId = null)
     {
-        if ((null === $courseId) || (null === ($course = Course::with(['department'])->find($courseId))))
-        {
+        if ((null === $courseId) || (null === ($course = Course::with(['department'])->find($courseId)))) {
             throw new NotFoundHttpException;
         }
 

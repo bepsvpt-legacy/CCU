@@ -37,8 +37,7 @@ class AssetsController extends Controller
 
     public function getView($viewPath, array $headers = [])
     {
-        if ( ! View::exists($viewPath))
-        {
+        if ( ! View::exists($viewPath)) {
             throw new NotFoundHttpException;
         }
 

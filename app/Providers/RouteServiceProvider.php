@@ -46,8 +46,7 @@ class RouteServiceProvider extends ServiceProvider
         $router->group(['namespace' => $this->namespace], function ($router) {
             require app_path('Http/routes.php');
 
-            if ($this->app->environment(['local']))
-            {
+            if ($this->app->environment(['local'])) {
                 require app_path('Http/routesDevelopment.php');
             }
         });

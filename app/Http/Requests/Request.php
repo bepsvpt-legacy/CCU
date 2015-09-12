@@ -25,10 +25,8 @@ abstract class Request extends FormRequest
     {
         $messages = (func_num_args() > 0) ? (array) func_get_arg(0) : [];
 
-        if ((method_exists($this, 'rules')) && (isset($this->rules()['g-recaptcha-response'])))
-        {
-            if ('validation.recaptcha' === ($lang = trans('validation.recaptcha')))
-            {
+        if ((method_exists($this, 'rules')) && (isset($this->rules()['g-recaptcha-response']))) {
+            if ('validation.recaptcha' === ($lang = trans('validation.recaptcha'))) {
                 $lang = 'Please ensure that you are a human!';
             }
 

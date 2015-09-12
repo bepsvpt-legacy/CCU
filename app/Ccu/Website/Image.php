@@ -18,12 +18,19 @@ class Image extends Entity
      *
      * @var array
      */
-    protected $visible = ['hash_1', 'hash_2'];
+    protected $visible = ['hash', 'uploaded_at'];
 
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
-    protected $fillable = ['hash_1', 'hash_2', 'mime_type'];
+    protected $fillable = ['hash', 'mime_type', 'uploaded_at'];
+
+    /**
+     * The attributes that should be mutated to dates.
+     *
+     * @var array
+     */
+    protected $dates = ['uploaded_at'];
 }

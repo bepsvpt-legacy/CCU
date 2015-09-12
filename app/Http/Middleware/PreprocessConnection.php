@@ -65,8 +65,7 @@ class PreprocessConnection
 
         Carbon::setLocale('zh-TW');
 
-        if (( ! $this->shouldPassThrough($this->request, $this->browserDetectionExcept)) && $this->isBrowserNotSupport())
-        {
+        if (( ! $this->shouldPassThrough($this->request, $this->browserDetectionExcept)) && $this->isBrowserNotSupport()) {
             return redirect()->route('errors.browserNotSupport');
         }
 
@@ -89,8 +88,7 @@ class PreprocessConnection
      */
     protected function isBrowserNotSupport()
     {
-        if (('IE' === ($browser = Agent::browser())) && (Agent::version($browser) < 11))
-        {
+        if (('IE' === ($browser = Agent::browser())) && (Agent::version($browser) < 11)) {
             return true;
         }
 
@@ -106,10 +104,8 @@ class PreprocessConnection
      */
     protected function shouldPassThrough($request, array $excepts = [])
     {
-        foreach ($excepts as $except)
-        {
-            if ($request->is($except))
-            {
+        foreach ($excepts as $except) {
+            if ($request->is($except)) {
                 return true;
             }
         }

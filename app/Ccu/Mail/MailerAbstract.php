@@ -33,8 +33,7 @@ abstract class MailerAbstract
      */
     public function send()
     {
-        return Mail::send($this->getView(), $this->getData(), function ($message)
-        {
+        return Mail::send($this->getView(), $this->getData(), function ($message) {
             $message->from($this->getFromEmail());
 
             $message->subject($this->getSubject());

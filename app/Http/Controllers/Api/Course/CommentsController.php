@@ -16,8 +16,7 @@ class CommentsController extends Controller
 {
     public function index($courseId = null)
     {
-        if ((null === $courseId) || null === ($course = Course::find($courseId, ['id'])))
-        {
+        if ((null === $courseId) || null === ($course = Course::find($courseId, ['id']))) {
             throw new NotFoundHttpException;
         }
 
@@ -30,8 +29,7 @@ class CommentsController extends Controller
 
     public function newest()
     {
-        $comments = Cache::remember('newestCoursesComments', 5, function ()
-        {
+        $comments = Cache::remember('newestCoursesComments', 5, function () {
             $comments = Comment::with(['course', 'course.department', 'user'])->whereNull('courses_comment_id')->latest()->take(5)->get();
 
             $this->parsingComments($comments, true);
@@ -44,15 +42,12 @@ class CommentsController extends Controller
 
     public function parsingComments($comments, $isRecursive = false)
     {
-        foreach ($comments as $comment)
-        {
-            if (( ! $isRecursive) && count($subComments = $comment->getAttribute('comments')))
-            {
+        foreach ($comments as $comment) {
+            if (( ! $isRecursive) && count($subComments = $comment->getAttribute('comments'))) {
                 $this->parsingComments($subComments, true);
             }
 
-            if (true === (bool) $comment->getAttribute('anonymous'))
-            {
+            if (true === (bool) $comment->getAttribute('anonymous')) {
                 $comment->offsetUnset('user_id');
                 $comment->offsetUnset('user');
             }
@@ -63,12 +58,9 @@ class CommentsController extends Controller
 
     public function store(Requests\Courses\CommentsRequest $request, $courseId, $commentId = null)
     {
-        if ( ! Course::where('id', '=', $courseId)->exists())
-        {
+        if ( ! Course::where('id', '=', $courseId)->exists()) {
             throw new NotFoundHttpException;
-        }
-        else if ((null !== $commentId) && ( ! Comment::where('course_id', '=', $courseId)->where('id', '=', $commentId)->exists()))
-        {
+        } else if ((null !== $commentId) && ( ! Comment::where('course_id', '=', $courseId)->where('id', '=', $commentId)->exists())) {
             throw new NotFoundHttpException;
         }
 
@@ -85,8 +77,7 @@ class CommentsController extends Controller
 
     public function getVotes(Request $request)
     {
-        if (null === $request->user())
-        {
+        if (null === $request->user()) {
             return response()->json([]);
         }
 

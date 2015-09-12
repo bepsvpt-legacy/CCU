@@ -18,8 +18,7 @@ class AuthController extends Controller
 {
     public function signIn(Request $request)
     {
-        if ( ! Auth::attempt(['email' => $request->input('email'), 'password' => $request->input('password')], $request->input('rememberMe', false)))
-        {
+        if ( ! Auth::attempt(['email' => $request->input('email'), 'password' => $request->input('password')], $request->input('rememberMe', false))) {
             return response()->json(['message' => ['Invalid email or password.']], 422);
         }
 
@@ -32,8 +31,7 @@ class AuthController extends Controller
     {
         $account = Account::create(['email' => $request->input('email'), 'password' => $request->input('password')]);
 
-        if ( ! $account->exists)
-        {
+        if ( ! $account->exists) {
             return response()->json(['message' => ['Register failed, please try again later.']], 500);
         }
 
@@ -46,8 +44,7 @@ class AuthController extends Controller
 
     public function verifyEmail($token)
     {
-        if ( ! (($account = Verify::verifyToken($token)) instanceof Account))
-        {
+        if ( ! (($account = Verify::verifyToken($token)) instanceof Account)) {
             return view('errors.emailVerifyFailed', ['message' => $account]);
         }
 
@@ -73,8 +70,7 @@ class AuthController extends Controller
     {
         $data = ['roles' => [], 'permissions' => [], 'signIn' => ( ! Auth::guest())];
 
-        if ($data['signIn'])
-        {
+        if ($data['signIn']) {
             $account = Auth::user()->load('roles.perms');
 
             $data['roles'] = $account->getRelation('roles')->pluck('name');

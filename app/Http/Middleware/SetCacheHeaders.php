@@ -35,22 +35,19 @@ class SetCacheHeaders
      */
     public function handle($request, Closure $next)
     {
-        if ( ! app()->environment(['production']))
-        {
+        if ( ! app()->environment(['production'])) {
             return $next($request);
         }
 
         $requestPath = $request->getPathInfo();
 
-        if (starts_with($requestPath, '/assets/') && ends_with($requestPath, $this->cacheFilenameExtensions))
-        {
+        if (starts_with($requestPath, '/assets/') && ends_with($requestPath, $this->cacheFilenameExtensions)) {
             config()->set('session.driver', 'array');
         }
 
         $response = $next($request);
 
-        if ((starts_with($response->headers->get('Content-Type'), $this->cacheContentType)) && ('/' !== $requestPath))
-        {
+        if ((starts_with($response->headers->get('Content-Type'), $this->cacheContentType)) && ('/' !== $requestPath)) {
             $this->setCacheHeaders($request, $response);
         }
 
@@ -65,8 +62,7 @@ class SetCacheHeaders
      */
     protected function setCacheHeaders($request, $response)
     {
-        if (($view = $response->getOriginalContent()) instanceof View)
-        {
+        if (($view = $response->getOriginalContent()) instanceof View) {
             $stat = stat($view->getPath());
 
             $response->setCache([
@@ -76,8 +72,7 @@ class SetCacheHeaders
 
             $response->setExpires(Carbon::now()->addDays(30));
 
-            if ((null !== ($etag = $request->headers->get('If-None-Match'))) || (null !== $request->headers->get('If-Modified-Since')))
-            {
+            if ((null !== ($etag = $request->headers->get('If-None-Match'))) || (null !== $request->headers->get('If-Modified-Since'))) {
                 $etags = explode('-', $etag, -1);
 
                 $request->headers->set('If-None-Match', (count($etags) ? ($etags[0] . '"') : ($etag)));

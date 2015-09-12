@@ -74,16 +74,15 @@ class Verify extends Entity
      */
     public static function verifyToken($token)
     {
-        if ((null === ($verify = self::with(['account'])->find($token))) || (false === ($hours = $verify->getExpireHours($verify->getAttribute('category_id')))))
-        {
+        $verify = self::with(['account'])->find($token);
+
+        if ((null === $verify) || (false === ($hours = $verify->getExpireHours($verify->getAttribute('category_id'))))) {
             return '驗證碼不存在';
-        }
-        else if (Carbon::now() > $verify->getAttribute('created_at')->addHours($hours))
-        {
+        } else if (Carbon::now() > $verify->getAttribute('created_at')->addHours($hours)) {
             return '驗證碼已過期';
         }
 
-        $account = $verify->account;
+        $account = $verify->getRelation('account');
 
         $verify->delete();
 
@@ -91,19 +90,23 @@ class Verify extends Entity
     }
 
     /**
-     * Get token expire hours.
+     * Get token expires hours.
      *
-     * @param $category
+     * @param $categoryId
      * @return bool|int
      */
-    public static function getExpireHours($category)
+    public static function getExpireHours($categoryId)
     {
-        switch ($category)
-        {
-            case 3:
-                return 6;
-            default:
-                return false;
+        $categories = Category::getCategories();
+
+        $category = $categories->search(function ($item) use ($categoryId) {
+            return $item->getAttribute('id') === $categoryId;
+        });
+
+        if (false === $category) {
+            return false;
         }
+
+        return json_decode($categories[$category]->getAttribute('name'))->{'expireHours'};
     }
 }

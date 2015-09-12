@@ -55,13 +55,11 @@ class ClearCache extends Command
      */
     public function handle()
     {
-        if (null !== ($key = $this->argument('key')))
-        {
+        if (null !== ($key = $this->argument('key'))) {
             $this->keys = [$key];
         }
 
-        foreach ($this->keys as $key)
-        {
+        foreach ($this->keys as $key) {
             $this->comment("Deleting {$key}...");
             $this->cacheManager->store()->forget($key);
         }

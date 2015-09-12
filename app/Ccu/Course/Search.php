@@ -2,10 +2,12 @@
 
 namespace App\Ccu\Course;
 
+use App\Ccu\General\Category;
+
 class Search
 {
     /**
-     * @var \App\Ccu\Course\Course
+     * @var Course
      */
     protected $model;
 
@@ -40,8 +42,7 @@ class Search
 
         $this->keywordFilter();
 
-        if (0 === $this->filterCount)
-        {
+        if (0 === $this->filterCount) {
             return [];
         }
 
@@ -53,21 +54,25 @@ class Search
      */
     protected function departmentFilter()
     {
-        if (isset($this->filter['department']))
-        {
+        if (isset($this->filter['department'])) {
             $departmentId = intval($this->filter['department']);
 
-            if (($departmentId >= 22) && ($departmentId <= 119))
-            {
+            // 取得系所資料
+            $departments = Category::getCategories('courses.department');
+
+            // 確認所查詢的系所存在
+            $department = $departments->search(function ($item) use ($departmentId) {
+                return $item->getAttribute('id') === $departmentId;
+            });
+
+            if (false !== $department) {
                 $this->model = $this->model->where('department_id', '=', $departmentId);
 
                 ++$this->filterCount;
 
-                if (117 === $departmentId)
-                {
+                // 判斷是否為通識課程
+                if ($departments[$department]->getAttribute('name') === '通識中心') {
                     $this->dimensionFilter();
-
-                    $this->fieldFilter();
                 }
             }
         }
@@ -78,31 +83,16 @@ class Search
      */
     protected function dimensionFilter()
     {
-        if (isset($this->filter['dimension']))
-        {
+        if (isset($this->filter['dimension'])) {
             $dimensionId = intval($this->filter['dimension']);
 
-            if (($dimensionId >= 11) && ($dimensionId <= 21))
-            {
+            // 確認所查詢的向度存在
+            $dimension = Category::getCategories('courses.dimension')->search(function ($item) use ($dimensionId) {
+                return $item->getAttribute('id') === $dimensionId;
+            });
+
+            if (false !== $dimension) {
                 $this->model = $this->model->where('dimension_id', '=', $dimensionId);
-
-                ++$this->filterCount;
-            }
-        }
-    }
-
-    /**
-     * Course field filter.
-     */
-    protected function fieldFilter()
-    {
-        if (isset($this->filter['field']))
-        {
-            $field = $this->filter['field'];
-
-            if ((strlen($field) > 0) && (intval($field) > 0))
-            {
-                $this->model = $this->model->where('code', 'like', "{$field}%");
 
                 ++$this->filterCount;
             }
@@ -114,14 +104,11 @@ class Search
      */
     protected function keywordFilter()
     {
-        if (isset($this->filter['keyword']))
-        {
-            $keyword = $this->filter['keyword'];
+        if (isset($this->filter['keyword'])) {
+            $keyword = trim($this->filter['keyword']);
 
-            if (mb_strlen($keyword) > 0)
-            {
-                $this->model = $this->model->where(function ($query) use ($keyword)
-                {
+            if (mb_strlen($keyword) > 0) {
+                $this->model = $this->model->where(function ($query) use ($keyword) {
                     $query->where('code', 'like', "%{$keyword}%")
                         ->orWhere('name', 'like', "%{$keyword}%")
                         ->orWhere('name_en', 'like', "%{$keyword}%")

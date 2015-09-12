@@ -59,65 +59,55 @@ class CommentsVote extends Entity
      */
     public static function vote($commentId, $userId, $agree = false, $withdraw = false)
     {
-        if (null === ($comment = Comment::where('id', '=', $commentId)->first(['id', 'courses_comment_id', 'agree', 'disagree'])))
-        {
-            return response()->json(['message' => ['Comment not found.']], 404);
-        }
-        else if ((null !== $comment->courses_comment_id) && ( ! Comment::where('id', '=', $comment->courses_comment_id)->exists()))
-        {
-            return response()->json(['message' => ['Comment not found.']], 404);
+        $comment = Comment::where('id', '=', $commentId)
+            ->first(['id', 'courses_comment_id', 'agree', 'disagree']);
+
+        // 確認該則留言是否存在，此外，如果是回覆，則需判斷父留言是否存在
+        if (null === $comment) {
+            return response()->json(['message' => ['留言不存在']], 404);
+        } else if ((null !== $comment->getAttribute('courses_comment_id')) && ( ! Comment::where('id', '=', $comment->getAttribute('courses_comment_id'))->exists())) {
+            return response()->json(['message' => ['留言不存在']], 404);
         }
 
         $agree = boolval($agree);
 
         DB::raw('LOCK TABLES `' . (CommentsVote::getTableName()) . '` WRITE');
 
-        $vote = CommentsVote::where('user_id', '=', $userId)->where('courses_comment_id', '=', $commentId)->first(['id', 'agree']);
+        $vote = CommentsVote::where('user_id', '=', $userId)
+            ->where('courses_comment_id', '=', $commentId)
+            ->first(['id', 'agree']);
 
-        if ((($withdraw) && (null === $vote)) || (( ! $withdraw) && (null !== $vote)))
-        {
-            return response()->json(['message' => ['Vote failed.']], 422);
+        // 如果是取消，則 $vote 不為 null；如果是新增，則 $vote 需為 null
+        if ((($withdraw) && (null === $vote)) || (( ! $withdraw) && (null !== $vote))) {
+            DB::raw('UNLOCK TABLES');
+
+            return response()->json(['message' => ['不正確的操作']], 422);
         }
 
-        try
-        {
-            DB::transaction(function () use ($withdraw, $comment, $vote, $userId, $commentId, $agree)
-            {
-                if ($withdraw)
-                {
-                    $comment->decrement(($vote->agree) ? 'agree' : 'disagree');
+        try {
+            DB::transaction(function () use ($withdraw, $comment, $vote, $userId, $commentId, $agree) {
+                if ($withdraw) {
+                    $comment->decrement(($vote->getAttribute('agree')) ? 'agree' : 'disagree');
 
-                    if (true !== $vote->delete())
-                    {
+                    if (true !== $vote->delete()) {
                         throw new Exception;
                     }
-                }
-                else
-                {
+                } else {
                     CommentsVote::create(['user_id' => $userId, 'courses_comment_id' => $commentId, 'agree' => $agree, 'created_at' => Carbon::now()]);
 
                     $comment->increment(($agree) ? 'agree' : 'disagree');
 
-                    if (CommentsVote::where('user_id', '=', $userId)->where('courses_comment_id', '=', $commentId)->count(['id']) > 1)
-                    {
+                    if (CommentsVote::where('user_id', '=', $userId)->where('courses_comment_id', '=', $commentId)->count(['id']) > 1) {
                         throw new Exception;
                     }
                 }
             });
-        }
-        catch(QueryException $e)
-        {
-            return response()->json(['message' => ['Vote failed.']], 422);
-        }
-        catch(Exception $e)
-        {
-            return response()->json(['message' => ['Vote failed.']], 422);
-        }
-        finally
-        {
+        } catch (Exception $e) {
+            return response()->json(['message' => ['操作失敗，請嘗試重新整理網頁']], 422);
+        } finally {
             DB::raw('UNLOCK TABLES');
         }
 
-        return response()->json(['agree' => $comment->agree, 'disagree' => $comment->disagree], 200);
+        return response()->json(['agree' => $comment->getAttribute('agree'), 'disagree' => $comment->getAttribute('disagree')], 200);
     }
 }

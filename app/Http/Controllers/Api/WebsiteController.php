@@ -12,8 +12,7 @@ class WebsiteController extends Controller
 {
     public function information($name)
     {
-        if (null === ($info = Information::find($name)))
-        {
+        if (null === ($info = Information::find($name))) {
             throw new NotFoundHttpException;
         }
 

@@ -24,8 +24,7 @@ class VerifyCsrfToken extends BaseVerifier
      */
     protected function addCookieToResponse($request, $response)
     {
-        if ('array' !== config('session.driver'))
-        {
+        if ('array' !== config('session.driver')) {
             return parent::addCookieToResponse($request, $response);
         }
 

@@ -1,7 +1,6 @@
 <?php
 
-if ( ! function_exists('_asset'))
-{
+if ( ! function_exists('_asset')) {
     /**
      * Generate an asset path for the application.
      *
@@ -14,8 +13,7 @@ if ( ! function_exists('_asset'))
     {
         $url = app('url')->asset($path, $secure);
 
-        if ($absolute)
-        {
+        if ($absolute) {
             return $url;
         }
 
@@ -23,8 +21,7 @@ if ( ! function_exists('_asset'))
     }
 }
 
-if ( ! function_exists('_route'))
-{
+if ( ! function_exists('_route')) {
     /**
      * Generate a URL to a named route.
      *
@@ -41,8 +38,7 @@ if ( ! function_exists('_route'))
     }
 }
 
-if ( ! function_exists('temp_path'))
-{
+if ( ! function_exists('temp_path')) {
     /**
      * Get the path to the temporary folder.
      *

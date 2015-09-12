@@ -30,13 +30,6 @@ class Account extends Entity implements AuthenticatableContract, CanResetPasswor
     protected $fillable = ['email', 'password'];
 
     /**
-     * The relations to eager load on every query.
-     *
-     * @var array
-     */
-    protected $with = ['user'];
-
-    /**
      * Get the user data associated with the account.
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
@@ -57,18 +50,21 @@ class Account extends Entity implements AuthenticatableContract, CanResetPasswor
             ->where('category_id', '=', Category::getCategories('events.account', true));
     }
 
+    /**
+     * Save a new model and return the instance.
+     *
+     * @param  array  $attributes
+     * @return static
+     */
     public static function create(array $attributes = [])
     {
         DB::beginTransaction();
 
         $account = parent::create(['email' => $attributes['email'], 'password' => bcrypt($attributes['password'])]);
 
-        if (( ! $account->exists) || ( ! $account->user()->create(['account_id' => $account->getAttribute('id'), 'nickname' => $account->getAttribute('email')])->exists))
-        {
+        if (( ! $account->exists) || ( ! $account->user()->create(['account_id' => $account->getAttribute('id'), 'nickname' => $account->getAttribute('email')])->exists)) {
             DB::rollBack();
-        }
-        else
-        {
+        } else {
             DB::commit();
         }
 

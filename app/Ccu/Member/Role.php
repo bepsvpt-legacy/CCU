@@ -19,14 +19,4 @@ class Role extends EntrustRole
      * @var array
      */
     protected $fillable = ['name', 'display_name', 'description'];
-
-    /**
-     * Get the permissions for the role.
-     *
-     * @return array
-     */
-    public function getPermissionListAttribute()
-    {
-        return $this->perms->lists('id')->all();
-    }
 }
