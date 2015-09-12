@@ -2689,12 +2689,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/yangqi/Htmldom.git",
-                "reference": "048b36308ab6a6b448f9be1f089ecc7cf61e8ed2"
+                "reference": "eee67c01f0a82c6c5e6252880d382e586e331da7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/yangqi/Htmldom/zipball/048b36308ab6a6b448f9be1f089ecc7cf61e8ed2",
-                "reference": "048b36308ab6a6b448f9be1f089ecc7cf61e8ed2",
+                "url": "https://api.github.com/repos/yangqi/Htmldom/zipball/eee67c01f0a82c6c5e6252880d382e586e331da7",
+                "reference": "eee67c01f0a82c6c5e6252880d382e586e331da7",
                 "shasum": ""
             },
             "require": {
@@ -2721,7 +2721,7 @@
                 "HTML Parser",
                 "laravel"
             ],
-            "time": "2015-03-27 18:51:01"
+            "time": "2015-09-10 13:45:37"
         },
         {
             "name": "zizaco/entrust",
