@@ -68,9 +68,14 @@ class RoommatesController extends Controller
             }
         }
 
-        return response('', 200);
+        return response()->json();
     }
 
+    /**
+     * Get the current academic.
+     *
+     * @return int
+     */
     public function getAcademic()
     {
         $now = Carbon::now();
