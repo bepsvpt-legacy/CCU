@@ -33,17 +33,19 @@
         <thead>
             <tr class="info">
                 <th>系所</th>
-                <th>課程代碼</th>
+                <th class="hidden-xs">課程代碼</th>
                 <th>課程名稱</th>
                 <th>授課教授</th>
+                <th>評論數</th>
             </tr>
         </thead>
         <tbody>
             <tr ng-repeat="course in courses">
                 <td>@{{ course.department.name }}</td>
-                <td>@{{ course.code }}</td>
+                <td class="hidden-xs">@{{ course.code }}</td>
                 <td><a ng-href="#/courses/@{{ course.id }}" data-toggle="tooltip" data-placement="bottom" title="@{{ course.name_en }}">@{{ course.name }}</a></td>
                 <td>@{{ course.professor }}</td>
+                <td><span ng-show="course.comments.length" class="text-primary">@{{ course.comments.length }}</span></td>
             </tr>
         </tbody>
     </table>

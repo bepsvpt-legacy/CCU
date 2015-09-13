@@ -18,7 +18,7 @@ class Course extends Entity
      *
      * @var array
      */
-    protected $visible = ['id', 'code', 'department', 'dimension', 'name', 'name_en', 'professor'];
+    protected $visible = ['id', 'code', 'comments', 'department', 'dimension', 'name', 'name_en', 'professor'];
 
     /**
      * The attributes that are mass assignable.

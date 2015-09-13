@@ -26,7 +26,9 @@ class Search
      */
     public function __construct(array $filter = [])
     {
-        $this->model = (new Course())->with(['department']);
+        $this->model = (new Course())->with(['comments' => function ($query) {
+            $query->select(['id', 'course_id']);
+        }, 'department']);
 
         $this->filter = $filter;
     }
