@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Ccu\Website;
+namespace App\Ccu\Image;
 
 use App\Ccu\Core\Entity;
 

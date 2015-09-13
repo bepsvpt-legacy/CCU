@@ -51,7 +51,7 @@ class User extends Entity
      */
     public function profilePicture()
     {
-        return $this->belongsTo('App\Ccu\Website\Image', 'profile_picture_id');
+        return $this->belongsTo('App\Ccu\Image\Image', 'profile_picture_id');
     }
 
     /**

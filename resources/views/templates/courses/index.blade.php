@@ -59,7 +59,7 @@
 
         <div ng-repeat="comment in comments" class="media shadow-z-1 courses-comments">
             <div class="media-left media-top">
-                <img class="media-object profile-picture-small" src="https://ccu.bepsvpt.net/favicon.png" alt="Profile Picture">
+                <profile-picture nickname="@{{ comment.user.nickname }}" size="profile-picture-medium"></profile-picture>
             </div>
             <div class="media-body">
                 <a ng-href="#/courses/@{{ comment.course.id }}" data-toggle="tooltip" data-placement="bottom" title="@{{ comment.course.department.name }} - @{{ comment.course.professor }}" class="pull-right">@{{ comment.course.name }}</a>

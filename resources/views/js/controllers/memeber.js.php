@@ -9,7 +9,7 @@
         .run(['errorsModal', function(errorsModal) {
             _errorsModal = errorsModal;
         }])
-        .controller('MemberController', ['$http', '$rootScope', '$scope', function ($http, $rootScope, $scope) {
+        .controller('MemberController', ['$http', '$rootScope', '$scope', '$window', 'Upload', function ($http, $rootScope, $scope, $window, Upload) {
             $scope.changeNickname = {};
 
             $scope.changeNicknameFormSubmit = function () {
@@ -20,6 +20,19 @@
                         $rootScope.user.nickname = $scope.changeNickname.nickname;
                         $scope.showChangeNicknameForm = false;
                     }, handleErrorResponse);
+            };
+
+            $scope.changeProfilePicture = function (file) {
+                if (file && ! file.$error) {
+                    file.upload = Upload.upload({
+                        method: 'POST',
+                        url: '{{ route("api.member.update.profilePicture") }}',
+                        file: file
+                    }).then(function (response) {
+                        $window.location.reload();
+                        setTimeout(function() {alert('上傳成功');}, 1);
+                    }, handleErrorResponse);
+                }
             };
         }]);
 })();

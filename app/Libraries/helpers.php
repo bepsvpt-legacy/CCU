@@ -47,6 +47,47 @@ if ( ! function_exists('temp_path')) {
      */
     function temp_path($path = '')
     {
-        return base_path('../temp') . ($path ? DIRECTORY_SEPARATOR . $path : $path);
+        return base_path('..' . DIRECTORY_SEPARATOR . 'temp') . ($path ? DIRECTORY_SEPARATOR . $path : $path);
+    }
+}
+
+if ( ! function_exists('image_path')) {
+    /**
+     * Get the path to the image folder.
+     *
+     * @param  int $hash
+     * @param  int $timestamp
+     * @param  bool $thumbnail
+     * @return string
+     */
+    function image_path($hash, $timestamp, $thumbnail = false)
+    {
+        // 基本路徑
+        $path = 'uploads' . DIRECTORY_SEPARATOR . 'images';
+
+        // 縮圖路徑
+        if ($thumbnail) {
+            $path .= DIRECTORY_SEPARATOR . 'thumbnails';
+        }
+
+        // prefix 路徑，以免當目錄過多檔案
+        $path .= DIRECTORY_SEPARATOR . substr($timestamp, 0, 3);
+
+        // 圖片名稱
+        $path .= DIRECTORY_SEPARATOR . "{$hash}-{$timestamp}";
+
+        return storage_path($path);
+    }
+}
+
+if ( ! function_exists('default_avatar_path')) {
+    /**
+     * Get the path to the default avatar.
+     *
+     * @return string
+     */
+    function default_avatar_path()
+    {
+        return storage_path('uploads/images/default_avatar.jpg');
     }
 }

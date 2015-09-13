@@ -129,7 +129,7 @@ class AuthController extends Controller
         $data = ['roles' => [], 'permissions' => [], 'signIn' => ( ! Auth::guest())];
 
         if ($data['signIn']) {
-            $account = Auth::user()->load('user')->load('roles.perms');
+            $account = Auth::user()->load(['user.profilePicture', 'roles.perms']);
 
             $data['roles'] = $account->getRelation('roles')->pluck('name');
 

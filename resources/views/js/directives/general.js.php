@@ -8,6 +8,16 @@
                 template: '<span> · </span>'
             };
         })
+        .directive('profilePicture', function () {
+            return {
+                restrict: 'E',
+                scope: {
+                    nickname: '@',
+                    size: '@'
+                },
+                template: '<img ng-src="/images/profile-picture/@{{ nickname }}" alt="profile-picture" class="img-circle @{{ size }}">'
+            };
+        })
         .directive('aPreventDefault', function () {
             return {
                 restrict: 'A',

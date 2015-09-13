@@ -22,7 +22,7 @@
             <div ng-if="$root.user.signIn">
                 <div class="media">
                     <div class="media-left">
-                        <img class="media-object profile-picture-medium" src="https://ccu.bepsvpt.net/favicon.png" alt="Profile Picture">
+                        <profile-picture nickname="@{{ $root.user.nickname }}" size="profile-picture-medium"></profile-picture>
                     </div>
                     <div class="media-body">
                         <form ng-submit="commentForm.$valid && commentFormSubmit()" name="commentForm" method="POST" accept-charset="UTF-8" data-toggle="validator">
@@ -51,7 +51,7 @@
             <div ng-if="comments.data.length">
                 <div ng-repeat="comment in comments.data" class="media shadow-z-1 courses-comments">
                     <div class="media-left media-top">
-                        <img class="media-object profile-picture-small" src="https://ccu.bepsvpt.net/favicon.png" alt="Profile Picture">
+                        <profile-picture nickname="@{{ comment.user.nickname }}" size="profile-picture-medium"></profile-picture>
                     </div>
 
                     <div class="media-body">
@@ -66,7 +66,7 @@
                         <div ng-if="comment.sub" class="courses-comments-comments overflow-scroll">
                             <div ng-repeat="subComment in comment.comments" class="media">
                                 <div class="media-left">
-                                    <img class="media-object profile-picture-small" src="https://ccu.bepsvpt.net/favicon.png" alt="Profile Picture">
+                                    <profile-picture nickname="@{{ subComment.user.nickname }}" size="profile-picture-small"></profile-picture>
                                 </div>
 
                                 <div class="media-body">
@@ -77,7 +77,7 @@
 
                         <div ng-if="$root.user.signIn && comment.reply" class="media">
                             <div class="media-left">
-                                <img class="media-object profile-picture-small" src="https://ccu.bepsvpt.net/favicon.png" alt="Profile Picture">
+                                <profile-picture nickname="@{{ $root.user.nickname }}" size="profile-picture-small"></profile-picture>
                             </div>
                             <div class="media-body">
                                 <form ng-submit="commentsComment[comment.id].content.length >= 10 && commentFormSubmit(comment.id)" method="POST" accept-charset="UTF-8" data-toggle="validator">
@@ -103,7 +103,7 @@
                 <div>
                     <ul class="pager">
                         <li ng-class="(comments.prev_page_url) ? '' : 'disabled'" class="previous cursor-pointer"><span ng-click="commentsPaginate(false, comments.prev_page_url)" class="text-primary text-noselect">← 上一頁</span></li>
-                        <li ng-class="(comments.next_page_url) ? '' : 'disabled'" class="next cursor-pointer"><span ng-click="commentsPaginate(true, comments.next_page_url)" class="text-primary text-noselect">下一頁 →</span></li>
+                        <li ng-class="(comments.next_page_url) ? '' : 'disabled'" class="next cursor-pointer"><span ng-click="commentsPaginate(true, comments.next_page_url)" class="text-primary text-noselect">下一頁 s→</span></li>
                     </ul>
                 </div>
             </div>

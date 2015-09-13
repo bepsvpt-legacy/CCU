@@ -27,6 +27,7 @@ Route::group(['prefix' => 'api', 'namespace' => 'Api', 'as' => 'api.'], function
     Route::group(['prefix' => 'member', 'middleware' => 'auth', 'as' => 'member.'], function () {
         Route::group(['prefix' => 'member', 'as' => 'update.'], function () {
             patch('nickname', ['as' => 'nickname', 'uses' => 'MemberController@updateNickname']);
+            post('profile-picture', ['as' => 'profilePicture', 'uses' => 'MemberController@updateProfilePicture']);
         });
     });
 
@@ -61,6 +62,12 @@ Route::group(['prefix' => 'api', 'namespace' => 'Api', 'as' => 'api.'], function
             post('/', ['as' => 'store', 'uses' => 'RoommatesController@store']);
         });
     });
+});
+
+Route::group(['prefix' => 'images', 'as' => 'images.'], function () {
+    get('profile-picture/{nickname?}', ['as' => 'profilePicture', 'uses' => 'ImagesController@profilePicture']);
+    get('{hash}/{time}', ['as' => 'show', 'uses' => 'ImagesController@show']);
+    get('{hash}/{time}/s', ['as' => 'show.small', 'uses' => 'ImagesController@show_s']);
 });
 
 Route::group(['prefix' => 'assets'], function () {

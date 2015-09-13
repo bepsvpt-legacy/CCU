@@ -15,6 +15,11 @@
         <div class="tab-content">
             <div role="tabpanel" class="tab-pane active" id="account">
                 <blockquote>
+                    <profile-picture nickname="@{{ $root.user.nickname }}" size="profile-picture"></profile-picture>
+                    <button type="file" ngf-select="changeProfilePicture($file)" accept="image/jpeg,image/png" ngf-max-size="4MB" class="btn btn-link">上傳</button>
+                </blockquote>
+
+                <blockquote>
                     <span>暱稱：@{{ $root.user.nickname }} <a ng-click="showChangeNicknameForm = true" ng-hide="showChangeNicknameForm" class="cursor-pointer">變更</a></span>
 
                     <div ng-show="showChangeNicknameForm">
