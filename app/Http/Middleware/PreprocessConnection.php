@@ -13,16 +13,6 @@ use Illuminate\Http\Response;
 class PreprocessConnection
 {
     /**
-     * @var Request
-     */
-    protected $request;
-
-    /**
-     * @var Response
-     */
-    protected $response;
-
-    /**
      * @var Guard
      */
     protected $guard;
@@ -61,19 +51,17 @@ class PreprocessConnection
      */
     public function handle($request, Closure $next)
     {
-        $this->request = $request;
-
         Carbon::setLocale('zh-TW');
 
-        if (( ! $this->shouldPassThrough($this->request, $this->browserDetectionExcept)) && $this->isBrowserNotSupport()) {
+        if (( ! $this->shouldPassThrough($request, $this->browserDetectionExcept)) && $this->isBrowserNotSupport()) {
             return redirect()->route('errors.browserNotSupport');
         }
 
         $this->setGlobalViewVariables();
 
-        $this->response = $next($request);
+        $response = $next($request);
 
-        return $this->response;
+        return $response;
     }
 
     protected function setGlobalViewVariables()
@@ -88,8 +76,17 @@ class PreprocessConnection
      */
     protected function isBrowserNotSupport()
     {
-        if (('IE' === ($browser = Agent::browser())) && (Agent::version($browser) < 11)) {
-            return true;
+        $browser = Agent::browser();
+
+        $version = Agent::version($browser);
+
+        switch ($browser) {
+            case 'IE':
+                return $version < 11;
+            case 'Firefox':
+                return $version < 38;
+            case 'Chrome':
+                return $version < 43;
         }
 
         return false;

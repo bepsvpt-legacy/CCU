@@ -22,7 +22,7 @@ class ErrorsController extends Controller
     {
         $view = "errors.{$method}";
 
-        if (View::exists($view)) {
+        if (view()->exists($view)) {
             return view($view);
         }
 
