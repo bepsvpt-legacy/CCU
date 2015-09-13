@@ -26,7 +26,7 @@
                                     {!! Form::label('nickname', '新暱稱', ['class' => 'sr-only']) !!}
                                     <div class="input-group">
                                         <span class="input-group-addon"><span class="fa fa-user"></span></span>
-                                        {!! Form::text('nickname', null, ['ng-model' => 'changeNickname.nickname', 'class' => 'form-control floating-label', 'placeholder' => '新暱稱', 'pattern' => '^\w{5,16}$', 'title' => '暱稱需為5~16個英文或數字', 'required']) !!}
+                                        {!! Form::text('nickname', null, ['ng-model' => 'changeNickname.nickname', 'class' => 'form-control floating-label', 'data-hint' => '需為5~16個英文或數字', 'placeholder' => '新暱稱', 'pattern' => '^\w{5,16}$', 'required']) !!}
                                     </div>
                                 </div>
 
