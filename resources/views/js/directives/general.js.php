@@ -7,5 +7,15 @@
                 restrict: 'E',
                 template: '<span> · </span>'
             };
+        })
+        .directive('aPreventDefault', function () {
+            return {
+                restrict: 'A',
+                link: function (scope, element, attrs) {
+                    element.click(function (e) {
+                        e.preventDefault();
+                    });
+                }
+            };
         });
 })();

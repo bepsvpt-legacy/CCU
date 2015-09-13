@@ -18,6 +18,8 @@
             .then(function (response) {
                 $rootScope.user = {
                     signIn: response.data.signIn,
+                    email: (response.data.signIn) ? response.data.email  : null,
+                    nickname: (response.data.signIn) ? response.data.nickname  : null,
                     roles: response.data.roles,
                     permissions: response.data.permissions,
                     hasRole: function (role) {

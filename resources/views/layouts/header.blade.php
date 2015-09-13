@@ -20,7 +20,7 @@
                         <li><a ui-sref="auth-register" data-toggle="tooltip" data-placement="bottom" title="註冊"><span class="fa fa-fw fa-user-plus"></span><span class="visible-xs-inline"> 註冊</span></a></li>
                         <li><a ui-sref="auth-signIn" data-toggle="tooltip" data-placement="bottom" title="登入"><span class="fa fa-fw fa-sign-in"></span><span class="visible-xs-inline"> 登入</span></a></li>
                     @else
-                        <li><a href="#/member" data-toggle="tooltip" data-placement="bottom" title="敬請期待">{{ $guard->user()->user->nickname }}</a></li>
+                        <li><a href="#/member" data-toggle="tooltip" data-placement="bottom" title="會員中心">@{{ $root.user.nickname }}</a></li>
                         <li><a ui-sref="auth-signOut" data-toggle="tooltip" data-placement="bottom" title="登出"><span class="fa fa-fw fa-sign-out"></span><span class="visible-xs-inline"> 登出</span></a></li>
                     @endif
                 </ul>

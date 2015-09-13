@@ -5,8 +5,7 @@
  *
  * @return string
  */
-Form::macro('validationMessage', function()
-{
+Form::macro('validationMessage', function() {
     return '<span class="form-control-feedback" aria-hidden="true"></span><div class="help-block with-errors text-center"></div>';
 });
 
@@ -15,8 +14,7 @@ Form::macro('validationMessage', function()
  *
  * @return string
  */
-Form::macro('recaptcha', function()
-{
+Form::macro('recaptcha', function() {
     $siteKey = env('RECAPTCHA_SITE_KEY');
 
     $size = Agent::isMobile() ? 'compact' : 'normal';

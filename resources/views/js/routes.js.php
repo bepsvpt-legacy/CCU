@@ -32,8 +32,8 @@
                 templateUrl: '{{ routeAssets("templates.courses.show") }}?' + VERSION,
                 controller: 'CoursesShowController',
                 onEnter: function ($state, $stateParams) {
-                    if(0 === $stateParams.courseId.length){
-                        $state.go('courses')
+                    if (0 === $stateParams.courseId.length) {
+                        $state.go('courses');
                     }
                 }
             })
@@ -45,6 +45,16 @@
                 url: '/dormitories/roommates',
                 templateUrl: '{{ routeAssets("templates.dormitories.roommates") }}?' + VERSION,
                 controller: 'RoommatesController'
+            })
+            .state('member', {
+                url: '/member',
+                templateUrl: '{{ routeAssets("templates.member.index") }}?' + VERSION,
+                controller: 'MemberController',
+                onEnter: function ($rootScope, $state) {
+                    if ((undefined === $rootScope.user) || ( ! $rootScope.user.signIn)) {
+                        $state.go('home');
+                    }
+                }
             })
             .state('about', {
                 url: '/about',
