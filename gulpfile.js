@@ -1,4 +1,5 @@
 var elixir = require('laravel-elixir');
+require('dotenv').load();
 
 /*
  |--------------------------------------------------------------------------
@@ -13,8 +14,10 @@ var elixir = require('laravel-elixir');
 
 elixir.config.sourcemaps = false;
 
+var cssPath = ('production' === process.env.APP_ENV) ? '../cdn/css/ccu.min.css' : 'resources/views/css/ccu.css.php';
+
 elixir(function(mix) {
     mix.sass([
             'ccu.scss'
-        ], 'resources/views/css/ccu.css.php');
+        ], cssPath);
 });

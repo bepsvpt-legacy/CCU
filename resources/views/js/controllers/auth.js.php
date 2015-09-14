@@ -11,7 +11,7 @@
         .run(['errorsModal', function(errorsModal) {
             _errorsModal = errorsModal;
         }])
-        .controller('SignInController', ['$scope', '$http', function ($scope, $http) {
+        .controller('SignInController', ['$http', '$scope', function ($http, $scope) {
             $scope.signIn = {rememberMe: true};
 
             $scope.signInFormSubmit = function () {
@@ -27,7 +27,7 @@
             $http.get('{{ route("api.auth.signOut") }}')
                 .then(redirectToHomePage, redirectToHomePage);
         }])
-        .controller('RegisterController', ['$scope', '$http', function ($scope, $http) {
+        .controller('RegisterController', ['$http', '$scope', function ($http, $scope) {
             $scope.register = {};
 
             $scope.registerFormSubmit = function () {

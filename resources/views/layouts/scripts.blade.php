@@ -4,9 +4,9 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/angulartics/0.19.2/angulartics.min.js" defer></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-loading-bar/0.8.0/loading-bar.min.js" defer></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/danialfarid-angular-file-upload/7.0.17/ng-file-upload.min.js" defer></script>
-<script src="{{ routeAssets('js.vendor.angulartics-google-analytics') }}?{{ $version }}" defer></script>
+<script src="https://cdn.bepsvpt.net/js/ga.min.js" defer></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js" defer></script>
-<script src="{{ routeAssets('js.vendor.arrive') }}?{{ $version }}" defer></script>
+<script src="https://cdn.bepsvpt.net/js/arrive.min.js" defer></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/0.3.0/js/material.min.js" defer></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/0.3.0/js/ripples.min.js" defer></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/1000hz-bootstrap-validator/0.9.0/validator.min.js" defer></script>
@@ -21,7 +21,7 @@
 @foreach($jsDirectories as $directory)
     @foreach($filesystem->allFiles(base_path("resources/views/js/{$directory}")) as $file)
         @if (ends_with($file->getRelativePathname(), '.js.php'))
-            <script src="{{ routeAssets("js.{$directory}." . str_replace('/', '.', substr($file->getRelativePathname(), 0, -7))) }}?{{ $version }}" defer></script>
+            <script src="{{ routeAssets('js.' . $directory . '.' . str_replace('/', '.', substr($file->getRelativePathname(), 0, -7))) }}?{{ $version }}" defer></script>
         @endif
     @endforeach
 @endforeach

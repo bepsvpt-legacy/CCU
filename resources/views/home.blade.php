@@ -6,17 +6,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>CCU</title>
         <noscript><meta http-equiv="refresh" content="0; url=/errors/noscript"></noscript>
-        <script>
-            const VERSION = {{ $version }};
-
-            (function () {
-                'use strict';
-
-                if (VERSION > parseFloat(localStorage.getItem('VERSION') || 0)) {
-                    localStorage.setItem('VERSION', VERSION);
-                }
-            })();
-        </script>
+        <script>const VERSION = {{ $version }};</script>
         <style>
             #ccu-initializing{position:fixed;top:50%;left:50%;margin-top:-164px;margin-left:-32px;z-index:99999}#ccu-initializing .background{position:fixed;top:0;left:0;min-width:100%;min-height:100%;background:#eee}.hide{display:none!important}body{overflow-y:scroll!important}
             /* http://tobiasahlin.com/spinkit/ */
@@ -27,7 +17,7 @@
         <link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/0.3.0/css/material-fullpalette.min.css">
         <link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/0.3.0/css/ripples.min.css">
         <link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/angular-loading-bar/0.8.0/loading-bar.min.css">
-        <link type="text/css" rel="stylesheet" href="{{ routeAssets("css.ccu") }}?{{ $version }}">
+        <link type="text/css" rel="stylesheet" href="{{ (app()->environment(['production'])) ? 'https://cdn.bepsvpt.net/css/ccu.min.css' : routeAssets('css.ccu') . "?{$version}" }}">
     </head>
     <body>
         <div id="ccu-initializing"><div class="background"></div><div class="ccu-initializing-spinner"></div></div>

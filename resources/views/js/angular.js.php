@@ -1,13 +1,11 @@
 'use strict';
 
 (function () {
-    var needLoaded = ['ui.router', 'angular-loading-bar', 'angulartics', 'ngFileUpload'];
-
-    if ('undefined' !== typeof GA_IS_AVAILABLE) {
-        needLoaded.push('angulartics.google.analytics');
-    }
-
-    var app = angular.module('ccu', needLoaded);
+    var app = angular.module('ccu', [
+        'ui.router', 'angular-loading-bar',
+        'angulartics', 'angulartics.google.analytics',
+        'ngFileUpload'
+    ]);
 
     app.config(['$httpProvider', function($httpProvider) {
         $httpProvider.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';

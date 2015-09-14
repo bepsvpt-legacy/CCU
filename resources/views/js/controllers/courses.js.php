@@ -9,7 +9,7 @@
         .run(['errorsModal', function(errorsModal) {
             _errorsModal = errorsModal;
         }])
-        .controller('CoursesController', ['$scope', '$http', 'CourseService', function ($scope, $http, CourseService) {
+        .controller('CoursesController', ['$http', '$scope', 'CourseService', function ($http, $scope, CourseService) {
             $scope.options = {};
             $scope.search = {keyword: ''};
             $scope.courses = CourseService.getCourses();

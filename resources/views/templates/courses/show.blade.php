@@ -70,7 +70,7 @@
                                 </div>
 
                                 <div class="media-body">
-                                    <courses-comments-body comment="subComment" vote="vote" subcomment="true"></courses-comments-body>
+                                    <courses-comments-body comment="subComment" vote="vote" is-sub-comment="true"></courses-comments-body>
                                 </div>
                             </div>
                         </div>

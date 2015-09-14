@@ -9,7 +9,7 @@
         .run(['errorsModal', function(errorsModal) {
             _errorsModal = errorsModal;
         }])
-        .controller('RoommatesController', ['$scope', '$http', function ($scope, $http) {
+        .controller('RoommatesController', ['$http', '$scope', function ($http, $scope) {
             var ls = JSON.parse(localStorage.getItem('dormitories'));
 
             $scope.showCreateForm = ((null !== ls) && (ls.hasOwnProperty('roommates')) && (ls.roommates.hasOwnProperty('showCreateForm'))) ? ls.roommates.showCreateForm : true;
