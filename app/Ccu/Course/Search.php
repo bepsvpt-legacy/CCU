@@ -2,7 +2,9 @@
 
 namespace App\Ccu\Course;
 
+use App\Ccu\Core\Entity;
 use App\Ccu\General\Category;
+use Cache;
 
 class Search
 {
@@ -36,7 +38,7 @@ class Search
     /**
      * Course search.
      *
-     * @return array|\App\Ccu\Course\Course
+     * @return array
      */
     public function search()
     {
@@ -48,7 +50,9 @@ class Search
             return [];
         }
 
-        return $this->model->orderBy('courses.code')->get();
+        $this->model = $this->model->orderBy('courses.code');
+
+        return $this->cacheQuery();
     }
 
     /**
@@ -120,5 +124,19 @@ class Search
                 ++$this->filterCount;
             }
         }
+    }
+
+    /**
+     * Get the query result and cache it.
+     *
+     * @return array
+     */
+    protected function cacheQuery()
+    {
+        $hash = 'courses:search:' . sha1($this->model->toSql() . ' | ' . implode(', ', $this->model->getBindings()));
+
+        return Cache::remember($hash, Entity::CACHE_A_WEEK, function () {
+            return $this->model->get();
+        });
     }
 }
