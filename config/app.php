@@ -148,7 +148,6 @@ return [
         Illuminate\Html\HtmlServiceProvider::class,
         Intervention\Image\ImageServiceProvider::class,
         Jenssegers\Agent\AgentServiceProvider::class,
-        PragmaRX\Google2FA\Vendor\Laravel\ServiceProvider::class,
         Yangqi\Htmldom\HtmldomServiceProvider::class,
         Zizaco\Entrust\EntrustServiceProvider::class,
 
@@ -203,7 +202,6 @@ return [
         'Agent'     => Jenssegers\Agent\Facades\Agent::class,
         'Entrust'   => Zizaco\Entrust\EntrustFacade::class,
         'Form'      => Illuminate\Html\FormFacade::class,
-        'Google2FA' => PragmaRX\Google2FA\Vendor\Laravel\Facade::class,
         'HTML'      => Illuminate\Html\HtmlFacade::class,
         'Htmldom'   => Yangqi\Htmldom\Htmldom::class,
         'Image'     => Intervention\Image\Facades\Image::class,

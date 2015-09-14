@@ -1,9 +1,8 @@
 <?php
 
 use Illuminate\Database\Schema\Blueprint;
-use Illuminate\Database\Migrations\Migration;
 
-class AddIndexToCoursesExamsTable extends Migration
+class AddIndexToCoursesExamsTable extends CustomMigration
 {
     /**
      * Run the migrations.
