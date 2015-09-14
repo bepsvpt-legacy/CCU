@@ -9,21 +9,13 @@ use Illuminate\View\View;
 class SetCacheHeaders
 {
     /**
+     * The request path that need cache.
+     *
      * @var array
      */
-    protected $cacheContentType = [
-        'text/css',
-        'application/javascript',
-        'text/html',
-    ];
-
-    /**
-     * @var array
-     */
-    protected $cacheFilenameExtensions = [
-        '.css',
-        '.js',
-        '.html',
+    protected $needCachePath = [
+        '/assets',
+        '/images',
     ];
 
     /**
@@ -39,15 +31,15 @@ class SetCacheHeaders
             return $next($request);
         }
 
-        $requestPath = $request->getPathInfo();
+        $needCache = starts_with($request->getPathInfo(), $this->needCachePath);
 
-        if (starts_with($requestPath, '/assets/') && ends_with($requestPath, $this->cacheFilenameExtensions)) {
+        if ($needCache) {
             config()->set('session.driver', 'array');
         }
 
         $response = $next($request);
 
-        if ((starts_with($response->headers->get('Content-Type'), $this->cacheContentType)) && ('/' !== $requestPath)) {
+        if ($needCache) {
             $this->setCacheHeaders($request, $response);
         }
 
@@ -62,9 +54,14 @@ class SetCacheHeaders
      */
     protected function setCacheHeaders($request, $response)
     {
-        if (($view = $response->getOriginalContent()) instanceof View) {
+        if (starts_with($request->getPathInfo(), ['/images'])) {
+            $stat = stat(session()->pull('requestImagePath'));
+        }
+        else if (($view = $response->getOriginalContent()) instanceof View) {
             $stat = stat($view->getPath());
+        }
 
+        if (isset($stat)) {
             $response->setCache([
                 'etag' => md5("{$stat['ino']}|{$stat['mtime']}|{$stat['size']}"),
                 'public' => true

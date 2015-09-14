@@ -29,7 +29,7 @@
 <div ng-show="courses.length" class="text-center">
     <hr>
 
-    <table class="table table-striped table-bordered table-hover">
+    <table class="table table-striped table-bordered table-hover shadow-z-1">
         <thead>
             <tr class="info">
                 <th>系所</th>
@@ -45,7 +45,10 @@
                 <td class="hidden-xs">@{{ course.code }}</td>
                 <td><a ng-href="#/courses/@{{ course.id }}" data-toggle="tooltip" data-placement="bottom" title="@{{ course.name_en }}">@{{ course.name }}</a></td>
                 <td>@{{ course.professor }}</td>
-                <td><span ng-show="course.comments.length" class="text-primary">@{{ course.comments.length }}</span></td>
+                <td>
+                    <span ng-hide="course.comments.length">-</span>
+                    <span ng-show="course.comments.length" class="text-primary">@{{ course.comments.length }}</span>
+                </td>
             </tr>
         </tbody>
     </table>

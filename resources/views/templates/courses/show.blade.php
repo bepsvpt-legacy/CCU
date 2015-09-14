@@ -103,7 +103,7 @@
                 <div>
                     <ul class="pager">
                         <li ng-class="(comments.prev_page_url) ? '' : 'disabled'" class="previous cursor-pointer"><span ng-click="commentsPaginate(false, comments.prev_page_url)" class="text-primary text-noselect">← 上一頁</span></li>
-                        <li ng-class="(comments.next_page_url) ? '' : 'disabled'" class="next cursor-pointer"><span ng-click="commentsPaginate(true, comments.next_page_url)" class="text-primary text-noselect">下一頁 s→</span></li>
+                        <li ng-class="(comments.next_page_url) ? '' : 'disabled'" class="next cursor-pointer"><span ng-click="commentsPaginate(true, comments.next_page_url)" class="text-primary text-noselect">下一頁 →</span></li>
                     </ul>
                 </div>
             </div>
