@@ -26,7 +26,7 @@
     </form>
 </div>
 
-<div ng-show="courses.length" class="text-center">
+<div class="text-center">
     <hr>
 
     <table class="table table-striped table-bordered table-hover shadow-z-1">
@@ -40,6 +40,9 @@
             </tr>
         </thead>
         <tbody>
+            <tr ng-hide="courses.length">
+                <td colspan="5">嘗試換個系所看看</td>
+            </tr>
             <tr ng-repeat="course in courses">
                 <td>@{{ course.department.name }}</td>
                 <td class="hidden-xs">@{{ course.code }}</td>
