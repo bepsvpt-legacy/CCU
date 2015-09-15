@@ -151,7 +151,7 @@
                         <blockquote>
                             <ul class="ul-noindent">
                                 <li>目前支援格式：pdf / jpeg / png / bmp</li>
-                                <li>檔案大小限制：8MB</li>
+                                <li>檔案大小限制：4MB</li>
                                 <li>尊重智慧財產權，勿上傳非相關檔案或未授權檔案，謝謝</li>
                             </ul>
                         </blockquote>
@@ -168,7 +168,7 @@
 
                                 <div class="form-group">
                                     <label class="sr-only">檔案</label>
-                                    <input ng-model="exam.file" ngf-select ngf-max-size="8MB" type="file" accept="image/jpeg,image/bmp,image/png,application/pdf" required>
+                                    <input ng-model="exam.file" ngf-select ngf-max-size="4MB" type="file" accept="image/jpeg,image/bmp,image/png,application/pdf" required>
                                 </div>
 
                                 <div class="form-group">

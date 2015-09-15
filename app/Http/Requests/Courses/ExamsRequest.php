@@ -15,7 +15,7 @@ class ExamsRequest extends Request
     {
         return [
             'semester' => 'required|exists:categories,id,category,courses.semester',
-            'file' => 'required|mimes:jpeg,bmp,png,pdf|max:8192',
+            'file' => 'required|mimes:jpeg,bmp,png,pdf|max:4096',
         ];
     }
 }

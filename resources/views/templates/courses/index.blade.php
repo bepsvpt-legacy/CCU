@@ -36,7 +36,7 @@
                 <th class="hidden-xs">課程代碼</th>
                 <th>課程名稱</th>
                 <th>授課教授</th>
-                <th>評論數</th>
+                <th>評論</th>
             </tr>
         </thead>
         <tbody>
@@ -50,7 +50,7 @@
                 <td>@{{ course.professor }}</td>
                 <td>
                     <span ng-hide="course.comments.length">-</span>
-                    <span ng-show="course.comments.length" class="text-primary">@{{ course.comments.length }}</span>
+                    <span ng-show="course.comments.length" class="text-primary" data-toggle="tooltip" data-placement="bottom" title="@{{ course.comments.length }} 則">✓<span class="hidden-xs"> 已有評論</span></span>
                 </td>
             </tr>
         </tbody>
