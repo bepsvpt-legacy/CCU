@@ -135,7 +135,7 @@ class Search
     {
         $hash = 'courses:search:' . sha1($this->model->toSql() . ' | ' . implode(', ', $this->model->getBindings()));
 
-        return Cache::remember($hash, Entity::CACHE_A_WEEK, function () {
+        return Cache::remember($hash, 5, function () {
             return $this->model->get();
         });
     }
