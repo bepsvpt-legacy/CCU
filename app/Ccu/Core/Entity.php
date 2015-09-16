@@ -11,7 +11,7 @@ class Entity extends Eloquent
      *
      * @var int
      */
-    const VERSION = 1.42;
+    const VERSION = 1.43;
 
     /**
      * The minutes of a day.
