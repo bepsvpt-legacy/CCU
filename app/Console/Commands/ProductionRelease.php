@@ -13,7 +13,7 @@ class ProductionRelease extends Command
      *
      * @var string
      */
-    protected $signature = 'releases:production {--pre : Pre Release} {--post : Post Release}';
+    protected $signature = 'release:production {--pre : Pre Release} {--post : Post Release}';
 
     /**
      * The console command description.
