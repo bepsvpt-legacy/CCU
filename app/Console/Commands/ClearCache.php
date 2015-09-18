@@ -60,10 +60,9 @@ class ClearCache extends Command
         }
 
         foreach ($this->keys as $key) {
-            $this->comment("Deleting {$key}...");
             $this->cacheManager->store()->forget($key);
         }
 
-        $this->info(PHP_EOL . 'Succeed!');
+        $this->info('Clear cache successfully!');
     }
 }

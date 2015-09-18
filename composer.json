@@ -49,16 +49,14 @@
             "php artisan clear-compiled"
         ],
         "post-install-cmd": [
-            "php artisan optimize",
-            "php artisan cache:clear"
+            "php artisan optimize"
         ],
         "pre-update-cmd": [
             "php artisan clear-compiled"
         ],
         "post-update-cmd": [
             "php artisan ide-helper:generate",
-            "php artisan optimize",
-            "php artisan cache:clear"
+            "php artisan optimize"
         ],
         "post-root-package-install": [
             "php -r \"copy('.env.example', '.env');\""

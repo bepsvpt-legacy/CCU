@@ -89,6 +89,8 @@ class ProductionRelease extends Command
 
         $this->call('config:cache');
 
+        $this->call('cache:clear');
+
         $this->call('up');
     }
 
