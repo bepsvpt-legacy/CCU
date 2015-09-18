@@ -31,11 +31,11 @@
                 url: '/courses/:courseId',
                 templateUrl: '{{ routeAssets("templates.courses.show") }}?v=' + VERSION,
                 controller: 'CoursesShowController',
-                onEnter: function ($state, $stateParams) {
+                onEnter: ['$state', '$stateParams', function ($state, $stateParams) {
                     if (0 === $stateParams.courseId.length) {
                         $state.go('courses');
                     }
-                }
+                }]
             })
             .state('courses-comments-list', {
                 url: '/courses/:courseId/comments',
@@ -50,11 +50,11 @@
                 url: '/member',
                 templateUrl: '{{ routeAssets("templates.member.index") }}?v=' + VERSION,
                 controller: 'MemberController',
-                onEnter: function ($rootScope, $state) {
+                onEnter: ['$rootScope', '$state', function ($rootScope, $state) {
                     if ((undefined === $rootScope.user) || ( ! $rootScope.user.signIn)) {
                         $state.go('home');
                     }
-                }
+                }]
             })
             .state('about', {
                 url: '/about',
