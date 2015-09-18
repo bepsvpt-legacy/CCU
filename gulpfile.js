@@ -20,8 +20,8 @@ elixir(function(mix) {
         .scripts([
             '../../views/js/angular.js.php',
             '../../views/js/routes.js.php',
-            '../../views/js/controllers/*.js',
-            '../../views/js/directives/*.js',
-            '../../views/js/factories/*.js'
+            '../../views/js/controllers/*.js.php',
+            '../../views/js/directives/*.js.php',
+            '../../views/js/factories/*.js.php'
         ], 'resources/views/js/all.js.php');
 });
