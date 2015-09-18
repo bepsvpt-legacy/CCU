@@ -16,7 +16,8 @@ class Kernel extends ConsoleKernel
         \App\Console\Commands\Inspire::class,
         \App\Console\Commands\ClearCache::class,
         \App\Console\Commands\DownloadCoursesArchive::class,
-        \App\Console\Commands\ImportCoursesData::class
+        \App\Console\Commands\ImportCoursesData::class,
+        \App\Console\Commands\ProductionRelease::class,
     ];
 
     /**

@@ -10,9 +10,11 @@
         "doctrine/dbal": "~2.5",
         "greggilbert/recaptcha": "~2.0",
         "guzzlehttp/guzzle": "~6.1",
+        "h4cc/wkhtmltopdf-amd64": "~0.12",
         "illuminate/html": "~5.0",
         "intervention/image": "~2.3",
         "jenssegers/agent": "~2.2",
+        "knplabs/knp-snappy": "~0.4",
         "predis/predis": "~1.0",
         "yangqi/htmldom": "dev-master",
         "zizaco/entrust": "~1.4"
@@ -43,8 +45,10 @@
         ]
     },
     "scripts": {
+        "pre-install-cmd": [
+            "php artisan clear-compiled"
+        ],
         "post-install-cmd": [
-            "php artisan clear-compiled",
             "php artisan optimize",
             "php artisan cache:clear"
         ],

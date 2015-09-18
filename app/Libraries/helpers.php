@@ -47,7 +47,20 @@ if ( ! function_exists('temp_path')) {
      */
     function temp_path($path = '')
     {
-        return base_path('..' . DIRECTORY_SEPARATOR . 'temp') . ($path ? DIRECTORY_SEPARATOR . $path : $path);
+        return storage_path('temp') . ($path ? DIRECTORY_SEPARATOR . $path : $path);
+    }
+}
+
+if ( ! function_exists('cdn_path')) {
+    /**
+     * Get the path to the cdn folder.
+     *
+     * @param  string  $path
+     * @return string
+     */
+    function cdn_path($path = '')
+    {
+        return realpath(base_path('..' . DIRECTORY_SEPARATOR . 'cdn')) . ($path ? DIRECTORY_SEPARATOR . $path : $path);
     }
 }
 

@@ -13,8 +13,6 @@ class HomeController extends Controller
     {
         $version = Entity::VERSION;
 
-        $jsDirectories = ['controllers', 'directives', 'factories'];
-
-        return view('home', compact('version', 'jsDirectories'));
+        return view('home', compact('version'));
     }
 }
