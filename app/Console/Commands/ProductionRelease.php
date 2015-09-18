@@ -63,15 +63,5 @@ class ProductionRelease extends Command
 
         // 移動 css 檔
         $this->filesystem->move(base_path('resources/views/css/ccu.css.php'), cdn_path('css/ccu.min.css'));
-
-        // 刪除舊有的 js 檔
-        $this->filesystem->delete($this->filesystem->glob(temp_path('*.js')));
-
-        // 複製檔案至暫存目錄
-        foreach ($this->filesystem->allFiles(base_path('resources/views/js')) as $file) {
-            if ('' !== $file->getRelativePath()) {
-                $this->filesystem->copy($file, $this->tempDir . DIRECTORY_SEPARATOR . str_random(8) . '.js');
-            }
-        }
     }
 }
