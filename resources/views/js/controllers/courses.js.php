@@ -58,10 +58,12 @@
             };
         }])
         .controller('CoursesShowController', ['$http', '$scope', '$stateParams', function ($http, $scope, $stateParams) {
-            $http.get('/api/courses/' + $stateParams.courseId, {cache: true})
-                .then(function (response) {
-                    $scope.info = response.data;
-                }, handleErrorResponse);
+            if (0 !== $stateParams.courseId.length) {
+                $http.get('/api/courses/' + $stateParams.courseId, {cache: true})
+                    .then(function (response) {
+                        $scope.info = response.data;
+                    }, handleErrorResponse);
+            }
         }])
         .controller('CoursesExamsController', ['$http',  '$scope', '$stateParams', 'Upload', function ($http, $scope, $stateParams, Upload) {
             $scope.exam = {};
