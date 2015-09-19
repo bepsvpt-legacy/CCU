@@ -1,6 +1,5 @@
 <script src="https://cdn.bepsvpt.net/js/vendors.min.js?v=1.0" defer></script>
 <script src="https://www.google.com/recaptcha/api.js" defer></script>
-<script src="{{ routeAssets('js.ccu') . "?v={$version}" }}" defer></script>
 
 @if (app()->environment(['production']))
     <script src="{{ routeAssets('js.all') . "?v={$version}" }}" defer></script>
@@ -8,6 +7,7 @@
 @else
     <script src="{{ routeAssets('js.angular') . "?v={$version}" }}" defer></script>
     <script src="{{ routeAssets('js.routes') . "?v={$version}" }}" defer></script>
+    <script src="{{ routeAssets('js.ccu') . "?v={$version}" }}" defer></script>
 
     @inject('filesystem', 'Illuminate\Filesystem\Filesystem')
 

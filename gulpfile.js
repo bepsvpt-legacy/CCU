@@ -27,7 +27,8 @@ gulp.task('js', function () {
         scriptsPrefix + 'routes.js.php',
         scriptsPrefix + 'controllers/*.js.php',
         scriptsPrefix + 'directives/*.js.php',
-        scriptsPrefix + 'factories/*.js.php'
+        scriptsPrefix + 'factories/*.js.php',
+        scriptsPrefix + 'ccu.js.php'
     ])
         .pipe(concat('all.js.php'))
         .pipe(uglify())
