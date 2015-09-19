@@ -26,37 +26,39 @@
     </form>
 </div>
 
-<div class="text-center">
-    <hr>
+<div class="row text-center">
+    <div class="col-xs-10 col-xs-offset-1">
+        <hr>
 
-    <table class="table table-striped table-bordered table-hover shadow-z-1">
-        <thead>
-            <tr class="info">
-                <th>系所</th>
-                <th class="hidden-xs">課程代碼</th>
-                <th>課程名稱</th>
-                <th>授課教授</th>
-                <th>評論</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr ng-hide="courses.length">
-                <td colspan="5">嘗試換個系所看看</td>
-            </tr>
-            <tr ng-repeat="course in courses">
-                <td>@{{ course.department.name }}</td>
-                <td class="hidden-xs">@{{ course.code }}</td>
-                <td><a ng-href="#/courses/@{{ course.id }}" data-toggle="tooltip" data-placement="bottom" title="@{{ course.name_en }}">@{{ course.name }}</a></td>
-                <td>@{{ course.professor }}</td>
-                <td>
-                    <span ng-hide="course.comments.length">-</span>
-                    <span ng-show="course.comments.length" class="text-primary" data-toggle="tooltip" data-placement="bottom" title="@{{ course.comments.length }} 則">✓<span class="hidden-xs"> 已有評論</span></span>
-                </td>
-            </tr>
-        </tbody>
-    </table>
+        <table class="table table-striped table-bordered table-hover shadow-z-1">
+            <thead>
+                <tr class="info">
+                    <th>系所</th>
+                    <th class="hidden-xs">課程代碼</th>
+                    <th>課程名稱</th>
+                    <th>授課教授</th>
+                    <th>評論</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-hide="courses.length">
+                    <td colspan="5">嘗試換個系所看看</td>
+                </tr>
+                <tr ng-repeat="course in courses">
+                    <td>@{{ course.department.name }}</td>
+                    <td class="hidden-xs">@{{ course.code }}</td>
+                    <td><a ng-href="#/courses/@{{ course.id }}" data-toggle="tooltip" data-placement="bottom" title="@{{ course.name_en }}">@{{ course.name }}</a></td>
+                    <td>@{{ course.professor }}</td>
+                    <td>
+                        <span ng-hide="course.comments.length">-</span>
+                        <span ng-show="course.comments.length" class="text-primary" data-toggle="tooltip" data-placement="bottom" title="@{{ course.comments.length }} 則">✓<span class="hidden-xs"> 已有評論</span></span>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
 
-    <hr>
+        <hr>
+    </div>
 </div>
 
 <div class="row">
