@@ -96,7 +96,7 @@ class ProductionRelease extends Command
 
     protected function gulp()
     {
-        $process = new Process('gulp --production');
+        $process = new Process('gulp sass js vendorjs');
 
         $process->run();
 
@@ -111,6 +111,9 @@ class ProductionRelease extends Command
     {
         // 移動 css 檔
         $this->filesystem->move(base_path('resources/views/css/ccu.css.php'), cdn_path('css/ccu.min.css'));
+
+        // 移動 js 檔
+        $this->filesystem->move(temp_path('vendors.min.js'), cdn_path('js/vendors.min.js'));
 
         $this->info('Move assets successfully!');
     }

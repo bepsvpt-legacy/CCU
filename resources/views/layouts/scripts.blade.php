@@ -1,16 +1,4 @@
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js" defer></script>
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular.min.js" defer></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.15/angular-ui-router.min.js" defer></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/angulartics/0.19.2/angulartics.min.js" defer></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-loading-bar/0.8.0/loading-bar.min.js" defer></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/danialfarid-angular-file-upload/7.0.17/ng-file-upload.min.js" defer></script>
-<script src="https://cdn.bepsvpt.net/js/ga.min.js" defer></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js" defer></script>
-<script src="https://cdn.bepsvpt.net/js/arrive.min.js" defer></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/0.3.0/js/material.min.js" defer></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/0.3.0/js/ripples.min.js" defer></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/1000hz-bootstrap-validator/0.9.0/validator.min.js" defer></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/autosize.js/3.0.8/autosize.min.js" defer></script>
+<script src="https://cdn.bepsvpt.net/js/vendors.min.js?v=1.0" defer></script>
 <script src="https://www.google.com/recaptcha/api.js" defer></script>
 <script src="{{ routeAssets('js.ccu') . "?v={$version}" }}" defer></script>
 
