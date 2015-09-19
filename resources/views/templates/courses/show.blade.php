@@ -115,7 +115,7 @@
     <h3><span class="fa fa-file-pdf-o" aria-hidden="true"></span> 考古題</h3><br>
 
     <div class="row">
-        <div class="col-xs-12 col-xs-offset-0 col-sm-10 col-sm-offset-1">
+        <div class="col-xs-10 col-xs-offset-1">
             <div class="text-center">
                 <table class="table table-striped table-bordered table-hover shadow-z-1">
                     <thead>
@@ -143,7 +143,7 @@
             </div>
         </div>
 
-        <div class="col-xs-12 col-xs-offset-0 col-sm-10 col-sm-offset-1">
+        <div class="col-xs-10 col-xs-offset-1">
             <div class="panel panel-default">
                 <div class="panel-heading">檔案上傳<span ng-if=" ! $root.user.signIn"> (需登入)</span></div>
                 <div class="panel-body">

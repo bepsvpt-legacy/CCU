@@ -60,7 +60,7 @@
 </div>
 
 <div class="row">
-    <div class="col-xs-10 col-xs-offset-1 col-sm-5 col-sm-offset-1">
+    <div class="col-xs-12 col-sm-5 col-sm-offset-1">
         <h3 class="text-center">最新留言</h3>
 
         <div ng-repeat="comment in comments" class="media shadow-z-1 courses-comments">
