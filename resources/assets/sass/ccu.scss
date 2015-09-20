@@ -23,10 +23,10 @@ footer {
     width: 100%;
     height: $footer-height;
     background-color: #b1b1b1;
-}
 
-footer .container {
-    margin-top: 5px;
+    .container {
+        margin-top: 5px;
+    }
 }
 
 table {
@@ -88,11 +88,18 @@ blockquote {
 }
 
 .text-noselect {
-    user-select: none;
+    -webkit-user-select: none !important;
+    -moz-user-select: none !important;
+    -ms-user-select: none !important;
+    user-select: none !important;
 }
 
 .pre-line {
     white-space: pre-line;
+}
+
+.media-body {
+    padding-left: 6px;
 }
 
 .media-left {
@@ -101,14 +108,14 @@ blockquote {
 
 .modal-header-custom {
     padding: 12px 24px 12px 24px !important;
-}
 
-.modal-header-custom .close {
-    position: relative;
-    top: 0 !important;
-    right: 0 !important;
-    padding-top: 0 !important;
-    margin-top: 0 !important;
+    .close {
+        position: relative;
+        top: 0 !important;
+        right: 0 !important;
+        padding-top: 0 !important;
+        margin-top: 0 !important;
+    }
 }
 
 .cursor-pointer {
@@ -119,7 +126,7 @@ blockquote {
     margin-top: 1em;
 }
 
-.sign-in-register-submit-checkbox {
+.sign-in-remember-me {
     label {
         padding-left: 10px;
     }
@@ -136,16 +143,16 @@ blockquote {
 .profile-picture {
     width: 64px;
     height: 64px;
-}
 
-.profile-picture-medium {
-    width: 32px;
-    height: 32px;
-}
+    &-medium {
+        width: 32px;
+        height: 32px;
+    }
 
-.profile-picture-small {
-    width: 20px;
-    height: 20px;
+    &-small {
+        width: 20px;
+        height: 20px;
+    }
 }
 
 .courses-comments {
@@ -153,21 +160,21 @@ blockquote {
     margin: 20px 0;
     padding: 15px;
     border-radius: 2px;
-}
 
-.media-body {
-    padding-left: 6px;
-}
+    &:first-of-type {
+        margin-top: 0;
+    }
 
-.courses-comments-comments {
-    border-left: 2px solid #d4d4d4;
-    margin-top: 16px;
-    margin-left: -4px;
-    padding-left: 6px;
-}
+    hr {
+        margin: 2px 0;
+    }
 
-.courses-comments-hr {
-    margin: 2px 0;
+    &-comments {
+        border-left: 2px solid #d4d4d4;
+        margin-top: 16px;
+        margin-left: -4px;
+        padding-left: 6px;
+    }
 }
 
 .overflow-scroll {

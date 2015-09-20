@@ -1,15 +1,16 @@
+<!-- Courses search form -->
 <div class="text-center">
     <form class="form-inline">
         <fieldset>
             <div class="form-group">
-                {!! Form::label('department', '系所', ['class' => 'sr-only']) !!}
+                <label class="sr-only">系所</label>
                 <select ng-model="search.department" ng-change="searchFormSubmit()" ng-options="department.name for department in options.departments track by department.id" class="form-control">
                     <option value="">系所</option>
                 </select>
             </div>
 
             <div ng-show="117 === search.department.id" class="form-group">
-                {!! Form::label('dimension', '系所', ['class' => 'sr-only']) !!}
+                <label class="sr-only">向度</label>
                 <select ng-model="search.dimension" ng-change="searchFormSubmit()" ng-options="dimension.name for dimension in options.dimensions track by dimension.id" class="form-control">
                     <option value="">向度</option>
                 </select>
@@ -18,7 +19,7 @@
             <div class="form-group">
                 {!! Form::label('keyword', '代碼/課名/教授', ['class' => 'sr-only']) !!}
                 <div class="input-group">
-                    <span class="input-group-addon"><span class="fa fa-search"></span></span>
+                    <span class="input-group-addon"><span class="fa fa-search" aria-hidden="true"></span></span>
                     {!! Form::input('search', 'keyword', null, ['ng-model' => 'search.keyword', 'ng-change' => 'searchFormSubmit()', 'class' => 'form-control floating-label', 'placeholder' => '代碼/課名/教授']) !!}
                 </div>
             </div>
@@ -26,8 +27,9 @@
     </form>
 </div>
 
+<!-- Courses search result -->
 <div class="row text-center">
-    <div class="col-xs-10 col-xs-offset-1">
+    <div class="col-xs-12 col-sm-10 col-sm-offset-1">
         <hr>
 
         <table class="table table-striped table-bordered table-hover shadow-z-1">
@@ -47,7 +49,7 @@
                 <tr ng-repeat="course in courses">
                     <td>@{{ course.department.name }}</td>
                     <td class="hidden-xs">@{{ course.code }}</td>
-                    <td><a ng-href="#/courses/@{{ course.id }}" data-toggle="tooltip" data-placement="bottom" title="@{{ course.name_en }}">@{{ course.name }}</a></td>
+                    <td><a ui-sref="courses-show({ courseId: course.id })">@{{ course.name }}</a></td>
                     <td>@{{ course.professor }}</td>
                     <td>
                         <span ng-hide="course.comments.length">-</span>
@@ -61,6 +63,7 @@
     </div>
 </div>
 
+<!-- Courses comments and exams -->
 <div class="row">
     <div class="col-xs-12 col-sm-5 col-sm-offset-1">
         <h3 class="text-center">最新留言</h3>
@@ -70,7 +73,7 @@
                 <profile-picture nickname="@{{ comment.user.nickname }}" size="profile-picture-medium"></profile-picture>
             </div>
             <div class="media-body">
-                <a ng-href="#/courses/@{{ comment.course.id }}" data-toggle="tooltip" data-placement="bottom" title="@{{ comment.course.department.name }} - @{{ comment.course.professor }}" class="pull-right">@{{ comment.course.name }}</a>
+                <a ui-sref="courses-show({ courseId: comment.course.id })" data-toggle="tooltip" data-placement="bottom" title="@{{ comment.course.department.name + ' - ' + comment.course.professor }}" class="pull-right">@{{ comment.course.name }}</a>
 
                 <courses-comments-body comment="comment" disable-action="true"></courses-comments-body>
             </div>

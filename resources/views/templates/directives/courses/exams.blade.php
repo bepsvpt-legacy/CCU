@@ -10,7 +10,7 @@
         </thead>
         <tbody>
             <tr ng-repeat="exam in exams">
-                <td><a ng-href="#/courses/@{{ exam.course.id }}" data-toggle="tooltip" data-placement="bottom" title="@{{ exam.course.department.name }} - @{{ exam.course.professor }}">@{{ exam.course.name }}</a></td>
+                <td><a ui-sref="courses-show({ courseId: exam.course.id })" data-toggle="tooltip" data-placement="bottom" title="@{{ exam.course.department.name + ' - ' + exam.course.professor }}">@{{ exam.course.name }}</a></td>
                 <td>@{{ exam.file_name }}</td>
             </tr>
         </tbody>

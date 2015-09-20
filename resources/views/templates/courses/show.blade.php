@@ -1,3 +1,4 @@
+<!-- Course info -->
 <div>
     <h3><span class="fa fa-info-circle" aria-hidden="true"></span> 課程資訊</h3><br>
 
@@ -14,6 +15,7 @@
     </div>
 </div>
 
+<!-- Course comments -->
 <div ng-controller="CoursesCommentsController">
     <h3><span class="fa fa-comments" aria-hidden="true"></span> 課程評論</h3><br>
 
@@ -25,7 +27,7 @@
                         <profile-picture nickname="@{{ $root.user.nickname }}" size="profile-picture-medium"></profile-picture>
                     </div>
                     <div class="media-body">
-                        <form ng-submit="commentForm.$valid && commentFormSubmit()" name="commentForm" method="POST" accept-charset="UTF-8" data-toggle="validator">
+                        <form ng-submit="commentForm.$valid && commentFormSubmit()" name="commentForm" method="POST" data-toggle="validator">
                             <fieldset>
                                 <div class="form-group">
                                     <label class="sr-only">留言</label>
@@ -45,7 +47,7 @@
             </div>
 
             <div ng-hide="comments.data.length" class="text-center">
-                <h3 ng-hide="undefined === comments" class="text-muted">尚無留言</h3>
+                <h3 class="text-muted">尚無留言</h3>
             </div>
 
             <div ng-if="comments.data.length">
@@ -57,13 +59,13 @@
                     <div class="media-body">
                         <courses-comments-body comment="comment" vote="vote"></courses-comments-body>
 
-                        <hr ng-if="comment.comments.length" class="courses-comments-hr">
+                        <div ng-if="comment.comments.length">
+                            <hr>
 
-                        <div ng-if="comment.comments.length && ( ! comment.sub)">
-                            <small ng-click="comment.sub = true" class="text-primary cursor-pointer">檢視回覆</small>
+                            <small ng-hide="comment.showSubComments" ng-click="comment.showSubComments = true" class="text-primary cursor-pointer">檢視回覆</small>
                         </div>
 
-                        <div ng-if="comment.sub" class="courses-comments-comments overflow-scroll">
+                        <div ng-if="comment.showSubComments" class="courses-comments-comments overflow-scroll">
                             <div ng-repeat="subComment in comment.comments" class="media">
                                 <div class="media-left">
                                     <profile-picture nickname="@{{ subComment.user.nickname }}" size="profile-picture-small"></profile-picture>
@@ -80,7 +82,7 @@
                                 <profile-picture nickname="@{{ $root.user.nickname }}" size="profile-picture-small"></profile-picture>
                             </div>
                             <div class="media-body">
-                                <form ng-submit="commentsComment[comment.id].content.length >= 10 && commentFormSubmit(comment.id)" method="POST" accept-charset="UTF-8" data-toggle="validator">
+                                <form ng-submit="commentsComment[comment.id].content.length >= 10 && commentFormSubmit(comment.id)" method="POST" data-toggle="validator">
                                     <fieldset>
                                         <div class="form-group form-group-no-margin">
                                             <label class="sr-only">回覆</label>
@@ -111,41 +113,40 @@
     </div>
 </div>
 
+<!-- Course exams -->
 <div ng-controller="CoursesExamsController">
     <h3><span class="fa fa-file-pdf-o" aria-hidden="true"></span> 考古題</h3><br>
 
     <div class="row">
-        <div class="col-xs-10 col-xs-offset-1">
-            <div class="text-center">
-                <table class="table table-striped table-bordered table-hover shadow-z-1">
-                    <thead>
-                        <tr class="info">
-                            <th>學期</th>
-                            <th>檔名<span ng-if=" ! $root.user.signIn"> (需登入方可下載)</span></th>
-                            <th class="hidden-xs">大小</th>
-                            <th>下載次數</th>
-                            <th class="hidden-xs">上傳時間</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr ng-hide="exams.length">
-                            <td colspan="5">尚無檔案</td>
-                        </tr>
-                        <tr ng-repeat="exam in exams">
-                            <td>@{{ exam.semester.name }}</td>
-                            <td><a ng-href="/api/courses/exams/@{{ exam.id }}" target="_blank">@{{ exam.file_name }}</a></td>
-                            <td class="hidden-xs">@{{ exam.file_size | bytes }}</td>
-                            <td>@{{ exam.downloads }}</td>
-                            <td class="hidden-xs">@{{ exam.created_at }}</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
+        <div class="col-xs-10 col-xs-offset-1 text-center">
+            <table class="table table-striped table-bordered table-hover shadow-z-1">
+                <thead>
+                    <tr class="info">
+                        <th>學期</th>
+                        <th>檔名<span ng-if=" ! $root.user.signIn"> (需登入方可下載)</span></th>
+                        <th class="hidden-xs">大小</th>
+                        <th>下載次數</th>
+                        <th class="hidden-xs">上傳時間</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-hide="exams.length">
+                        <td colspan="5">尚無檔案</td>
+                    </tr>
+                    <tr ng-repeat="exam in exams">
+                        <td>@{{ exam.semester.name }}</td>
+                        <td><a ng-href="/api/courses/exams/@{{ exam.id }}" target="_blank">@{{ exam.file_name }}</a></td>
+                        <td class="hidden-xs">@{{ exam.file_size | bytes }}</td>
+                        <td>@{{ exam.downloads }}</td>
+                        <td class="hidden-xs">@{{ exam.created_at }}</td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
 
         <div class="col-xs-10 col-xs-offset-1">
             <div class="panel panel-default">
-                <div class="panel-heading">檔案上傳<span ng-if=" ! $root.user.signIn"> (需登入)</span></div>
+                <div class="panel-heading">檔案上傳<span ng-hide="$root.user.signIn"> (需登入)</span></div>
                 <div class="panel-body">
                     <div>
                         <blockquote>
@@ -157,10 +158,10 @@
                         </blockquote>
                     </div>
                     <div ng-if="$root.user.signIn">
-                        <form ng-submit="examForm.$valid && examFormSubmit()" name="examForm" method="POST" accept-charset="UTF-8" enctype="multipart/form-data" class="form-inline">
+                        <form ng-submit="examForm.$valid && examFormSubmit()" name="examForm" method="POST" enctype="multipart/form-data" class="form-inline">
                             <fieldset>
                                 <div class="form-group">
-                                    {!! Form::label('semester', '學期', ['class' => 'sr-only']) !!}
+                                    <label class="sr-only">學期</label>
                                     <select ng-model="exam.semester" ng-options="semester.name for semester in semesters track by semester.id" class="form-control" required>
                                         <option value="">學期</option>
                                     </select>

@@ -11,7 +11,16 @@
                     isSubComment: '@',
                     disableAction: '@'
                 },
-                templateUrl: '{{ routeAssets("templates.directives.courses.commentsBody") }}?' + VERSION
+                templateUrl: '{{ routeAssets("templates.directives.courses.commentsBody") }}?' + VERSION,
+                link: function(scope, element, attrs) {
+                    if (angular.isUndefined(scope.disableAction)) {
+                        scope.disableAction = false;
+                    }
+
+                    if (angular.isUndefined(scope.isSubComment)) {
+                        scope.isSubComment = false;
+                    }
+                }
             }
         })
         .directive('coursesInfo', function() {

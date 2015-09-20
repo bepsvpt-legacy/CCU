@@ -12,7 +12,7 @@
         <link type="text/css" rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
     </head>
     <body>
-        <div id="ccu-initializing"><div class="background"></div><span class="fa fa-spinner fa-pulse fa-4x"></span></div>
+        <div id="ccu-initializing"><div class="background"></div><span class="fa fa-spinner fa-pulse fa-4x" aria-hidden="true"></span></div>
 
         <div class="hide">
             @include('layouts.header')

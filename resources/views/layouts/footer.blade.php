@@ -5,7 +5,7 @@
                 <span><a href="https://bepsvpt.net" target="_blank" class="navbar-link">bepsvpt.net</a> © 2015</span>
             </div>
             <div class="col-xs-3 col-sm-3">
-                <a href="https://github.com/BePsvPT/CCU" target="_blank"><span class="fa fa-github fa-lg"></span></a>
+                <a href="https://github.com/BePsvPT/CCU" target="_blank"><span class="fa fa-github fa-lg" aria-hidden="true"></span></a>
             </div>
         </div>
     </div>

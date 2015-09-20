@@ -13,7 +13,7 @@
 
         <!-- Tab panes -->
         <div class="tab-content">
-            <div role="tabpanel" class="tab-pane active" id="account">
+            <div id="account" role="tabpanel" class="tab-pane active">
                 <blockquote>
                     <profile-picture nickname="@{{ $root.user.nickname }}" size="profile-picture"></profile-picture>
                     <button type="file" ngf-select="changeProfilePicture($file)" accept="image/jpeg,image/png" ngf-max-size="4MB" class="btn btn-link">上傳</button>
@@ -30,7 +30,7 @@
                                 <div class="form-group">
                                     {!! Form::label('nickname', '新暱稱', ['class' => 'sr-only']) !!}
                                     <div class="input-group">
-                                        <span class="input-group-addon"><span class="fa fa-user"></span></span>
+                                        <span class="input-group-addon"><span class="fa fa-user" aria-hidden="true"></span></span>
                                         {!! Form::text('nickname', null, ['ng-model' => 'changeNickname.nickname', 'class' => 'form-control floating-label', 'data-hint' => '需為5~16個英文或數字', 'placeholder' => '新暱稱', 'pattern' => '^\w{5,16}$', 'required']) !!}
                                     </div>
                                 </div>
