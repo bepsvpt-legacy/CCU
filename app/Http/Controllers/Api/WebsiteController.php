@@ -18,4 +18,9 @@ class WebsiteController extends Controller
 
         return response($info->getAttribute('content'));
     }
+
+    public function prtSc()
+    {
+        return response('', 204);
+    }
 }

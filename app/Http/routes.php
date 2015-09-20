@@ -62,6 +62,8 @@ $router->group(['prefix' => 'api', 'namespace' => 'Api', 'as' => 'api.'], functi
             $router->post('/', ['as' => 'store', 'uses' => 'RoommatesController@store']);
         });
     });
+
+    $router->post('check', ['as' => 'prtSc', 'uses' => 'WebsiteController@prtSc']);
 });
 
 $router->group(['prefix' => 'images', 'as' => 'images.'], function ($router) {
