@@ -40,9 +40,11 @@ gulp.task('vendorjs', function() {
     remoteSrc([
         'https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js',
         'https://ajax.googleapis.com/ajax/libs/angularjs/1.4.6/angular.min.js',
-        'https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.15/angular-ui-router.min.js',
+        'https://ajax.googleapis.com/ajax/libs/angularjs/1.4.6/angular-animate.min.js',
+        'https://cdnjs.cloudflare.com/ajax/libs/angularjs-toaster/0.4.15/toaster.min.js',
         'https://cdnjs.cloudflare.com/ajax/libs/angulartics/0.19.2/angulartics.min.js',
         'https://cdnjs.cloudflare.com/ajax/libs/angular-loading-bar/0.8.0/loading-bar.min.js',
+        'https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.15/angular-ui-router.min.js',
         'https://cdnjs.cloudflare.com/ajax/libs/danialfarid-angular-file-upload/7.2.2/ng-file-upload.min.js',
         'https://cdn.bepsvpt.net/js/ga.min.js',
         'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js',

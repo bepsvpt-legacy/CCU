@@ -9,7 +9,7 @@
         .run(['errorsModal', function(errorsModal) {
             _errorsModal = errorsModal;
         }])
-        .controller('RoommatesController', ['$http', '$scope', function ($http, $scope) {
+        .controller('RoommatesController', ['$http', '$scope', 'toaster', function ($http, $scope, toaster) {
             var ls = JSON.parse(localStorage.getItem('dormitories'));
 
             $scope.showCreateForm = ((null !== ls) && (ls.hasOwnProperty('roommates')) && (ls.roommates.hasOwnProperty('showCreateForm'))) ? ls.roommates.showCreateForm : true;
@@ -43,7 +43,7 @@
                 })
                     .then(function () {
                         $scope.createFormHide();
-                        setTimeout(function() {alert('新增成功');}, 1);
+                        toaster.pop({type: 'success', title: '新增成功', timeout: 4500, showCloseButton: true});
                     }, handleErrorResponse);
             };
 

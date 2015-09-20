@@ -22,11 +22,14 @@
             @include('layouts.footer')
         </div>
 
+        <toaster-container></toaster-container>
+
         @include('layouts.errorsModal')
 
         <link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/0.3.0/css/material-fullpalette.min.css">
         <link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/0.3.0/css/ripples.min.css">
         <link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/angular-loading-bar/0.8.0/loading-bar.min.css">
+        <link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/angularjs-toaster/0.4.15/toaster.min.css">
         <link type="text/css" rel="stylesheet" href="{{ ((app()->environment(['production'])) ? 'https://cdn.bepsvpt.net/css/ccu.min.css' : routeAssets('css.ccu')) . "?v={$version}" }}">
 
         @include('layouts.scripts')

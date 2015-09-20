@@ -4,7 +4,8 @@
     var app = angular.module('ccu', [
         'ui.router', 'angular-loading-bar',
         'angulartics', 'angulartics.google.analytics',
-        'ngFileUpload'
+        'ngFileUpload',
+        'toaster', 'ngAnimate'
     ]);
 
     app.config(['$httpProvider', function($httpProvider) {

@@ -189,20 +189,36 @@ blockquote {
 // angular-loading-bar https://github.com/chieffancypants/angular-loading-bar
 
 #loading-bar-spinner {
-    top: 15px;
-    left: initial;
-    right: 14px;
+    top: 15px !important;
+    left: initial !important;
+    right: 14px !important;
 }
 
 #loading-bar-spinner .spinner-icon {
-    width: 20px;
-    height: 20px;
+    width: 20px !important;
+    height: 20px !important;
 }
 
 @media only screen and (max-width:768px) {
     #loading-bar-spinner {
-        top: 14px;
-        left: initial;
-        right: 64px;
+        top: 14px !important;
+        left: initial !important;
+        right: 64px !important;
     }
+}
+
+// AngularJS-Toaster https://github.com/jirikavi/AngularJS-Toaster
+
+.toast-top-right {
+    top: 75px !important;
+}
+
+:not(.no-enter)#toast-container > div.ng-enter,
+:not(.no-leave)#toast-container > div.ng-leave
+{
+    -webkit-transition: 500ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all !important;
+    -moz-transition: 500ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all !important;;
+    -ms-transition: 500ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all !important;;
+    -o-transition: 500ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all !important;;
+    transition: 500ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all !important;;
 }

@@ -65,7 +65,7 @@
                     }, handleErrorResponse);
             }
         }])
-        .controller('CoursesExamsController', ['$http',  '$scope', '$stateParams', 'Upload', function ($http, $scope, $stateParams, Upload) {
+        .controller('CoursesExamsController', ['$http',  '$scope', '$stateParams', 'toaster', 'Upload', function ($http, $scope, $stateParams, toaster, Upload) {
             $scope.exam = {};
 
             $scope.getExams = function () {
@@ -88,7 +88,7 @@
                 }).then(function () {
                     $scope.exam = {};
                     $scope.getExams();
-                    setTimeout(function() {alert('上傳成功');}, 1);
+                    toaster.pop({type: 'success', title: '上傳成功', timeout: 4500, showCloseButton: true});
                 }, handleErrorResponse)
             };
 

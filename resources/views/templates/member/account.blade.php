@@ -4,9 +4,9 @@
 </blockquote>
 
 <blockquote>
-    <span>暱稱：@{{ $root.user.nickname }} <a ng-click="showChangeNicknameForm = true" ng-hide="showChangeNicknameForm" class="cursor-pointer">變更</a></span>
+    <span>暱稱：@{{ $root.user.nickname }} <a ng-click="changeNickname.show = true" ng-hide="changeNickname.show" class="cursor-pointer">變更</a></span>
 
-    <div ng-show="showChangeNicknameForm">
+    <div ng-show="changeNickname.show">
         <br>
 
         <form ng-submit="changeNicknameForm.$valid && changeNicknameFormSubmit()" name="changeNicknameForm" method="POST" class="form-inline">
