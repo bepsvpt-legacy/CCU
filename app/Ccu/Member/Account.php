@@ -36,7 +36,7 @@ class Account extends Entity implements AuthenticatableContract, CanResetPasswor
      */
     public function user()
     {
-        return $this->hasOne('App\Ccu\Member\User');
+        return $this->hasOne(\App\Ccu\Member\User::class);
     }
 
     /**
@@ -46,7 +46,7 @@ class Account extends Entity implements AuthenticatableContract, CanResetPasswor
      */
     public function events()
     {
-        return $this->hasMany('App\Ccu\General\Event')
+        return $this->hasMany(\App\Ccu\General\Event::class)
             ->where('category_id', '=', Category::getCategories('events.account', true));
     }
 

@@ -63,7 +63,7 @@ class Verify extends Entity
      */
     public function account()
     {
-        return $this->belongsTo('App\Ccu\Member\Account');
+        return $this->belongsTo(\App\Ccu\Member\Account::class);
     }
 
     /**

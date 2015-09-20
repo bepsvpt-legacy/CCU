@@ -41,7 +41,7 @@ class User extends Entity
      */
     public function account()
     {
-        return $this->belongsTo('App\Ccu\Member\Account');
+        return $this->belongsTo(\App\Ccu\Member\Account::class);
     }
 
     /**
@@ -51,7 +51,7 @@ class User extends Entity
      */
     public function profilePicture()
     {
-        return $this->belongsTo('App\Ccu\Image\Image', 'profile_picture_id');
+        return $this->belongsTo(\App\Ccu\Image\Image::class, 'profile_picture_id');
     }
 
     /**
@@ -61,6 +61,6 @@ class User extends Entity
      */
     public function votes()
     {
-        return $this->hasMany('App\Ccu\Course\CommentsVote');
+        return $this->hasMany(\App\Ccu\Course\CommentsVote::class);
     }
 }

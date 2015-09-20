@@ -4,7 +4,7 @@
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>CCU</title>
+        <title>Changin' CCU</title>
         <noscript><meta http-equiv="refresh" content="0; url=/errors/noscript"></noscript>
         <script>const VERSION = {{ $version }};</script>
         <style>#ccu-initializing{position:fixed;top:50%;left:50%;margin:-4em 0 0 -2em;z-index:99999}#ccu-initializing .background{position:fixed;top:0;left:0;min-width:100%;min-height:100%;background:#eee}#ccu-initializing span{color:orange}body{overflow-y:scroll!important}</style>

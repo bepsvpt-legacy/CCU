@@ -58,7 +58,7 @@ class Exam extends Entity
      */
     public function course()
     {
-        return $this->belongsTo('App\Ccu\Course\Course');
+        return $this->belongsTo(\App\Ccu\Course\Course::class);
     }
 
     /**
@@ -68,6 +68,6 @@ class Exam extends Entity
      */
     public function semester()
     {
-        return $this->belongsTo('App\Ccu\General\Category', 'semester_id');
+        return $this->belongsTo(\App\Ccu\General\Category::class, 'semester_id');
     }
 }

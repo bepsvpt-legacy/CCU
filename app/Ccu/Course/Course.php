@@ -34,7 +34,7 @@ class Course extends Entity
      */
     public function comments()
     {
-        return $this->hasMany('App\Ccu\Course\Comment')
+        return $this->hasMany(\App\Ccu\Course\Comment::class)
             ->whereNull('courses_comment_id');
     }
 
@@ -45,7 +45,7 @@ class Course extends Entity
      */
     public function department()
     {
-        return $this->belongsTo('App\Ccu\General\Category', 'department_id');
+        return $this->belongsTo(\App\Ccu\General\Category::class, 'department_id');
     }
 
     /**
@@ -55,7 +55,7 @@ class Course extends Entity
      */
     public function dimension()
     {
-        return $this->belongsTo('App\Ccu\General\Category', 'dimension_id');
+        return $this->belongsTo(\App\Ccu\General\Category::class, 'dimension_id');
     }
 
     /**
@@ -65,6 +65,6 @@ class Course extends Entity
      */
     public function exams()
     {
-        return $this->hasMany('App\Ccu\Course\Exam');
+        return $this->hasMany(\App\Ccu\Course\Exam::class);
     }
 }

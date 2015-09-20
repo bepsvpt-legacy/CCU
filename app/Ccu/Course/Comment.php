@@ -37,7 +37,7 @@ class Comment extends Entity
      */
     public function comments()
     {
-        return $this->hasMany('App\Ccu\Course\Comment', 'courses_comment_id');
+        return $this->hasMany(\App\Ccu\Course\Comment::class, 'courses_comment_id');
     }
 
     /**
@@ -47,7 +47,7 @@ class Comment extends Entity
      */
     public function course()
     {
-        return $this->belongsTo('App\Ccu\Course\Course');
+        return $this->belongsTo(\App\Ccu\Course\Course::class);
     }
 
     /**
@@ -57,6 +57,6 @@ class Comment extends Entity
      */
     public function user()
     {
-        return $this->belongsTo('App\Ccu\Member\User');
+        return $this->belongsTo(\App\Ccu\Member\User::class);
     }
 }
