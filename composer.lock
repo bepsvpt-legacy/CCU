@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "89bf9508339dad675eabd0014ff323e6",
+    "hash": "b163911aa7dbb6068290ff07c03c21b4",
     "content-hash": "ab8aab2a24fe7aef5037225fc5372615",
     "packages": [
         {
@@ -621,26 +621,26 @@
         },
         {
             "name": "greggilbert/recaptcha",
-            "version": "2.0.2",
+            "version": "2.0.3",
             "source": {
                 "type": "git",
-                "url": "git@github.com:greggilbert/recaptcha.git",
-                "reference": "828b9fdeee3c3b15ea1ce148d2871adaaeca26d3"
+                "url": "https://github.com/greggilbert/recaptcha.git",
+                "reference": "121fd8ef288a311f288d36020c5a07baa312f53a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/greggilbert/recaptcha/zipball/30909552d594717d35a2f419622dddf95782f933",
-                "reference": "828b9fdeee3c3b15ea1ce148d2871adaaeca26d3",
+                "url": "https://api.github.com/repos/greggilbert/recaptcha/zipball/121fd8ef288a311f288d36020c5a07baa312f53a",
+                "reference": "121fd8ef288a311f288d36020c5a07baa312f53a",
                 "shasum": ""
             },
             "require": {
-                "illuminate/support": "~5.0",
+                "illuminate/support": "~5.1",
                 "php": ">=5.3.0"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.0-dev"
+                    "dev-master": "2.1-dev"
                 }
             },
             "autoload": {
@@ -669,7 +669,7 @@
                 "laravel5",
                 "recaptcha"
             ],
-            "time": "2015-05-11 14:16:01"
+            "time": "2015-09-19 13:57:56"
         },
         {
             "name": "guzzlehttp/guzzle",
@@ -1686,16 +1686,16 @@
         },
         {
             "name": "nikic/php-parser",
-            "version": "v1.4.0",
+            "version": "v1.4.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nikic/PHP-Parser.git",
-                "reference": "196f177cfefa0f1f7166c0a05d8255889be12418"
+                "reference": "f78af2c9c86107aa1a34cd1dbb5bbe9eeb0d9f51"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nikic/PHP-Parser/zipball/196f177cfefa0f1f7166c0a05d8255889be12418",
-                "reference": "196f177cfefa0f1f7166c0a05d8255889be12418",
+                "url": "https://api.github.com/repos/nikic/PHP-Parser/zipball/f78af2c9c86107aa1a34cd1dbb5bbe9eeb0d9f51",
+                "reference": "f78af2c9c86107aa1a34cd1dbb5bbe9eeb0d9f51",
                 "shasum": ""
             },
             "require": {
@@ -1727,7 +1727,7 @@
                 "parser",
                 "php"
             ],
-            "time": "2015-07-14 17:31:05"
+            "time": "2015-09-19 14:15:08"
         },
         {
             "name": "predis/predis",
@@ -3695,16 +3695,16 @@
         },
         {
             "name": "phpunit/phpunit",
-            "version": "4.8.7",
+            "version": "4.8.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "dab2ada9e9a503d2ec3c32fe0fb59dea9bdd9dfa"
+                "reference": "521720279261e5b14799cf1bb895d4b55e516f26"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/dab2ada9e9a503d2ec3c32fe0fb59dea9bdd9dfa",
-                "reference": "dab2ada9e9a503d2ec3c32fe0fb59dea9bdd9dfa",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/521720279261e5b14799cf1bb895d4b55e516f26",
+                "reference": "521720279261e5b14799cf1bb895d4b55e516f26",
                 "shasum": ""
             },
             "require": {
@@ -3763,7 +3763,7 @@
                 "testing",
                 "xunit"
             ],
-            "time": "2015-09-14 06:57:22"
+            "time": "2015-09-19 05:44:37"
         },
         {
             "name": "phpunit/phpunit-mock-objects",
