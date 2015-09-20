@@ -11,8 +11,6 @@ class HomeController extends Controller
 {
     public function home()
     {
-        $version = Entity::VERSION;
-
-        return view('home', compact('version'));
+        return view('home');
     }
 }

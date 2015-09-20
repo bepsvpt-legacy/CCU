@@ -3,6 +3,7 @@
 namespace App\Http\Middleware;
 
 use Agent;
+use App\Ccu\Core\Entity;
 use Carbon\Carbon;
 use Closure;
 use Illuminate\Auth\Guard;
@@ -67,6 +68,8 @@ class PreprocessConnection
     protected function setGlobalViewVariables()
     {
         $this->view->share('guard', $this->guard);
+
+        $this->view->share('version', Entity::VERSION);
     }
 
     /**
