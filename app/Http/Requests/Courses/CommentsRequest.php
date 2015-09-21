@@ -14,7 +14,7 @@ class CommentsRequest extends Request
     public function rules()
     {
         return [
-            'content' => 'required|min:10|max:1000',
+            'content' => 'required|min:10|max:16000',
             'anonymous' => 'boolean'
         ];
     }
