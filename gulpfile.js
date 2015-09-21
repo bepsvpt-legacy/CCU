@@ -46,13 +46,16 @@ gulp.task('vendorjs', function() {
         'https://cdnjs.cloudflare.com/ajax/libs/angular-loading-bar/0.8.0/loading-bar.min.js',
         'https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.15/angular-ui-router.min.js',
         'https://cdnjs.cloudflare.com/ajax/libs/danialfarid-angular-file-upload/7.2.2/ng-file-upload.min.js',
-        'https://cdn.bepsvpt.net/js/ga.min.js',
-        'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js',
         'https://cdn.bepsvpt.net/js/arrive.min.js',
+        'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js',
         'https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/0.3.0/js/material.min.js',
         'https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/0.3.0/js/ripples.min.js',
         'https://cdnjs.cloudflare.com/ajax/libs/1000hz-bootstrap-validator/0.9.0/validator.min.js',
-        'https://cdnjs.cloudflare.com/ajax/libs/autosize.js/3.0.12/autosize.min.js'
+        'https://cdnjs.cloudflare.com/ajax/libs/autosize.js/3.0.12/autosize.min.js',
+        'https://cdn.bepsvpt.net/js/ga.min.js',
+        'https://cdn.bepsvpt.net/vendor/textboxio/angular/tbio.js',
+        'https://cdn.bepsvpt.net/vendor/textboxio/angular/tbioValidationsFactory.js',
+        'https://cdn.bepsvpt.net/vendor/textboxio/angular/tbioConfigFactory.js'
     ], {base: ''})
         .pipe(concat('vendors.min.js'))
         .pipe(uglify())

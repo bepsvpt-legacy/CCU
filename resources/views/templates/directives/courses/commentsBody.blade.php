@@ -1,6 +1,6 @@
 <h4 ng-class="(comment.anonymous) ? 'text-muted' : 'text-info'" class="media-heading">@{{ (comment.anonymous) ? '匿名' : comment.user.nickname }}</h4>
 
-<p class="pre-line">@{{ comment.content }}</p>
+<div ng-bind-html="comment.content | sanitize"></div>
 
 <div>
     <small>

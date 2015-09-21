@@ -94,9 +94,9 @@
 
             $scope.getExams();
         }])
-        .controller('CoursesCommentsController', ['$http', '$rootScope', '$scope', '$stateParams', 'CourseService', function ($http, $rootScope, $scope, $stateParams, CourseService) {
+        .controller('CoursesCommentsController', ['$http', '$rootScope', '$scope', '$stateParams', 'CourseService', 'toaster', function ($http, $rootScope, $scope, $stateParams, CourseService, toaster) {
             $scope.vote = {votes: CourseService.getVotes()};
-            $scope.comment = {};
+            $scope.comment = {showReply: true};
             $scope.commentsComment = [];
 
             $scope.$on('userVotesLoaded', function() {
@@ -149,8 +149,12 @@
             };
 
             $scope.commentFormSubmit = function (commentId) {
-                var isSubComment = undefined !== commentId,
+                var isSubComment = ! angular.isUndefined(commentId),
                     url = '/api/courses/' + $stateParams.courseId + '/comments' + ((isSubComment) ? ('/' + commentId) : '');
+
+                if ( ! isSubComment && ! $scope.checkCommentIsValid($scope.comment.content)) {
+                    return;
+                }
 
                 $http.post(url, {
                     content: (isSubComment) ? $scope.commentsComment[commentId].content : $scope.comment.content,
@@ -163,7 +167,25 @@
                     } else {
                         $scope.comment = {};
                     }
+
+                    toaster.pop({type: 'success', title: '評論成功', timeout: 4500, showCloseButton: true});
                 }, handleErrorResponse);
+            };
+
+            $scope.checkCommentIsValid = function (content) {
+                var message = '';
+
+                if ((angular.isUndefined(content)) || (content.length < 17)) {
+                    message = '文章過短';
+                }
+
+                if (message.length) {
+                    toaster.pop({type: 'warning', title: message, timeout: 4500, showCloseButton: true});
+
+                    return false;
+                }
+
+                return true;
             };
 
             $scope.commentsPaginate = function (nextPage, url) {

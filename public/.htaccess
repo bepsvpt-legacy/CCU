@@ -16,8 +16,3 @@ Options -Indexes +FollowSymLinks
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteRule ^ index.php [L]
 </IfModule>
-
-<IfModule mod_headers.c>
-    Header set Access-Control-Allow-Origin: "*.bepsvpt.net"
-    Header set Content-Security-Policy: "frame-ancestors 'self'"
-</IfModule>

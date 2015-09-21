@@ -62,6 +62,8 @@ class PreprocessConnection
 
         $response = $next($request);
 
+        $this->setResponseHeaders($response);
+
         return $response;
     }
 
@@ -93,6 +95,18 @@ class PreprocessConnection
         }
 
         return false;
+    }
+
+    /**
+     * @param \Illuminate\Http\Response $response
+     */
+    protected function setResponseHeaders($response)
+    {
+        $response->header('Content-Security-Policy',
+            "style-src *.bepsvpt.net https://cdnjs.cloudflare.com https://maxcdn.bootstrapcdn.com 'unsafe-inline';" .
+            "script-src *.bepsvpt.net https://cdnjs.cloudflare.com https://www.google.com https://www.gstatic.com 'sha256-" . base64_encode(hash('sha256', 'const VERSION = ' . Entity::VERSION . ';', true)) . "';" .
+            "frame-ancestors 'self'"
+        );
     }
 
     /**

@@ -17,33 +17,25 @@
 
 <!-- Course comments -->
 <div ng-controller="CoursesCommentsController">
-    <h3><span class="fa fa-comments" aria-hidden="true"></span> 課程評論</h3><br>
+    <h3><span><span class="fa fa-comments" aria-hidden="true"></span> 課程評論</span></h3><br>
 
     <div class="row">
         <div class="col-xs-10 col-xs-offset-1 col-sm-7 col-sm-offset-1">
-            <div ng-if="$root.user.signIn">
-                <div class="media">
-                    <div class="media-left">
-                        <profile-picture nickname="@{{ $root.user.nickname }}" size="profile-picture-medium"></profile-picture>
-                    </div>
-                    <div class="media-body">
-                        <form ng-submit="commentForm.$valid && commentFormSubmit()" name="commentForm" method="POST" data-toggle="validator">
-                            <fieldset>
-                                <div class="form-group">
-                                    <label class="sr-only">留言</label>
-                                    <textarea ng-model="comment.content" class="form-control textarea-no-resize" rows="1" placeholder="留言..." data-minlength="10" data-minlength-error="至少需10個字" maxlength="1000" required></textarea>
-                                    <div class="help-block with-errors"></div>
-                                </div>
+            <div ng-if="$root.user.signIn && comment.showReply">
+                <form>
+                    <fieldset>
+                        <div class="form-group">
+                            <label for="course-comments-textarea" class="sr-only">留言</label>
+                            <textarea ng-model="comment.content" tbio configuration="ccu" tbio-required tbio-minlength="10" tbio-maxlength="2500" id="course-comments-textarea" class="form-control" rows="12"></textarea>
+                        </div>
 
-                                <div class="form-group text-right">
-                                    <label>{!! Form::checkbox('anonymous', true, null, ['ng-model' => 'comment.anonymous']) !!} <span>匿名</span></label>
+                        <div class="form-group text-right">
+                            <label>{!! Form::checkbox('anonymous', true, null, ['ng-model' => 'comment.anonymous']) !!} <span>匿名</span></label>
 
-                                    {!! Form::submit('送出', ['class' => 'btn btn-sm btn-success']) !!}
-                                </div>
-                            </fieldset>
-                        </form>
-                    </div>
-                </div>
+                            <button ng-disabled=" ! comment.content" ng-click="commentFormSubmit()" class="btn btn-sm btn-success">留言</button>
+                        </div>
+                    </fieldset>
+                </form>
             </div>
 
             <div ng-hide="comments.data.length" class="text-center">

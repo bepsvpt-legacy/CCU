@@ -1,4 +1,5 @@
 <script src="https://cdn.bepsvpt.net/js/vendors.min.js?v=1.1" defer></script>
+<script src="https://cdn.bepsvpt.net/vendor/textboxio/textboxio.js" defer></script>
 <script src="https://www.google.com/recaptcha/api.js" defer></script>
 
 @if (app()->environment(['production']))
@@ -11,7 +12,7 @@
 
     @inject('filesystem', 'Illuminate\Filesystem\Filesystem')
 
-    @foreach(['controllers', 'directives', 'factories'] as $directory)
+    @foreach(['controllers', 'directives', 'factories', 'filters'] as $directory)
         @foreach($filesystem->allFiles(base_path("resources/views/js/{$directory}")) as $file)
             @if (ends_with($file->getRelativePathname(), '.js.php'))
                 <script src="{{ routeAssets('js.' . $directory . '.' . str_replace('/', '.', substr($file->getRelativePathname(), 0, -7))) . "?v={$version}" }}" defer></script>
