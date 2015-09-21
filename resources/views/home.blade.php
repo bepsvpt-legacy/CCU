@@ -7,7 +7,7 @@
         <title>Changin' CCU</title>
         <noscript><meta http-equiv="refresh" content="0; url=/errors/noscript"></noscript>
         <script>const VERSION = {{ $version }};</script>
-        <style>#ccu-initializing{position:fixed;top:50%;left:50%;margin:-4em 0 0 -2em;z-index:99999}#ccu-initializing .background{position:fixed;top:0;left:0;min-width:100%;min-height:100%;background:#eee}#ccu-initializing span{color:orange}body{overflow-y:scroll!important}</style>
+        <style>#ccu-initializing{position:fixed;top:50%;left:50%;margin:-4em 0 0 -2em;z-index:99999}#ccu-initializing .background{position:fixed;top:0;left:0;min-width:100%;min-height:100%;background:#eee}#ccu-initializing span{color:orange}</style>
         <link type="text/css" rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
         <link type="text/css" rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
     </head>

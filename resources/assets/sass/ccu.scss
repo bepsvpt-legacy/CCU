@@ -10,10 +10,6 @@ html {
 body {
     min-height: 100%;
     padding-right: 0 !important;
-
-    &.ephox-elder-modal-scroll-lock {
-        overflow: inherit !important;
-    }
 }
 
 main {
@@ -215,7 +211,8 @@ blockquote {
 // AngularJS-Toaster https://github.com/jirikavi/AngularJS-Toaster
 
 .toast-top-right {
-    top: 75px !important;
+    top: 80px !important;
+    right: 18px !important;
 }
 
 :not(.no-enter)#toast-container > div.ng-enter,
