@@ -28,6 +28,7 @@ gulp.task('js', function () {
         scriptsPrefix + 'controllers/*.js.php',
         scriptsPrefix + 'directives/*.js.php',
         scriptsPrefix + 'factories/*.js.php',
+        scriptsPrefix + 'filters/*.js.php',
         scriptsPrefix + 'ccu.js.php'
     ])
         .pipe(concat('all.js.php'))
