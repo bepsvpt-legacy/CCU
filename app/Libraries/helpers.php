@@ -11,7 +11,7 @@ if ( ! function_exists('_asset')) {
      */
     function _asset($path, $secure = null, $absolute = false)
     {
-        $url = app('url')->asset($path, $secure);
+        $url = asset($path, $secure);
 
         if ($absolute) {
             return $url;
@@ -47,7 +47,7 @@ if ( ! function_exists('temp_path')) {
      */
     function temp_path($path = '')
     {
-        return storage_path('temp') . ($path ? DIRECTORY_SEPARATOR . $path : $path);
+        return custom_path(storage_path('temp'), $path);
     }
 }
 
@@ -60,7 +60,7 @@ if ( ! function_exists('cdn_path')) {
      */
     function cdn_path($path = '')
     {
-        return realpath(base_path('..' . DIRECTORY_SEPARATOR . 'cdn')) . ($path ? DIRECTORY_SEPARATOR . $path : $path);
+        return custom_path(base_path('../cdn'), $path);
     }
 }
 
@@ -76,20 +76,17 @@ if ( ! function_exists('image_path')) {
     function image_path($hash, $timestamp, $thumbnail = false)
     {
         // 基本路徑
-        $path = 'uploads' . DIRECTORY_SEPARATOR . 'images';
+        $path = 'uploads/images';
 
         // 縮圖路徑
         if ($thumbnail) {
-            $path .= DIRECTORY_SEPARATOR . 'thumbnails';
+            $path .= '/thumbnails';
         }
 
-        // prefix 路徑，以免當目錄過多檔案
-        $path .= DIRECTORY_SEPARATOR . substr($timestamp, 0, 3);
+        // 以時間前三位作為目錄分隔，以免單一目錄過多檔案
+        $path .= '/' . substr($timestamp, 0, 3) . "/{$hash}-{$timestamp}";
 
-        // 圖片名稱
-        $path .= DIRECTORY_SEPARATOR . "{$hash}-{$timestamp}";
-
-        return storage_path($path);
+        return custom_path(storage_path(), $path);
     }
 }
 
@@ -101,6 +98,26 @@ if ( ! function_exists('default_avatar_path')) {
      */
     function default_avatar_path()
     {
-        return storage_path('uploads/images/default_avatar.jpg');
+        return custom_path(storage_path(), 'uploads/images/default_avatar.jpg');
+    }
+}
+
+if ( ! function_exists('custom_path')) {
+    /**
+     * Transform path according to operating system.
+     *
+     * @param  string $base
+     * @param  string $addition
+     * @return string
+     */
+    function custom_path($base, $addition = '')
+    {
+        if ($addition) {
+            // 如果 $addition 有值，則附加在 $base 後面
+            $base .= DIRECTORY_SEPARATOR . $addition;
+        }
+
+        // 將路徑中的 「/」 或 「\」 根據系統轉換成對應分隔符號後回傳
+        return str_replace(['/', '\\'], DIRECTORY_SEPARATOR, $base);
     }
 }

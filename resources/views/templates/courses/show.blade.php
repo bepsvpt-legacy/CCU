@@ -26,7 +26,7 @@
                     <fieldset>
                         <div class="form-group">
                             <label for="course-comments-textarea" class="sr-only">留言</label>
-                            <textarea ng-model="comment.content" tbio configuration="ccu" tbio-required tbio-minlength="10" tbio-maxlength="2500" id="course-comments-textarea" class="form-control" rows="12"></textarea>
+                            <textarea ng-model="comment.content" tbio configuration="ccu" tbio-required tbio-minlength="10" tbio-maxlength="2500" rows="12"></textarea>
                         </div>
 
                         <div class="form-group text-right">
