@@ -13,11 +13,7 @@ if ( ! function_exists('_asset')) {
     {
         $url = asset($path, $secure);
 
-        if ($absolute) {
-            return $url;
-        }
-
-        return str_replace(env('APPLICATION_URL'), '', $url);
+        return $absolute ? $url : str_replace(env('APPLICATION_URL'), '', $url);
     }
 }
 
