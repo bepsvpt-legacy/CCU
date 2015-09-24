@@ -76,17 +76,21 @@ class Verify extends Entity
     {
         $verify = self::with(['account'])->find($token);
 
-        if ((null === $verify) || (false === ($hours = $verify->getExpireHours($verify->getAttribute('category_id'))))) {
+        if (null === $verify) {
             return '驗證碼不存在';
+        }
+
+        $hours = $verify->getExpireHours($verify->getAttribute('category_id'));
+
+        if (false === $hours) {
+            return '驗證碼資料異常，請聯繫管理員協助處理';
         } else if (Carbon::now() > $verify->getAttribute('created_at')->addHours($hours)) {
             return '驗證碼已過期';
         }
 
-        $account = $verify->getRelation('account');
-
         $verify->delete();
 
-        return $account;
+        return $verify->getRelation('account');
     }
 
     /**
@@ -103,10 +107,8 @@ class Verify extends Entity
             return $item->getAttribute('id') === $categoryId;
         });
 
-        if (false === $category) {
-            return false;
-        }
-
-        return json_decode($categories[$category]->getAttribute('name'))->{'expireHours'};
+        return (false !== $category)
+            ? json_decode($categories[$category]->getAttribute('name'))->{'expireHours'}
+            : false;
     }
 }

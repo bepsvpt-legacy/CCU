@@ -38,7 +38,7 @@ class Category extends Entity
     public static function getCategories($category = null, $getId = false)
     {
         $categories = Cache::remember('categories', self::CACHE_A_MONTH, function () {
-            return Category::all();
+            return self::all();
         });
 
         if ((null === $category) || ( ! is_string($category))) {
@@ -49,6 +49,6 @@ class Category extends Entity
             return $category === $item->category;
         });
 
-        return ($getId) ? $categories->first()->getAttribute('id') : $categories;
+        return $getId ? $categories->first()->getAttribute('id') : $categories;
     }
 }
