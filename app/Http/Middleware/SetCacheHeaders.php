@@ -6,7 +6,7 @@ use Carbon\Carbon;
 use Closure;
 use Illuminate\View\View;
 
-class SetCacheHeaders
+class SetCacheHeaders extends Middleware
 {
     /**
      * The request path that need cache.

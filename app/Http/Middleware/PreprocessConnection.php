@@ -11,7 +11,7 @@ use Illuminate\Contracts\View\Factory as ViewFactory;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
-class PreprocessConnection
+class PreprocessConnection extends Middleware
 {
     /**
      * @var Guard
@@ -81,20 +81,25 @@ class PreprocessConnection
      */
     protected function isBrowserNotSupport()
     {
-        $browser = Agent::browser();
+        if (Agent::isDesktop()) {
+            $browser = Agent::browser();
 
-        $version = Agent::version($browser);
+            $version = Agent::version($browser);
 
-        switch ($browser) {
-            case 'IE':
-                return $version < 11;
-            case 'Firefox':
-                return $version < 38;
-            case 'Chrome':
-                return $version < 43;
+            switch ($browser) {
+                case 'IE':
+                    return $version < 11;
+                case 'Firefox':
+                    return $version < 38;
+                case 'Chrome':
+                    return $version < 43;
+                case 'Edge':
+                case 'Safari':
+                    return true;
+            }
+
+            return false;
         }
-
-        return false;
     }
 
     /**
@@ -104,28 +109,10 @@ class PreprocessConnection
     {
         $response->header('Content-Security-Policy',
             "style-src *.bepsvpt.net https://cdnjs.cloudflare.com https://maxcdn.bootstrapcdn.com 'unsafe-inline';" .
-            "script-src *.bepsvpt.net https://cdnjs.cloudflare.com https://www.google.com https://www.gstatic.com https://www.google-analytics.com " .
+            "script-src *.bepsvpt.net https://cdnjs.cloudflare.com https://www.google.com https://apis.google.com https://www.gstatic.com https://www.google-analytics.com " .
             "'sha256-" . base64_encode(hash('sha256', 'const VERSION = ' . Entity::VERSION . ';', true)) . "' " .
             "'sha256-H9EpD3T5JFFGDYAqo8gL2yzG+cfJvNN5Bgs6jVowgDc=';" .
             "frame-ancestors 'self'"
         );
-    }
-
-    /**
-     * Determine if the request has a URI that should pass through browser detection.
-     *
-     * @param  \Illuminate\Http\Request $request
-     * @param  array $excepts
-     * @return bool
-     */
-    protected function shouldPassThrough($request, array $excepts = [])
-    {
-        foreach ($excepts as $except) {
-            if ($request->is($except)) {
-                return true;
-            }
-        }
-
-        return false;
     }
 }

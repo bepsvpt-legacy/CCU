@@ -6,7 +6,7 @@ use Closure;
 use Illuminate\Contracts\Auth\Guard;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 
-class Authenticate
+class Authenticate extends Middleware
 {
     /**
      * The Guard implementation.
