@@ -13,7 +13,7 @@
 
         <!-- Tab panes -->
         <div class="tab-content">
-            <div ng-include="'{{ routeAssets('templates.member.account') . '?v=' . $version }}'" id="account" role="tabpanel" class="tab-pane active"></div>
+            <div ng-include="'{{ routeAssets('templates.member.account', true) }}'" id="account" role="tabpanel" class="tab-pane active"></div>
         </div>
     </div>
 </div>

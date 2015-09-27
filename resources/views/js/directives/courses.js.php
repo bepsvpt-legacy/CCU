@@ -11,7 +11,7 @@
                     isSubComment: '@',
                     disableAction: '@'
                 },
-                templateUrl: '{{ routeAssets("templates.directives.courses.commentsBody") }}?v=' + VERSION,
+                templateUrl: '{{ routeAssets("templates.directives.courses.commentsBody", true) }}',
                 link: function(scope, element, attrs) {
                     if (angular.isUndefined(scope.disableAction)) {
                         scope.disableAction = false;
@@ -31,7 +31,7 @@
                     type: '@',
                     value: '@'
                 },
-                templateUrl: '{{ routeAssets("templates.directives.courses.info") }}?v=' + VERSION
+                templateUrl: '{{ routeAssets("templates.directives.courses.info", true) }}'
             }
         })
         .directive('coursesExams', function() {
@@ -41,7 +41,7 @@
                     exams: '=',
                     heading: '@'
                 },
-                templateUrl: '{{ routeAssets("templates.directives.courses.exams") }}?v=' + VERSION
+                templateUrl: '{{ routeAssets("templates.directives.courses.exams", true) }}'
             }
         });
 })();

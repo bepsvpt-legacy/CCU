@@ -21,16 +21,17 @@ if ( ! function_exists('_route')) {
     /**
      * Generate a URL to a named route.
      *
-     * @param  string  $name
+     * @param  string $name
+     * @param  bool $appendVersion
      * @return string
      */
-    function routeAssets($name)
+    function routeAssets($name, $appendVersion = false)
     {
         $postfix = ['js' => '.js', 'templates' => '.html', 'css' => '.css'][strstr($name, '.', true)];
 
         $url = 'assets/' . str_replace('.', '/', $name) . $postfix;
 
-        return _asset($url);
+        return _asset($url) . ($appendVersion ? ('?v=' . \App\Ccu\Core\Entity::VERSION) : '');
     }
 }
 

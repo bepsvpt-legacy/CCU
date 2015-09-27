@@ -10,12 +10,7 @@
                 $('header [data-toggle="tooltip"]').tooltip('destroy');
             }
 
-            setTimeout(function() {
-                $('#ccu-initializing').fadeOut(300, function () {
-                    $(this).next('div.hide').removeClass('hide');
-                    $(this).remove();
-                });
-            }, 350);
+            $('#ccu-initializing').fadeOut(350, function () {$(this).remove();});
         };
 
         if ( ! window.location.hash) {
