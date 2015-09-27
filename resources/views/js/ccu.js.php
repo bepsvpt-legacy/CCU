@@ -13,10 +13,6 @@
             $('#ccu-initializing').fadeOut(350, function () {$(this).remove();});
         };
 
-        if ( ! window.location.hash) {
-            window.location.hash = '#/';
-        }
-
         $(document).on('click', 'header nav.navbar a', function () {
             $('button[data-toggle="collapse"][data-target="#navbar-collapse"][aria-expanded="true"]').click();
         });
