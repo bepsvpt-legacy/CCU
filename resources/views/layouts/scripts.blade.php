@@ -1,3 +1,4 @@
+<!-- scripts -->
 <script src="https://cdn.bepsvpt.net/js/vendors.min.js?v=1.2" defer></script>
 <script src="https://cdn.bepsvpt.net/vendor/textboxio/textboxio.js" defer></script>
 <script src="https://www.google.com/recaptcha/api.js" defer></script>

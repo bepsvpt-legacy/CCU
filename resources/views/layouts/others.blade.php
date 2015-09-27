@@ -1,7 +1,7 @@
 <!-- AngularJS-Toaster - https://github.com/jirikavi/AngularJS-Toaster -->
 <toaster-container></toaster-container>
 
-<!-- Error modal -->
+<!-- error modal -->
 <div class="modal fade" id="ajaxErrorsModal" tabindex="-1" role="dialog" aria-labelledby="ajaxErrorsModalLabel">
     <div class="modal-dialog" role="document">
         <div class="modal-content">

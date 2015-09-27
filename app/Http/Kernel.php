@@ -18,6 +18,7 @@ class Kernel extends HttpKernel
         \App\Http\Middleware\SetCacheHeaders::class,
         \Illuminate\Session\Middleware\StartSession::class,
         \Illuminate\View\Middleware\ShareErrorsFromSession::class,
+        \App\Http\Middleware\SetContentSecurityPolicyHeader::class,
         \App\Http\Middleware\VerifyCsrfToken::class,
         \App\Http\Middleware\PreprocessConnection::class,
     ];
