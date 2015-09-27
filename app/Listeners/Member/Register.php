@@ -2,20 +2,19 @@
 
 namespace App\Listeners\Member;
 
+use App\Ccu\General\Event;
 use App\Events\Member\Register as RegisterEvent;
-use App\Ccu\Mail\Register;
 
-class EmailVerification
+class Register
 {
     /**
      * Handle the event.
      *
-     * @param RegisterEvent $event
+     * @param  RegisterEvent  $event
+     * @return void
      */
     public function handle(RegisterEvent $event)
     {
-        $mail = new Register($event->account);
-
-        $mail->send();
+        Event::_create('events.account', $event->account, 'account.register');
     }
 }

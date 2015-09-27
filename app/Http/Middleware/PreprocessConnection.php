@@ -10,6 +10,7 @@ use Illuminate\Auth\Guard;
 use Illuminate\Contracts\View\Factory as ViewFactory;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Symfony\Component\HttpFoundation\BinaryFileResponse;
 
 class PreprocessConnection extends Middleware
 {
@@ -97,19 +98,23 @@ class PreprocessConnection extends Middleware
                 case 'Safari':
                     return true;
             }
-
-            return false;
         }
+
+        return false;
     }
 
     /**
-     * @param \Illuminate\Http\Response $response
+     * @param \Illuminate\Http\Response|\Symfony\Component\HttpFoundation\BinaryFileResponse $response
      */
     protected function setResponseHeaders($response)
     {
+        if ($response instanceof BinaryFileResponse) {
+            return;
+        }
+
         $response->header('Content-Security-Policy',
-            "style-src *.bepsvpt.net https://cdnjs.cloudflare.com https://maxcdn.bootstrapcdn.com 'unsafe-inline';" .
-            "script-src *.bepsvpt.net https://cdnjs.cloudflare.com https://www.google.com https://apis.google.com https://www.gstatic.com https://www.google-analytics.com " .
+            "style-src *.bepsvpt.net https://cdnjs.cloudflare.com https://maxcdn.bootstrapcdn.com https://cdn.datatables.net 'unsafe-inline';" .
+            "script-src *.bepsvpt.net https://cdnjs.cloudflare.com https://www.google.com https://apis.google.com https://ajax.googleapis.com https://www.gstatic.com https://www.google-analytics.com https://cdn.datatables.net " .
             "'sha256-" . base64_encode(hash('sha256', 'const VERSION = ' . Entity::VERSION . ';', true)) . "' " .
             "'sha256-H9EpD3T5JFFGDYAqo8gL2yzG+cfJvNN5Bgs6jVowgDc=';" .
             "frame-ancestors 'self'"

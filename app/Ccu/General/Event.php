@@ -51,4 +51,21 @@ class Event extends Entity
 
         return parent::create($attributes);
     }
+
+    /**
+     * @param string $categoryName
+     * @param \App\Ccu\Member\Account $account
+     * @param string $action
+     * @param mixed|null $detail
+     * @return Event
+     */
+    public static function _create($categoryName, $account, $action, $detail = null)
+    {
+        return static::create([
+            'category_id' => Category::getCategories($categoryName, true),
+            'account_id' => $account->getAttribute('id'),
+            'action' => $action,
+            'detail' => $detail
+        ]);
+    }
 }

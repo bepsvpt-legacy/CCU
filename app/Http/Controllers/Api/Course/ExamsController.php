@@ -85,12 +85,12 @@ class ExamsController extends Controller
 
         $exam->increment('downloads');
 
-        Event::create([
-            'category_id' => Category::getCategories('events.user', true),
-            'account_id' => $request->user()->user->account_id,
-            'action' => 'user.download',
-            'detail' => collect(['target' => 'courses.exams', 'identify' => $examId]),
-        ]);
+        Event::_create(
+            'events.user',
+            $request->user(),
+            'user.download',
+            collect(['target' => 'courses.exams', 'identify' => $examId])
+        );
 
         return response()->download(
             storage_path('uploads/courses/exams') . '/' . $exam->getAttribute('file_path'),

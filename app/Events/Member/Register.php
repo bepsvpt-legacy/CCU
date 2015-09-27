@@ -6,7 +6,7 @@ use App\Ccu\Member\Account;
 use App\Events\Event;
 use Illuminate\Queue\SerializesModels;
 
-class SignInEvent extends Event
+class Register extends Event
 {
     use SerializesModels;
 

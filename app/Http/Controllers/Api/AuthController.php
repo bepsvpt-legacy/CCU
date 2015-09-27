@@ -2,13 +2,11 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Ccu\General\Category;
 use App\Ccu\General\Event;
 use App\Ccu\General\Verify;
 use App\Ccu\Member\Account;
 use App\Ccu\Member\Role;
-use App\Events\Member\RegisterEvent;
-use App\Events\Member\SignInEvent;
+use App\Events\Member\Register;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Auth;
@@ -58,7 +56,7 @@ class AuthController extends Controller
             return response()->json(['message' => ['帳號或密碼錯誤']], 422);
         }
 
-        event(new SignInEvent(Auth::user()));
+        Event::_create('events.account', Auth::user(), 'account.signIn');
 
         return response()->json();
     }
@@ -67,7 +65,7 @@ class AuthController extends Controller
      * Handle a registration request for the application.
      *
      * @param Requests\RegisterRequest $request
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function register(Requests\RegisterRequest $request)
     {
@@ -79,7 +77,7 @@ class AuthController extends Controller
 
         Auth::loginUsingId($account->getAttribute('id'), true);
 
-        event(new RegisterEvent($account));
+        event(new Register($account));
 
         return response()->json();
     }
@@ -98,11 +96,7 @@ class AuthController extends Controller
 
         $account->attachRole(Role::where('name', '=', 'verified-user')->first());
 
-        Event::create([
-            'category_id' => Category::getCategories('events.account', true),
-            'account_id' => $account->getAttribute('id'),
-            'action' => 'account.verifyEmail',
-        ]);
+        Event::_create('events.account', $account, 'account.verifyEmail');
 
         return redirect()->route('home');
     }

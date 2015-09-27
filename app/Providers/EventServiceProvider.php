@@ -13,6 +13,10 @@ class EventServiceProvider extends ServiceProvider
      * @var array
      */
     protected $listen = [
+        'App\Events\Member\Register' => [
+            'App\Listeners\Member\Register',
+            'App\Listeners\Member\EmailVerification',
+        ],
     ];
 
     /**
@@ -21,7 +25,6 @@ class EventServiceProvider extends ServiceProvider
      * @var array
      */
     protected $subscribe = [
-        'App\Listeners\Member\AccountEventListener',
     ];
 
     /**
