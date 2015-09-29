@@ -28,14 +28,14 @@ class Exam extends Entity
      *
      * @var array
      */
-    protected $visible = ['id', 'file_name', 'file_size', 'downloads', 'created_at', 'course', 'semester'];
+    protected $visible = ['id', 'file_name', 'file_size', 'downloads', 'virustotal_report', 'uploaded_at', 'course', 'semester'];
 
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
-    protected $fillable = ['user_id', 'course_id', 'semester_id', 'file_name', 'file_type', 'file_path', 'file_size', 'downloads', 'created_at'];
+    protected $fillable = ['user_id', 'course_id', 'semester_id', 'file_name', 'file_type', 'file_path', 'file_size', 'downloads', 'virustotal_report', 'created_at'];
 
     /**
      * The attributes that should be mutated to dates.

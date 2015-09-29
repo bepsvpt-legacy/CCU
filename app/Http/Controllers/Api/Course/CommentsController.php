@@ -52,7 +52,7 @@ class CommentsController extends Controller
                 $comment->offsetUnset('user');
             }
 
-            $comment->setAttribute('posted_at', collect(['date' => $comment->created_at->toDateTimeString(), 'human' => $comment->getAttribute('created_at')->diffForHumans(Carbon::now())]));
+            $comment->setAttribute('posted_at', $this->convertTimeFieldToHumanReadable($comment->getAttribute('created_at')));
         }
     }
 

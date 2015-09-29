@@ -13,10 +13,11 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-        \App\Console\Commands\ClearCache::class,
-        \App\Console\Commands\DownloadCoursesArchive::class,
-        \App\Console\Commands\ImportCoursesData::class,
-        \App\Console\Commands\ProductionRelease::class,
+        Commands\ClearCache::class,
+        Commands\DownloadCoursesArchive::class,
+        Commands\ImportCoursesData::class,
+        Commands\ProductionRelease::class,
+        Commands\ScanFiles::class,
     ];
 
     /**

@@ -119,6 +119,7 @@
                         <th class="hidden-xs">大小</th>
                         <th>下載次數</th>
                         <th class="hidden-xs">上傳時間</th>
+                        <th>掃毒結果</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -130,7 +131,11 @@
                         <td><a ng-href="/api/courses/exams/@{{ exam.id }}" target="_blank">@{{ exam.file_name }}</a></td>
                         <td class="hidden-xs">@{{ exam.file_size | bytes }}</td>
                         <td>@{{ exam.downloads }}</td>
-                        <td class="hidden-xs">@{{ exam.created_at }}</td>
+                        <td class="hidden-xs"><span data-toggle="tooltip" data-placement="bottom" title="@{{ exam.uploaded_at.date }}">@{{ exam.uploaded_at.human }}</span></td>
+                        <td>
+                            <span ng-if=" ! exam.virustotal_report.length">掃描中</span>
+                            <a ng-if="exam.virustotal_report.length" href="@{{ exam.virustotal_report }}" target="_blank"><span class="fa fa-search text-success"></span></a>
+                        </td>
                     </tr>
                 </tbody>
             </table>

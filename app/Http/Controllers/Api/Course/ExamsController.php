@@ -4,10 +4,10 @@ namespace App\Http\Controllers\Api\Course;
 
 use App\Ccu\Course\Course;
 use App\Ccu\Course\Exam;
-use App\Ccu\General\Category;
 use App\Ccu\General\Event;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use App\Jobs\Courses\ScanExamUploadFiles;
 use Cache;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -20,10 +20,8 @@ class ExamsController extends Controller
     public function index($courseId)
     {
         $course = Course::with([
-            'exams'=> function ($query)
-            {
-                $query->orderBy('semester_id', 'desc')
-                    ->orderBy('downloads', 'desc');
+            'exams'=> function ($query) {
+                $query->orderBy('semester_id', 'desc')->orderBy('downloads', 'desc');
             }
         ])->find($courseId, ['id']);
 
@@ -31,7 +29,13 @@ class ExamsController extends Controller
             throw new NotFoundHttpException;
         }
 
-        return response()->json($course->getRelation('exams'));
+        $exams = $course->getRelation('exams')->map(function ($exam) {
+            $exam->setAttribute('uploaded_at', $this->convertTimeFieldToHumanReadable($exam->getAttribute('created_at')));
+
+            return $exam;
+        });
+
+        return response()->json($exams);
     }
 
     public function newestHottest()
@@ -71,6 +75,8 @@ class ExamsController extends Controller
         }
 
         $request->file('file')->move($path['dir'], $path['name']);
+
+        $this->dispatch(new ScanExamUploadFiles($exam));
 
         return response()->json($exam);
     }

@@ -13,6 +13,7 @@
         "h4cc/wkhtmltopdf-amd64": "~0.12",
         "illuminate/html": "~5.0",
         "intervention/image": "~2.3",
+        "jayzeng/virustotalapi": "~0.1",
         "jenssegers/agent": "~2.2",
         "knplabs/knp-snappy": "~0.4",
         "predis/predis": "~1.0",
