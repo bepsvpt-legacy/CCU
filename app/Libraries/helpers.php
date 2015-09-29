@@ -118,3 +118,18 @@ if ( ! function_exists('custom_path')) {
         return str_replace(['/', '\\'], DIRECTORY_SEPARATOR, $base);
     }
 }
+
+if ( ! function_exists('virustotal_link_to_id')) {
+    /**
+     * Convert VirusTotal permalink to id.
+     *
+     * @param  string $link
+     * @return string
+     */
+    function virustotal_link_to_id($link)
+    {
+        $spilt = explode('/', strstr($link, 'file'));
+
+        return "{$spilt[1]}-{$spilt[3]}";
+    }
+}
