@@ -15,9 +15,9 @@ Form::macro('validationMessage', function() {
  * @return string
  */
 Form::macro('recaptcha', function() {
-    $siteKey = env('RECAPTCHA_SITE_KEY');
-
-    $size = Agent::isMobile() ? 'compact' : 'normal';
-
-    return "<div id='g-recaptcha' data-sitekey='{$siteKey}' data-size='{$size}'></div>";
+    return sprintf(
+        '<div id="g-recaptcha" data-sitekey="%s" data-size="%s"></div>',
+        env('RECAPTCHA_SITE_KEY', ''),
+        Agent::isMobile() ? 'compact' : 'normal'
+    );
 });

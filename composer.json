@@ -16,6 +16,7 @@
         "jayzeng/virustotalapi": "~0.1",
         "jenssegers/agent": "~2.2",
         "knplabs/knp-snappy": "~0.4",
+        "laravel/socialite": "~2.0",
         "predis/predis": "~1.0",
         "yangqi/htmldom": "dev-master",
         "zizaco/entrust": "~1.4"
