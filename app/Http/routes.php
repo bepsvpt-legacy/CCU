@@ -22,6 +22,8 @@ $router->group(['prefix' => 'api', 'namespace' => 'Api', 'as' => 'api.'], functi
         $router->post('register', ['as' => 'register', 'uses' => 'AuthController@register']);
         $router->get('register/verify-email/{token}', ['as' => 'verifyEmail', 'uses' => 'AuthController@verifyEmail']);
         $router->get('roles-permissions', ['as' => 'rolesPermissions', 'uses' => 'AuthController@rolesPermissions']);
+        $router->get('facebook', ['as' => 'facebook.signIn', 'uses' => 'OAuthController@facebook']);
+        $router->get('facebook/callback', ['as' => 'facebook.callback', 'uses' => 'OAuthController@facebookCallback']);
     });
 
     $router->group(['prefix' => 'member', 'middleware' => 'auth', 'as' => 'member.'], function ($router) {

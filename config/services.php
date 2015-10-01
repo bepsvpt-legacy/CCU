@@ -15,24 +15,30 @@ return [
     */
 
     'mailgun' => [
-        'domain' => '',
-        'secret' => '',
+        'domain' => env('MAILGUN_DOMAIN'),
+        'secret' => env('MAILGUN_SECRET'),
     ],
 
     'mandrill' => [
-        'secret' => '',
+        'secret' => env('MANDRILL_SECRET'),
     ],
 
     'ses' => [
-        'key'    => '',
-        'secret' => '',
+        'key'    => env('SES_KEY'),
+        'secret' => env('SES_SECRET'),
         'region' => 'us-east-1',
     ],
 
     'stripe' => [
         'model'  => App\Ccu\Member\Account::class,
-        'key'    => '',
-        'secret' => '',
+        'key'    => env('STRIPE_KEY'),
+        'secret' => env('STRIPE_SECRET'),
+    ],
+
+    'facebook' => [
+        'client_id' => env('FACEBOOK_CLIENT_ID'),
+        'client_secret' => env('FACEBOOK_CLIENT_SECRET'),
+        'redirect' => env('APPLICATION_URL') . '/api/auth/facebook/callback',
     ],
 
 ];

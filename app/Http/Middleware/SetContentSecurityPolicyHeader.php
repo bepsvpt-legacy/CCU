@@ -4,6 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 
 class SetContentSecurityPolicyHeader extends Middleware
 {
@@ -32,6 +33,7 @@ class SetContentSecurityPolicyHeader extends Middleware
         switch (true) {
             case ($this->shouldPassThrough($request, $this->except)):
             case ($response instanceof BinaryFileResponse):
+            case ($response instanceof RedirectResponse):
                 return $response;
         }
 

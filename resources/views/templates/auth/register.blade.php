@@ -49,5 +49,7 @@
             <span>已有帳號？</span>
             <span><a ui-sref="auth-signIn">登入</a></span>
         </div>
+
+        {!! HTML::loginWithFacebook() !!}
     </div>
 </div>

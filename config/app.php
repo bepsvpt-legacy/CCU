@@ -148,6 +148,7 @@ return [
         Illuminate\Html\HtmlServiceProvider::class,
         Intervention\Image\ImageServiceProvider::class,
         Jenssegers\Agent\AgentServiceProvider::class,
+        Laravel\Socialite\SocialiteServiceProvider::class,
         Yangqi\Htmldom\HtmldomServiceProvider::class,
         Zizaco\Entrust\EntrustServiceProvider::class,
 
@@ -206,6 +207,7 @@ return [
         'Htmldom'   => Yangqi\Htmldom\Htmldom::class,
         'Image'     => Intervention\Image\Facades\Image::class,
         'Recaptcha' => Greggilbert\Recaptcha\Facades\Recaptcha::class,
+        'Socialite' => Laravel\Socialite\Facades\Socialite::class,
 
     ],
 

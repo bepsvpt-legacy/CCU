@@ -45,5 +45,7 @@
             <span>尚未註冊？</span>
             <span><a ui-sref="auth-register">註冊</a></span>
         </div>
+
+        {!! HTML::loginWithFacebook() !!}
     </div>
 </div>
