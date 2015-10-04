@@ -34,6 +34,7 @@ class SetContentSecurityPolicyHeader extends Middleware
             case ($this->shouldPassThrough($request, $this->except)):
             case ($response instanceof BinaryFileResponse):
             case ($response instanceof RedirectResponse):
+            case (env('APP_DEBUG', false)):
                 return $response;
         }
 

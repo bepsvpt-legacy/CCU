@@ -47,7 +47,7 @@ class Comment extends Entity
      */
     public function course()
     {
-        return $this->belongsTo(\App\Ccu\Course\Course::class);
+        return $this->belongsTo(\App\Ccu\Course\Course::class)->rememberForever();
     }
 
     /**
@@ -57,6 +57,6 @@ class Comment extends Entity
      */
     public function user()
     {
-        return $this->belongsTo(\App\Ccu\Member\User::class);
+        return $this->belongsTo(\App\Ccu\Member\User::class)->rememberForever();
     }
 }

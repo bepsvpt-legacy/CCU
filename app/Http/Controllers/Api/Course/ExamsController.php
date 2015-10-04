@@ -8,7 +8,6 @@ use App\Ccu\General\Event;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Jobs\Courses\ScanExamUploadFiles;
-use Cache;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Symfony\Component\CssSelector\Exception\InternalErrorException;
@@ -40,15 +39,12 @@ class ExamsController extends Controller
 
     public function newestHottest()
     {
-        $exams = Cache::remember('newestCoursesExams', 60, function () {
-            $newest = Exam::with(['course', 'course.department'])->latest()->take(5)->get();
+        $result = Exam::with(['course', 'course.department'])->latest()->remember(60)->get();
 
-            $hottest = Exam::with(['course', 'course.department'])->orderBy('downloads', 'desc')->take(5)->get();
-
-            return ['newest' => $newest, 'hottest' => $hottest];
-        });
-
-        return response()->json($exams);
+        return response()->json([
+            'newest' => $result->take(5),
+            'hottest' => $result->sortByDesc('downloads')->take(5),
+        ]);
     }
 
     public function store(Requests\Courses\ExamsRequest $request, $courseId)

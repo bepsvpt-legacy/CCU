@@ -7,7 +7,6 @@ use Carbon\Carbon;
 use DB;
 use Exception;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Illuminate\Database\QueryException;
 
 class CommentsVote extends Entity
 {

@@ -7,8 +7,6 @@ use App\Ccu\Course\Course;
 use App\Ccu\Course\CommentsVote;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-use Cache;
-use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
@@ -29,13 +27,14 @@ class CommentsController extends Controller
 
     public function newest()
     {
-        $comments = Cache::remember('newestCoursesComments', 5, function () {
-            $comments = Comment::with(['course', 'course.department', 'user'])->whereNull('courses_comment_id')->latest()->take(5)->get();
+        $comments = Comment::with(['course', 'course.department', 'user'])
+            ->whereNull('courses_comment_id')
+            ->latest()
+            ->take(5)
+            ->remember(5)
+            ->get();
 
-            $this->parsingComments($comments, true);
-
-            return $comments;
-        });
+        $this->parsingComments($comments, true);
 
         return response()->json($comments);
     }

@@ -45,7 +45,7 @@ class Course extends Entity
      */
     public function department()
     {
-        return $this->belongsTo(\App\Ccu\General\Category::class, 'department_id');
+        return $this->belongsTo(\App\Ccu\General\Category::class, 'department_id')->rememberForever();
     }
 
     /**
@@ -55,7 +55,7 @@ class Course extends Entity
      */
     public function dimension()
     {
-        return $this->belongsTo(\App\Ccu\General\Category::class, 'dimension_id');
+        return $this->belongsTo(\App\Ccu\General\Category::class, 'dimension_id')->rememberForever();
     }
 
     /**

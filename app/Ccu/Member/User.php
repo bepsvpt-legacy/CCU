@@ -41,7 +41,7 @@ class User extends Entity
      */
     public function account()
     {
-        return $this->belongsTo(\App\Ccu\Member\Account::class);
+        return $this->belongsTo(\App\Ccu\Member\Account::class)->rememberForever();
     }
 
     /**

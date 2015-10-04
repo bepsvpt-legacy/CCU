@@ -31,8 +31,6 @@ class ClearCache extends Command
      */
     private $keys = [
         'categories',
-        'newestCoursesComments',
-        'newestCoursesExams',
         'roommatesStatus',
     ];
 
@@ -62,6 +60,8 @@ class ClearCache extends Command
         foreach ($this->keys as $key) {
             $this->cacheManager->store()->forget($key);
         }
+
+        $this->cacheManager->store()->tags(['dbQueryCache'])->flush();
 
         $this->info('Clear cache successfully!');
     }
