@@ -2,10 +2,13 @@
 
 namespace App\Ccu\Core;
 
+use App\Ccu\Core\Cache\Rememberable;
 use Eloquent;
 
 class Entity extends Eloquent
 {
+    use Rememberable;
+
     /**
      * Website version.
      *
